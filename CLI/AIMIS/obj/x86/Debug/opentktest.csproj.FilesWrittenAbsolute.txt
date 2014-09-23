@@ -1,0 +1,12 @@
+/home/alexis/dev/opentktest/opentktest/obj/x86/Debug/.NETFramework,Version=v4.0.AssemblyAttribute.cs
+/home/alexis/dev/opentktest/opentktest/bin/Debug/opentktest.exe.mdb
+/home/alexis/dev/opentktest/opentktest/bin/Debug/opentktest.exe
+/home/alexis/dev/opentktest/opentktest/obj/x86/Debug/opentktest.exe
+/home/alexis/dev/opentktest/opentktest/obj/x86/Debug/opentktest.exe.mdb
+/home/alexis/dev/opentktest/opentktest/bin/Debug/OpenTK.dll
+/home/alexis/dev/project/opentktest/opentktest/obj/x86/Debug/.NETFramework,Version=v4.0.AssemblyAttribute.cs
+/home/alexis/dev/project/opentktest/opentktest/bin/Debug/opentktest.exe.mdb
+/home/alexis/dev/project/opentktest/opentktest/bin/Debug/opentktest.exe
+/home/alexis/dev/project/opentktest/opentktest/obj/x86/Debug/opentktest.exe
+/home/alexis/dev/project/opentktest/opentktest/obj/x86/Debug/opentktest.exe.mdb
+/home/alexis/dev/project/opentktest/opentktest/bin/Debug/OpenTK.dll
