@@ -54,6 +54,7 @@ namespace AIMIS
 			public Vector2 Velocity;
 			public Vector2 Position;
 			public List<Vector2> Trails;
+			public Vector2 Acceleration;
 
 
 		}
@@ -62,6 +63,10 @@ namespace AIMIS
 		[STAThread]
 		public static void Main()
 		{
+
+			//show trails?
+			bool blTrails = true;
+
 			using (var game = new GameWindow())
 			{
 				//list of planets
@@ -71,7 +76,11 @@ namespace AIMIS
 				List<List<Vector2>> lstTrails = new List<List<Vector2>>();
 
 				//color of planets
-				Color colPlanets = Color.Blue;
+				Color colPlanets = Color.LightYellow;
+
+				//viewpoint
+				Vector3 ViewPointV = new Vector3 (0f, 0f, 0f);
+
 
 				Matrix4 matrix = Matrix4.CreateTranslation(0,0,0);
 				game.Load += (sender, e) =>
@@ -87,7 +96,8 @@ namespace AIMIS
 
 				game.UpdateFrame += (sender, e) =>
 				{
-					// add game logic, input handling
+				
+					
 					if (game.Keyboard[Key.Escape])
 					{
 						game.Exit();
@@ -95,9 +105,19 @@ namespace AIMIS
 					if (game.Keyboard[Key.A]) {
 						//col1 = Color.Red;
 						//matrix = Matrix4.C(0f,0.5f,0.5f,0f,0f,0f,0.5f,0.2f,0.2f);
-						matrix = Matrix4.CreateTranslation(0.5f,0.5f,0f);
-
+						ViewPointV.X += 0.01f;
 					}
+					if(game.Keyboard[Key.D]) {
+						ViewPointV.X -= 0.01f;
+					}
+					if(game.Keyboard[Key.W] ) {
+						ViewPointV.Y -= 0.01f;
+					}
+					if(game.Keyboard[Key.S] ) {
+						ViewPointV.Y += 0.01f;
+					}
+
+
 					if (game.Keyboard[Key.B]) {
 						//delete trails
 						lstTrails = new List<List<Vector2>>();
@@ -105,6 +125,10 @@ namespace AIMIS
 						foreach (PlanetObject planobj in lstPlanets ) {
 							planobj.Trails = new List<Vector2>();
 						}
+					}
+
+					if(game.Keyboard[Key.T] ) {
+						blTrails = !blTrails;
 					}
 
 
@@ -121,7 +145,7 @@ namespace AIMIS
 
 
 				//create random planets
-				for (int ii = 0; ii <  400; ii ++) {
+				for (int ii = 0; ii <  00; ii ++) {
 					PlanetObject p1 = new PlanetObject ();
 					//p1.Mass = 0.5f;
 					p1.Position = new Vector2 (((float)rand.NextDouble () - 0.5f) * 4f, ((float)rand.NextDouble () - 0.5f)*4f);
@@ -133,24 +157,26 @@ namespace AIMIS
 					lstPlanets.Add (p1); 
 					//Console.WriteLine ("Added planet!:D");
 				}
+
 				//other planets
-					PlanetObject p2 = new PlanetObject();
-					p2.Mass = 100f;
-					p2.Position = new Vector2 (0.2f, 0.2f);
-					p2.Velocity = new Vector2 (0f, 0f);
+				PlanetObject p2 = new PlanetObject();
+				p2.Mass = 1000f;
+				p2.Position = new Vector2 (0f, 0f);
+				p2.Velocity = new Vector2 (0f, 0f);
 				p2.Trails = new List<Vector2> ();
 					//p2.Radius = 0.005f;
-					//lstPlanets.Add (p2);
+				lstPlanets.Add (p2);
 
-				/*
+
 				PlanetObject p3 = new PlanetObject();
 				p3.Mass = 1f;
-				p3.Position = new Vector2 (-0.5f, -0.1f);
-				p3.Velocity = new Vector2 (0f, 0f);
+				p3.Position = new Vector2 (0f, -3f);
+				p3.Velocity = new Vector2 (0.012916398f, 0f);
 				//p3.Radius = 0.003f;
+				p3.Trails = new List<Vector2> ();
 				lstPlanets.Add (p3);
 					
-				*/
+
 
 
 
@@ -164,6 +190,8 @@ namespace AIMIS
 
 					GL.MatrixMode(MatrixMode.Projection);
 					//GL.LoadIdentity();
+					matrix = Matrix4.CreateTranslation(ViewPointV);
+
 					GL.LoadMatrix(ref matrix);
 					GL.Ortho(-10.0, 10.0, -8.0, 8.0, 0.0, 4.0);
 
@@ -171,6 +199,7 @@ namespace AIMIS
 
 					//foreach (PlanetObject planob in lstPlanets) {
 					//calculate forces between objects
+					for(int zx = 0; zx < 80; zx ++) {
 					for (int i = lstPlanets.Count - 1; i >= 0; i--) {
 
 						PlanetObject planob = lstPlanets[i];
@@ -188,8 +217,11 @@ namespace AIMIS
 								//split into up, sideways
 								float Yaccel = (Accel/Distance) * (planob.Position.Y - plan2.Position.Y);
 								float Xaccel = (Accel/Distance) * (planob.Position.X - plan2.Position.X);
-								planob.Velocity.X += Xaccel;
-								planob.Velocity.Y += Yaccel;
+
+								planob.Velocity.X += Xaccel / 80;
+								planob.Velocity.Y += Yaccel / 80;
+								planob.Position += planob.Velocity / 80;
+								//planob.Acceleration = new Vector2(Xaccel,Yaccel);
 
 								//collision detection, merge objects
 								if(Math.Abs(planob.Position.X - plan2.Position.X) < planob.Radius && Math.Abs(planob.Position.Y - plan2.Position.Y) < planob.Radius) {
@@ -209,18 +241,23 @@ namespace AIMIS
 							}
 						}
 					}
+					}
+
+
 
 					//draw
 
 					GL.Color3(Color.DarkRed);
 
 					//draw vector [dead] trails
+					if(blTrails) {
 					foreach( List<Vector2> TrailL in lstTrails) {
 						GL.Begin(PrimitiveType.LineStrip);	
 						foreach(Vector2 pos in TrailL) {
 							GL.Vertex2(pos.X, pos.Y);
 						}
 						GL.End();//
+					}
 					}
 
 
@@ -231,16 +268,17 @@ namespace AIMIS
 						DrawCircle(30,planob.Position.X, planob.Position.Y, planob.Radius);		
 
 						GL.Color3(Color.DarkRed);
-
-						planob.Position += planob.Velocity;
+							
 						//trails
 						planob.Trails.Add(planob.Position);
-						
+
+						if(blTrails) {
 						GL.Begin(PrimitiveType.LineStrip);	
 						foreach(Vector2 pos in planob.Trails) {
 							GL.Vertex2(pos.X, pos.Y);
 						}
 						GL.End();
+						}
 						//planet
 			
 					}
