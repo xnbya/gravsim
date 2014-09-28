@@ -78,6 +78,7 @@ namespace AIMIS
 
 				//viewpoint
 				Vector3 ViewPointV = new Vector3 (0f, 0f, 0f);
+				float ZoomMulti = 1f;
 
 
 				Matrix4 matrix = Matrix4.CreateTranslation(0,0,0);
@@ -114,6 +115,12 @@ namespace AIMIS
 					if(game.Keyboard[Key.S] ) {
 						ViewPointV.Y += 0.01f;
 					}
+					if(game.Keyboard[Key.Z] ) {
+						ZoomMulti += 0.01f;
+					}
+					if(game.Keyboard[Key.X] ) {
+						ZoomMulti -= 0.01f;
+					}
 
 
 					if (game.Keyboard[Key.B]) {
@@ -142,12 +149,14 @@ namespace AIMIS
 
 
 
+
+
 				//create random planets
 				for (int ii = 0; ii <  50; ii ++) {
 					PlanetObject p1 = new PlanetObject ();
 					//p1.Mass = 0.5f;
-					p1.Position = new Vector2 (((float)rand.NextDouble () - 0.5f) * 4f, ((float)rand.NextDouble () - 0.5f)*4f);
-					p1.Velocity = new Vector2 (((float)rand.NextDouble () - 0.5f) / 20, ((float)rand.NextDouble () - 0.5f) / 20);
+					p1.Position = new Vector2 (((float)rand.NextDouble () - 0.5f) * 8f, ((float)rand.NextDouble () - 0.5f)*8f);
+					p1.Velocity = new Vector2 (((float)rand.NextDouble () - 0.5f) / 20, ((float)rand.NextDouble () - 0.5f) / 50);
 //Vector2 (0.02f, 0.01f);
 					//p1.Velocity = new Vector2 (0f, 0f);
 					p1.Mass = (float)rand.NextDouble () + 0.02f;
@@ -157,22 +166,30 @@ namespace AIMIS
 				}
 
 				//other planets
+
 				PlanetObject p2 = new PlanetObject();
 				p2.Mass = 1000f;
 				p2.Position = new Vector2 (0f, 0f);
-				p2.Velocity = new Vector2 (0f, 0f);
+				p2.Velocity = new Vector2 (-0.015f, 0f);
 				p2.Trails = new List<Vector2> ();
 					//p2.Radius = 0.005f;
 				lstPlanets.Add (p2);
 
 
 				PlanetObject p3 = new PlanetObject();
-				p3.Mass = 1f;
-				p3.Position = new Vector2 (0f, -3f);
-				p3.Velocity = new Vector2 (00.012916398f, 0f);
+				p3.Mass = 800f;
+				p3.Position = new Vector2 (0f, -1f);
+				p3.Velocity = new Vector2 (0.015f, 0f);
 				//p3.Radius = 0.003f;
 				p3.Trails = new List<Vector2> ();
 				lstPlanets.Add (p3);
+
+				PlanetObject p4 = new PlanetObject ();
+				p4.Mass = 3f;
+				p4.Position = new Vector2 (0f, 2f);
+				p4.Velocity = new Vector2 (-0.012916398f, 0f);
+				p4.Trails = new List<Vector2> ();
+				lstPlanets.Add (p4);
 					
 
 
@@ -187,13 +204,25 @@ namespace AIMIS
 					GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
 					GL.MatrixMode(MatrixMode.Projection);
+					//trackobject
+					/*
+					ViewPointV.X = -lstPlanets[0].Position.X / 10;
+					ViewPointV.Y = -lstPlanets[0].Position.Y / 8;
+					Console.Write("plan");
+					Console.WriteLine(lstPlanets[0].Position.X);
+					Console.WriteLine(ViewPointV.X);
+					*/
+
+
+
 					//GL.LoadIdentity();
 					matrix = Matrix4.CreateTranslation(ViewPointV);
 
 					GL.LoadMatrix(ref matrix);
-					GL.Ortho(-10.0, 10.0, -8.0, 8.0, 0.0, 4.0);
+					GL.Ortho(-10.0 * ZoomMulti, 10.0 * ZoomMulti, -8.0 * ZoomMulti, 8.0 * ZoomMulti, 0.0, 4.0);
 
-
+					//speedup
+					for(int zx = 0; zx < 2; zx++) {
 
 					//foreach (PlanetObject planob in lstPlanets) {
 					//calculate forces between objects
@@ -266,6 +295,12 @@ namespace AIMIS
 					}
 					}
 
+					foreach (PlanetObject planob in lstPlanets ) {
+							planob.Trails.Add(planob.Position);
+							planob.Position += planob.Velocity;
+						}
+
+					}
 
 					//draw planets
 					for (int i = lstPlanets.Count - 1; i >= 0; i--) {
@@ -276,8 +311,8 @@ namespace AIMIS
 						GL.Color3(Color.DarkRed);
 							
 						//trails
-						planob.Trails.Add(planob.Position);
-						planob.Position += planob.Velocity;
+						//planob.Trails.Add(planob.Position);
+						//planob.Position += planob.Velocity;
 
 
 						if(blTrails) {
@@ -291,6 +326,7 @@ namespace AIMIS
 			
 					}
 
+				
 
 
 					game.SwapBuffers();
