@@ -1,0 +1,6 @@
+/home/alexis/dev/project/gravsim/CLI/AIMIS/obj/x86/Debug/.NETFramework,Version=v4.0.AssemblyAttribute.cs
+/home/alexis/dev/project/gravsim/CLI/AIMIS/bin/Debug/opentktest.exe.mdb
+/home/alexis/dev/project/gravsim/CLI/AIMIS/bin/Debug/opentktest.exe
+/home/alexis/dev/project/gravsim/CLI/AIMIS/obj/x86/Debug/opentktest.exe
+/home/alexis/dev/project/gravsim/CLI/AIMIS/obj/x86/Debug/opentktest.exe.mdb
+/home/alexis/dev/project/gravsim/CLI/AIMIS/bin/Debug/OpenTK.dll
