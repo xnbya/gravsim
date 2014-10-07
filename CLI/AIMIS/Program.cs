@@ -59,14 +59,9 @@ namespace AIMIS
 			public List<Vector2> Trails;
 		}
 
+		[STAThread]
 		public static void Main ()
 		{
-            Variables vars = new Variables();
-            vars.blShowTrails = true;
-
-            System.Windows.Forms.Application.EnableVisualStyles();
-            frmTEst form1 = new frmTEst(vars);
-            form1.Show();
 
 			//show trails?
 			bool blTrails = true;
@@ -140,7 +135,7 @@ namespace AIMIS
 					}
 
 					if (game.Keyboard [Key.T]) {
-						//blTrails = !blTrails;
+						blTrails = !blTrails;
 					}
 
 
@@ -207,8 +202,6 @@ namespace AIMIS
 				//Vector2 velocity = new Vector2 (0f, 0f);
 				game.RenderFrame += (sender, e) =>
 				{
-                    blTrails = vars.blShowTrails;
-
 					// render graphics
 					GL.Clear (ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
