@@ -77,7 +77,7 @@ namespace AIMIS
 				Color colPlanets = Color.LightYellow;
 
 				//keep trails infinitly
-				bool blKeepTrails = false;
+				bool blKeepTrails = true;
 
 				//viewpoint
 				Vector3 ViewPointV = new Vector3 (0f, 0f, 0f);
@@ -154,7 +154,7 @@ namespace AIMIS
 
 
 				//create random planets
-				for (int ii = 0; ii <  50; ii ++) {
+				for (int ii = 0; ii <  0; ii ++) {
 					PlanetObject p1 = new PlanetObject ();
 					//p1.Mass = 0.5f;
 					p1.Position = new Vector2 (((float)rand.NextDouble () - 0.5f) * 8f, ((float)rand.NextDouble () - 0.5f) * 8f);
@@ -172,26 +172,26 @@ namespace AIMIS
 				PlanetObject p2 = new PlanetObject ();
 				p2.Mass = 1000f;
 				p2.Position = new Vector2 (0f, 0f);
-				p2.Velocity = new Vector2 (-0.015f, 0f);
+				p2.Velocity = new Vector2 (0f, 0f);
 				p2.Trails = new List<Vector2> ();
 				//p2.Radius = 0.005f;
 				lstPlanets.Add (p2);
 
 
 				PlanetObject p3 = new PlanetObject ();
-				p3.Mass = 801f;
-				p3.Position = new Vector2 (0f, -1f);
-				p3.Velocity = new Vector2 (0.015f, 0f);
+				p3.Mass = 3f;
+				p3.Position = new Vector2 (0f, -3f);
+				p3.Velocity = new Vector2 (-0.01f, 0f);
 				//p3.Radius = 0.003f;
 				p3.Trails = new List<Vector2> ();
 				lstPlanets.Add (p3);
 
 				PlanetObject p4 = new PlanetObject ();
 				p4.Mass = 3f;
-				p4.Position = new Vector2 (0f, 2f);
-				p4.Velocity = new Vector2 (-0.012916398f, 0f);
+				p4.Position = new Vector2 (0f, 3f);
+				p4.Velocity = new Vector2 (0.01f, 0f);
 				p4.Trails = new List<Vector2> ();
-				//lstPlanets.Add (p4);
+				lstPlanets.Add (p4);
 					
 
 
@@ -223,6 +223,8 @@ namespace AIMIS
 					GL.LoadMatrix (ref matrix);
 					GL.Ortho (-10.0 * ZoomMulti, 10.0 * ZoomMulti, -8.0 * ZoomMulti, 8.0 * ZoomMulti, 0.0, 4.0);
 
+					//speedup
+					for(int zx = 0; zx < 5; zx ++) {
 
 					//foreach (PlanetObject planob in lstPlanets) {
 					//calculate forces between objects
@@ -233,29 +235,12 @@ namespace AIMIS
 							PlanetObject plan2 = lstPlanets [ic];
 							if (plan2 != planob) {
 
-								/*
-									//calculate force exerted 
-									float Force = 0 - (G * planob.Mass * plan2.Mass) / ( (float)Math.Pow((planob.Position.X - plan2.Position.X),2)
-									                                                + (float)Math.Pow((planob.Position.Y - plan2.Position.Y),2));
-									//F=ma
-									float Accel = Force / planob.Mass;
-									float Distance = (float)Math.Sqrt(Math.Pow(planob.Position.X + plan2.Position.X,2)
-									                                  + Math.Pow(planob.Position.Y + plan2.Position.Y,2));
-									//split into up, sideways
-									float Yaccel = (Accel/Distance) * (planob.Position.Y - plan2.Position.Y);
-									float Xaccel = (Accel/Distance) * (planob.Position.X - plan2.Position.X);
-
-									planob.Velocity.X += Xaccel;
-									planob.Velocity.Y += Yaccel;
-									planob.Position += planob.Velocity;
-									//planob.Acceleration = new Vector2(Xaccel,Yaccel);
-									*/
-								//calculate with vectors
+								//calculate force with vectors
 								float dissqu = (float)Math.Pow ((planob.Position.X - plan2.Position.X), 2)
 									+ (float)Math.Pow ((planob.Position.Y - plan2.Position.Y), 2);
 								Vector2 Force = - G * ((planob.Mass * plan2.Mass) / dissqu) * ((planob.Position - plan2.Position) / (float)Math.Sqrt (dissqu));
 								Vector2 Acceleration = Force / planob.Mass;
-								planob.Velocity += Acceleration;
+								planob.Velocity += Acceleration; 
 
 								//collision detection, merge objects
 								if (Math.Abs (planob.Position.X - plan2.Position.X) < planob.Radius && Math.Abs (planob.Position.Y - plan2.Position.Y) < planob.Radius) {
@@ -278,6 +263,7 @@ namespace AIMIS
 						}
 					}
 
+					//}
 
 
 
@@ -303,7 +289,7 @@ namespace AIMIS
 						planob.Trails.Add (planob.Position);
 						planob.Position += planob.Velocity;
 					}
-
+					}
 
 					//draw planets
 					for (int i = lstPlanets.Count - 1; i >= 0; i--) {
