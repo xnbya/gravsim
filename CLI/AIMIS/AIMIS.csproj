@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -7,8 +7,8 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{F4BA1A17-76D3-4C5A-B8A6-A615C7BD8E2E}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>opentktest</RootNamespace>
-    <AssemblyName>opentktest</AssemblyName>
+    <RootNamespace>AIMIS</RootNamespace>
+    <AssemblyName>AIMIS</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <DebugSymbols>true</DebugSymbols>
@@ -37,13 +37,27 @@
     </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmTEst.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTEst.Designer.cs">
+      <DependentUpon>frmTEst.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Variables.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="frmTEst.resx">
+      <DependentUpon>frmTEst.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>
