@@ -12,6 +12,9 @@ namespace AIMIS
     public partial class frmControl : Form
     {
         public gbVariables gbvars;
+        public EventHandler ClearTrails;
+        public tkui MainUIclass;
+
         public frmControl()
         {
             InitializeComponent();
@@ -19,7 +22,18 @@ namespace AIMIS
 
         private void rbNoTrails_CheckedChanged(object sender, EventArgs e)
         {
-            gbvars.ShowTrails = false;
+            gbvars.ShowTrails = !rbNoTrails.Checked;
+            gbvars.ShortTrails = rbShortTrails.Checked;
+        }
+
+        private void btnClearTrails_Click(object sender, EventArgs e)
+        {
+            MainUIclass.ClearTrails();
+        }
+
+        private void rkbSpeed_Scroll(object sender, EventArgs e)
+        {
+            MainUIclass.SimulationSpeed = rkbSpeed.Value;
         }
     }
 }
