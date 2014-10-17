@@ -105,6 +105,7 @@ namespace AIMIS
 
 			using (var game = new GameWindow(700,500, new GraphicsMode(8,2,0))) {
 
+
 				Matrix4 matrix = Matrix4.CreateTranslation (0, 0, 0);
 				game.Load += (sender, e) =>
 				{
@@ -117,8 +118,21 @@ namespace AIMIS
 					GL.Viewport (0, 0, game.Width, game.Height);
 				};
 
+                game.Mouse.ButtonDown += (sender, e) =>
+                    {
+                        Console.WriteLine(e.X.ToString() + ' ' + e.Y.ToString());
+
+                    };
+
+                game.Mouse.Move += (sender, e) =>
+                    {
+                        Console.WriteLine(e.X.ToString() + ' ' + e.Y.ToString());
+                    };
+
 				game.UpdateFrame += (sender, e) =>
 				{
+
+                    
 				
 					
 					if (game.Keyboard [Key.Escape]) {
@@ -169,9 +183,6 @@ namespace AIMIS
 
 				//gravitational constant
 				float G = 0.0000005f;
-
-
-
 
 
 				//create random planets
@@ -342,9 +353,9 @@ namespace AIMIS
 
 
 					game.SwapBuffers ();
-					Console.WriteLine (game.UpdateFrequency);
-					Console.WriteLine (lstPlanets.Count);
-					Console.WriteLine (lstPlanets [0].Trails.Count * lstPlanets.Count);
+					//Console.WriteLine (game.UpdateFrequency);
+					//Console.WriteLine (lstPlanets.Count);
+					//Console.WriteLine (lstPlanets [0].Trails.Count * lstPlanets.Count);
 				};
 
 
