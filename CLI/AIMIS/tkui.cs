@@ -118,21 +118,49 @@ namespace AIMIS
 					GL.Viewport (0, 0, game.Width, game.Height);
 				};
 
+                //mouse click to add logic
+                float MoCinitialX = 0;
+                float MoCinitialY = 0;
+
+                Vector2 MoCdvec = new Vector2(0f, 0f);
+                bool MoCdraw = false;
+
                 game.Mouse.ButtonDown += (sender, e) =>
                     {
+
+                        MoCinitialX = ((float)e.X / (float)game.Width - 0.5f) * 20f * ZoomMulti;
+                        MoCinitialY = 0 - ((float)e.Y / (float)game.Height - 0.5f) * 16f * ZoomMulti;
+                        MoCdraw = true;
+
                         Console.WriteLine(e.X.ToString() + ' ' + e.Y.ToString());
 
+
+
                     };
+
+                game.Mouse.ButtonUp += (sender, e) =>
+                    {
+                        MoCdraw = false;
+                        float MoCfinalX = ((float)e.X / (float)game.Width - 0.5f) * 20f * ZoomMulti;
+                        float MoCfinalY = 0 - ((float)e.Y / (float)game.Height - 0.5f) * 16f * ZoomMulti;
+
+                        PlanetObject plan = new PlanetObject();
+                        plan.Mass = 100f;
+                        plan.Position = new Vector2(MoCinitialX, MoCinitialY);
+                        plan.Velocity = new Vector2((MoCfinalX - MoCinitialX) / 50f, (MoCfinalY - MoCinitialY) / 50f);
+                        plan.Trails = new List<Vector2>();
+                        //p2.Radius = 0.005f;
+                        lstPlanets.Add(plan);
+                    };
+
 
                 game.Mouse.Move += (sender, e) =>
                     {
-                        Console.WriteLine(e.X.ToString() + ' ' + e.Y.ToString());
+                        MoCdvec = new Vector2(((float)e.X / (float)game.Width - 0.5f) * 20f * ZoomMulti, 0 - ((float)e.Y / (float)game.Height - 0.5f) * 16f * ZoomMulti);
                     };
 
 				game.UpdateFrame += (sender, e) =>
-				{
-
-                    
+				{             
 				
 					
 					if (game.Keyboard [Key.Escape]) {
@@ -348,6 +376,18 @@ namespace AIMIS
 						//planet
 			
 					}
+
+                    //draw mouse click line
+                    if (MoCdraw)
+                    {
+                        GL.Begin(PrimitiveType.Lines);
+                        GL.Color3(Color.Yellow);
+                        GL.Vertex2(MoCinitialX, MoCinitialY);
+                        GL.Vertex2(MoCdvec);
+                        GL.End();
+
+                        DrawCircle(30, MoCinitialX, MoCinitialY, 0.1f);
+                    }
 
 				
 
