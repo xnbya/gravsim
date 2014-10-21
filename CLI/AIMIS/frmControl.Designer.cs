@@ -35,8 +35,14 @@
             this.rbNoTrails = new System.Windows.Forms.RadioButton();
             this.rkbSpeed = new System.Windows.Forms.TrackBar();
             this.label1 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.cboNewMass = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.cboNewColour = new System.Windows.Forms.ComboBox();
             this.grbTrails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.rkbSpeed)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // grbTrails
@@ -77,6 +83,7 @@
             // rbShortTrails
             // 
             this.rbShortTrails.AutoSize = true;
+            this.rbShortTrails.Checked = true;
             this.rbShortTrails.Location = new System.Drawing.Point(6, 42);
             this.rbShortTrails.Name = "rbShortTrails";
             this.rbShortTrails.Size = new System.Drawing.Size(74, 17);
@@ -100,7 +107,7 @@
             // 
             // rkbSpeed
             // 
-            this.rkbSpeed.Location = new System.Drawing.Point(12, 210);
+            this.rkbSpeed.Location = new System.Drawing.Point(18, 133);
             this.rkbSpeed.Maximum = 100;
             this.rkbSpeed.Name = "rkbSpeed";
             this.rkbSpeed.Size = new System.Drawing.Size(400, 45);
@@ -110,25 +117,95 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(15, 194);
+            this.label1.Location = new System.Drawing.Point(15, 117);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(99, 13);
             this.label1.TabIndex = 2;
             this.label1.Text = "Speed of simulation";
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.cboNewColour);
+            this.groupBox1.Controls.Add(this.label3);
+            this.groupBox1.Controls.Add(this.cboNewMass);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Location = new System.Drawing.Point(183, 12);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(200, 102);
+            this.groupBox1.TabIndex = 3;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "New Objects";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(15, 21);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Mass:";
+            // 
+            // cboNewMass
+            // 
+            this.cboNewMass.FormattingEnabled = true;
+            this.cboNewMass.Items.AddRange(new object[] {
+            "1",
+            "5",
+            "10",
+            "25",
+            "50",
+            "100"});
+            this.cboNewMass.Location = new System.Drawing.Point(56, 18);
+            this.cboNewMass.Name = "cboNewMass";
+            this.cboNewMass.Size = new System.Drawing.Size(121, 21);
+            this.cboNewMass.TabIndex = 1;
+            this.cboNewMass.Text = "5";
+            this.cboNewMass.SelectedValueChanged += new System.EventHandler(this.cboNewMass_SelectedValueChanged);
+            this.cboNewMass.TextChanged += new System.EventHandler(this.cboNewMass_TextChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(15, 48);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(40, 13);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Colour:";
+            // 
+            // cboNewColour
+            // 
+            this.cboNewColour.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboNewColour.FormattingEnabled = true;
+            this.cboNewColour.Items.AddRange(new object[] {
+            "Red",
+            "Blue",
+            "Yellow",
+            "Green",
+            "White"});
+            this.cboNewColour.Location = new System.Drawing.Point(56, 45);
+            this.cboNewColour.Name = "cboNewColour";
+            this.cboNewColour.Size = new System.Drawing.Size(121, 21);
+            this.cboNewColour.TabIndex = 3;
+            // 
             // frmControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(488, 260);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.ClientSize = new System.Drawing.Size(427, 177);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.rkbSpeed);
             this.Controls.Add(this.grbTrails);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmControl";
+            this.Opacity = 0.8D;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "AIMIS control window";
+            this.TopMost = true;
             this.grbTrails.ResumeLayout(false);
             this.grbTrails.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.rkbSpeed)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -143,5 +220,10 @@
         private System.Windows.Forms.Button btnClearTrails;
         private System.Windows.Forms.TrackBar rkbSpeed;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.ComboBox cboNewColour;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox cboNewMass;
+        private System.Windows.Forms.Label label2;
     }
 }

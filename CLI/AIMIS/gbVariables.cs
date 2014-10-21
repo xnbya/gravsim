@@ -9,6 +9,8 @@ namespace AIMIS
     {
         public bool ShowTrails;
         public bool ShortTrails;
+        public float NewObjectMass;
+        public System.Drawing.Color NewObjectColour;
 
     }
 }

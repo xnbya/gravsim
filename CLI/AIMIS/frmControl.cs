@@ -18,6 +18,7 @@ namespace AIMIS
         public frmControl()
         {
             InitializeComponent();
+            //gbvars.NewObjectMass = 5;
         }
 
         private void rbNoTrails_CheckedChanged(object sender, EventArgs e)
@@ -34,6 +35,16 @@ namespace AIMIS
         private void rkbSpeed_Scroll(object sender, EventArgs e)
         {
             MainUIclass.SimulationSpeed = rkbSpeed.Value;
+        }
+
+        private void cboNewMass_SelectedValueChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void cboNewMass_TextChanged(object sender, EventArgs e)
+        {
+            gbvars.NewObjectMass = float.Parse(cboNewMass.Text);
         }
     }
 }

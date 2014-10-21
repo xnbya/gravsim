@@ -57,6 +57,7 @@ namespace AIMIS
 			public Vector2 Velocity;
 			public Vector2 Position;
 			public List<Vector2> Trails;
+            public Color PColour;
 		}
 
         public void ClearTrails()
@@ -90,6 +91,7 @@ namespace AIMIS
 		public void Main ()
 		{
             gbVariables gbvars = new gbVariables();
+            gbvars.NewObjectMass = 5f;
 
             frmControl form = new frmControl();
             form.MainUIclass = this;
@@ -104,7 +106,10 @@ namespace AIMIS
             gbvars.ShortTrails = true;
 
 			using (var game = new GameWindow(700,500, new GraphicsMode(8,2,0))) {
-
+                game.Title = "AIMIS";
+                game.WindowState = WindowState.Fullscreen;
+              //  DisplayDevice.Default.ChangeResolution(1280, 1024,2, 30);
+               
 
 				Matrix4 matrix = Matrix4.CreateTranslation (0, 0, 0);
 				game.Load += (sender, e) =>
@@ -145,7 +150,7 @@ namespace AIMIS
                         float MoCfinalY = 0 - ((float)e.Y / (float)game.Height - 0.5f) * 16f * ZoomMulti;
 
                         PlanetObject plan = new PlanetObject();
-                        plan.Mass = 100f;
+                        plan.Mass = gbvars.NewObjectMass;
                         plan.Position = new Vector2(MoCinitialX, MoCinitialY);
                         plan.Velocity = new Vector2((MoCfinalX - MoCinitialX) / 50f, (MoCfinalY - MoCinitialY) / 50f);
                         plan.Trails = new List<Vector2>();
@@ -153,6 +158,10 @@ namespace AIMIS
                         lstPlanets.Add(plan);
                     };
 
+                game.Mouse.WheelChanged += (sender, e) =>
+                    {
+                        ZoomMulti -= e.DeltaPrecise * 0.05f;
+                    };
 
                 game.Mouse.Move += (sender, e) =>
                     {
@@ -210,11 +219,11 @@ namespace AIMIS
 				Random rand = new Random ();
 
 				//gravitational constant
-				float G = 0.0000005f;
+				float G = 0.0000006673f;
 
 
 				//create random planets
-				for (int ii = 0; ii < 60; ii ++) {
+				for (int ii = 0; ii < 0; ii ++) {
 					PlanetObject p1 = new PlanetObject ();
 					//p1.Mass = 0.5f;
 					p1.Position = new Vector2 (((float)rand.NextDouble () - 0.5f) * 8f, ((float)rand.NextDouble () - 0.5f) * 8f);
@@ -234,24 +243,22 @@ namespace AIMIS
 				p2.Position = new Vector2 (0f, 0f);
 				p2.Velocity = new Vector2 (0f, 0f);
 				p2.Trails = new List<Vector2> ();
-				//p2.Radius = 0.005f;
-				lstPlanets.Add (p2);
+				//lstPlanets.Add (p2);
 
 
 				PlanetObject p3 = new PlanetObject ();
 				p3.Mass = 3f;
 				p3.Position = new Vector2 (0f, -3f);
 				p3.Velocity = new Vector2 (-0.01f, 0f);
-				//p3.Radius = 0.003f;
 				p3.Trails = new List<Vector2> ();
-				lstPlanets.Add (p3);
+				//lstPlanets.Add (p3);
 
 				PlanetObject p4 = new PlanetObject ();
 				p4.Mass = 3f;
 				p4.Position = new Vector2 (0f, 3f);
 				p4.Velocity = new Vector2 (0.01f, 0f);
 				p4.Trails = new List<Vector2> ();
-				lstPlanets.Add (p4);
+				//lstPlanets.Add (p4);
 					
 
 
