@@ -71,6 +71,14 @@ namespace AIMIS
             }
         }
 
+        public Vector2 MousePosition(float mX, float mY, GameWindow game)
+        {
+            Vector2 vecMousePos = new Vector2(((mX) / (float)game.Width - 0.5f) * 20f * ZoomMulti - ViewPointV.X * 10f * ZoomMulti, 0 - ((mY) / (float)game.Height - 0.5f) * 16f * ZoomMulti - ViewPointV.Y * 8f * ZoomMulti);
+            Console.WriteLine(ViewPointV);
+            return vecMousePos;
+
+        }
+
         //vars
         //list of planets
         List<PlanetObject> lstPlanets = new List<PlanetObject>();
@@ -107,7 +115,7 @@ namespace AIMIS
 
 			using (var game = new GameWindow(700,500, new GraphicsMode(8,2,0))) {
                 game.Title = "AIMIS";
-                game.WindowState = WindowState.Fullscreen;
+               // game.WindowState = WindowState.Fullscreen;
               //  DisplayDevice.Default.ChangeResolution(1280, 1024,2, 30);
                
 
@@ -124,35 +132,31 @@ namespace AIMIS
 				};
 
                 //mouse click to add logic
-                float MoCinitialX = 0;
-                float MoCinitialY = 0;
-
+                Vector2 MoCinitialvec = new Vector2(0f, 0f);
                 Vector2 MoCdvec = new Vector2(0f, 0f);
                 bool MoCdraw = false;
 
                 game.Mouse.ButtonDown += (sender, e) =>
                     {
-
-                        MoCinitialX = ((float)e.X / (float)game.Width - 0.5f) * 20f * ZoomMulti;
-                        MoCinitialY = 0 - ((float)e.Y / (float)game.Height - 0.5f) * 16f * ZoomMulti;
+                        MoCinitialvec = MousePosition(e.X, e.Y, game);
                         MoCdraw = true;
 
                         Console.WriteLine(e.X.ToString() + ' ' + e.Y.ToString());
-
-
 
                     };
 
                 game.Mouse.ButtonUp += (sender, e) =>
                     {
                         MoCdraw = false;
-                        float MoCfinalX = ((float)e.X / (float)game.Width - 0.5f) * 20f * ZoomMulti;
-                        float MoCfinalY = 0 - ((float)e.Y / (float)game.Height - 0.5f) * 16f * ZoomMulti;
+                       // float MoCfinalX = ((float)e.X / (float)game.Width - 0.5f) * 20f * ZoomMulti;
+                       // float MoCfinalY = 0 - ((float)e.Y / (float)game.Height - 0.5f) * 16f * ZoomMulti;
 
+
+                        MoCdvec = MousePosition(e.X, e.Y, game);
                         PlanetObject plan = new PlanetObject();
                         plan.Mass = gbvars.NewObjectMass;
-                        plan.Position = new Vector2(MoCinitialX, MoCinitialY);
-                        plan.Velocity = new Vector2((MoCfinalX - MoCinitialX) / 50f, (MoCfinalY - MoCinitialY) / 50f);
+                        plan.Position = MoCinitialvec;
+                        plan.Velocity = (MoCdvec - MoCinitialvec) * 0.05f; // new Vector2((MoCfinalX - MoCinitialX) / 50f, (MoCfinalY - MoCinitialY) / 50f);
                         plan.Trails = new List<Vector2>();
                         //p2.Radius = 0.005f;
                         lstPlanets.Add(plan);
@@ -165,7 +169,7 @@ namespace AIMIS
 
                 game.Mouse.Move += (sender, e) =>
                     {
-                        MoCdvec = new Vector2(((float)e.X / (float)game.Width - 0.5f) * 20f * ZoomMulti, 0 - ((float)e.Y / (float)game.Height - 0.5f) * 16f * ZoomMulti);
+                        MoCdvec = MousePosition(e.X, e.Y, game); // new Vector2(((float)e.X / (float)game.Width - 0.5f) * 20f * ZoomMulti, 0 - ((float)e.Y / (float)game.Height - 0.5f) * 16f * ZoomMulti);
                     };
 
 				game.UpdateFrame += (sender, e) =>
@@ -389,11 +393,11 @@ namespace AIMIS
                     {
                         GL.Begin(PrimitiveType.Lines);
                         GL.Color3(Color.Yellow);
-                        GL.Vertex2(MoCinitialX, MoCinitialY);
+                        GL.Vertex2(MoCinitialvec);
                         GL.Vertex2(MoCdvec);
                         GL.End();
 
-                        DrawCircle(30, MoCinitialX, MoCinitialY, 0.1f);
+                        DrawCircle(30, MoCinitialvec.X, MoCinitialvec.Y, 0.1f);
                     }
 
 				

@@ -44,7 +44,15 @@ namespace AIMIS
 
         private void cboNewMass_TextChanged(object sender, EventArgs e)
         {
-            gbvars.NewObjectMass = float.Parse(cboNewMass.Text);
+            float Mass = 0;
+            if(float.TryParse(cboNewMass.Text, out Mass )) {
+                gbvars.NewObjectMass = Mass;
+            }
+            else
+            {
+                MessageBox.Show("Please enter a valid mass", "Invalid mass", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
         }
     }
 }
