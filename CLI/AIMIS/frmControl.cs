@@ -30,6 +30,9 @@ namespace AIMIS
         private void btnClearTrails_Click(object sender, EventArgs e)
         {
             MainUIclass.ClearTrails();
+			tkui TKUI = new tkui ();
+			System.Threading.Thread newthr = new System.Threading.Thread (TKUI.Main);
+			newthr.Start ();
         }
 
         private void rkbSpeed_Scroll(object sender, EventArgs e)

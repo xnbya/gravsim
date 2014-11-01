@@ -1,4 +1,4 @@
-﻿ /* AIMIS
+﻿  /* AIMIS
 Copyright (C) 2014 Alexis Enston
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -101,10 +101,14 @@ namespace AIMIS
             gbVariables gbvars = new gbVariables();
             gbvars.NewObjectMass = 5f;
 
-            frmControl form = new frmControl();
-            form.MainUIclass = this;
-            form.gbvars = gbvars;
-            form.Show();
+
+			//load the control window
+			threading uithread = new threading ();
+			uithread.gbvars = gbvars;
+			uithread.mainUI = this;
+            
+			System.Threading.Thread formth = new System.Threading.Thread (uithread.ShowUI);
+			formth.Start ();
 
 
 			//show trails?

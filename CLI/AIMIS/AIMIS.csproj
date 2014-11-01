@@ -52,6 +52,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="gbVariables.cs" />
     <Compile Include="tkui.cs" />
+    <Compile Include="threading.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
