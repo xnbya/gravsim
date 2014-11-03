@@ -36,10 +36,11 @@
             this.rkbSpeed = new System.Windows.Forms.TrackBar();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.cboNewMass = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.cboNewColour = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.cboNewMass = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.btnNewSim = new System.Windows.Forms.Button();
             this.grbTrails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.rkbSpeed)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -110,7 +111,7 @@
             this.rkbSpeed.Location = new System.Drawing.Point(18, 133);
             this.rkbSpeed.Maximum = 100;
             this.rkbSpeed.Name = "rkbSpeed";
-            this.rkbSpeed.Size = new System.Drawing.Size(400, 45);
+            this.rkbSpeed.Size = new System.Drawing.Size(451, 45);
             this.rkbSpeed.TabIndex = 1;
             this.rkbSpeed.Scroll += new System.EventHandler(this.rkbSpeed_Scroll);
             // 
@@ -136,14 +137,29 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "New Objects";
             // 
-            // label2
+            // cboNewColour
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(15, 21);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Mass:";
+            this.cboNewColour.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboNewColour.FormattingEnabled = true;
+            this.cboNewColour.Items.AddRange(new object[] {
+            "Red",
+            "Blue",
+            "Yellow",
+            "Green",
+            "White"});
+            this.cboNewColour.Location = new System.Drawing.Point(56, 45);
+            this.cboNewColour.Name = "cboNewColour";
+            this.cboNewColour.Size = new System.Drawing.Size(121, 21);
+            this.cboNewColour.TabIndex = 3;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(15, 48);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(40, 13);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Colour:";
             // 
             // cboNewMass
             // 
@@ -163,34 +179,30 @@
             this.cboNewMass.SelectedValueChanged += new System.EventHandler(this.cboNewMass_SelectedValueChanged);
             this.cboNewMass.TextChanged += new System.EventHandler(this.cboNewMass_TextChanged);
             // 
-            // label3
+            // label2
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(15, 48);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(40, 13);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Colour:";
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(15, 21);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Mass:";
             // 
-            // cboNewColour
+            // btnNewSim
             // 
-            this.cboNewColour.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboNewColour.FormattingEnabled = true;
-            this.cboNewColour.Items.AddRange(new object[] {
-            "Red",
-            "Blue",
-            "Yellow",
-            "Green",
-            "White"});
-            this.cboNewColour.Location = new System.Drawing.Point(56, 45);
-            this.cboNewColour.Name = "cboNewColour";
-            this.cboNewColour.Size = new System.Drawing.Size(121, 21);
-            this.cboNewColour.TabIndex = 3;
+            this.btnNewSim.Location = new System.Drawing.Point(394, 21);
+            this.btnNewSim.Name = "btnNewSim";
+            this.btnNewSim.Size = new System.Drawing.Size(75, 40);
+            this.btnNewSim.TabIndex = 4;
+            this.btnNewSim.Text = "New Simulation";
+            this.btnNewSim.UseVisualStyleBackColor = true;
+            this.btnNewSim.Click += new System.EventHandler(this.btnNewSim_Click);
             // 
             // frmControl
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(427, 177);
+            this.ClientSize = new System.Drawing.Size(481, 177);
+            this.Controls.Add(this.btnNewSim);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.rkbSpeed);
@@ -225,5 +237,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cboNewMass;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btnNewSim;
     }
 }

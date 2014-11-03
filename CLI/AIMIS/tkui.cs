@@ -20,6 +20,8 @@ namespace AIMIS
 {
 	public class tkui
 	{
+        public gbVariables gbvars;
+
 		public void DrawCircle (int segments, float xpos, float ypos, float radius)
 		{
 
@@ -93,29 +95,31 @@ namespace AIMIS
         Vector3 ViewPointV = new Vector3(0f, 0f, 0f);
         float ZoomMulti = 1f;
 
+
+
         //speed
         public int SimulationSpeed = 1;
 
 		public void Main ()
 		{
-            gbVariables gbvars = new gbVariables();
-            gbvars.NewObjectMass = 5f;
+           // gbVariables gbvars = new gbVariables();
+            //gbvars.NewObjectMass = 5f;
 
 
 			//load the control window
-			threading uithread = new threading ();
+			/*threading uithread = new threading ();
 			uithread.gbvars = gbvars;
 			uithread.mainUI = this;
             
 			System.Threading.Thread formth = new System.Threading.Thread (uithread.ShowUI);
-			formth.Start ();
+			formth.Start (); */
 
 
 			//show trails?
-			gbvars.ShowTrails = true;
+			//gbvars.ShowTrails = true;
 
             //short trails
-            gbvars.ShortTrails = true;
+            //gbvars.ShortTrails = true;
 
 			using (var game = new GameWindow(700,500, new GraphicsMode(8,2,0))) {
                 game.Title = "AIMIS";

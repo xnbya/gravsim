@@ -1,0 +1,10 @@
+C:\Users\08enstona.KSC\Source\Repos\gravsim\CLI\AIMIS\bin\Debug\AIMIS.exe
+C:\Users\08enstona.KSC\Source\Repos\gravsim\CLI\AIMIS\bin\Debug\AIMIS.pdb
+C:\Users\08enstona.KSC\Source\Repos\gravsim\CLI\AIMIS\bin\Debug\OpenTK.dll
+C:\Users\08enstona.KSC\Source\Repos\gravsim\CLI\AIMIS\bin\Debug\OpenTK.xml
+C:\Users\08enstona.KSC\Source\Repos\gravsim\CLI\AIMIS\obj\x86\Debug\AIMIS.csprojResolveAssemblyReference.cache
+C:\Users\08enstona.KSC\Source\Repos\gravsim\CLI\AIMIS\obj\x86\Debug\AIMIS.frmControl.resources
+C:\Users\08enstona.KSC\Source\Repos\gravsim\CLI\AIMIS\obj\x86\Debug\AIMIS.csproj.GenerateResource.Cache
+C:\Users\08enstona.KSC\Source\Repos\gravsim\CLI\AIMIS\obj\x86\Debug\AIMIS.exe
+C:\Users\08enstona.KSC\Source\Repos\gravsim\CLI\AIMIS\obj\x86\Debug\AIMIS.pdb
+C:\Users\08enstona.KSC\Source\Repos\gravsim\CLI\AIMIS\obj\x86\Debug\AIMIS.frmNewSim.resources

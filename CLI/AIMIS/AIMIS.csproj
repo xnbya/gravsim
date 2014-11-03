@@ -48,6 +48,12 @@
     <Compile Include="frmControl.Designer.cs">
       <DependentUpon>frmControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmNewSim.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmNewSim.Designer.cs">
+      <DependentUpon>frmNewSim.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="gbVariables.cs" />
@@ -61,6 +67,9 @@
   <ItemGroup>
     <EmbeddedResource Include="frmControl.resx">
       <DependentUpon>frmControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNewSim.resx">
+      <DependentUpon>frmNewSim.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
 </Project>

@@ -15,6 +15,7 @@ using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Input;
+using System.Windows.Forms;
 
 namespace AIMIS
 {
@@ -23,8 +24,15 @@ namespace AIMIS
         [STAThread]
         public static void Main()
         {
-            tkui mainui = new tkui();
-            mainui.Main();
+            frmControl form = new frmControl();
+            gbVariables gbvars = new gbVariables();
+            form.gbvars = gbvars;
+
+            Application.EnableVisualStyles();
+            Application.Run(form);
+
+            //tkui mainui = new tkui();
+           // mainui.Main();
         }
     }
 }

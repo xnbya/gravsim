@@ -30,9 +30,7 @@ namespace AIMIS
         private void btnClearTrails_Click(object sender, EventArgs e)
         {
             MainUIclass.ClearTrails();
-			tkui TKUI = new tkui ();
-			System.Threading.Thread newthr = new System.Threading.Thread (TKUI.Main);
-			newthr.Start ();
+
         }
 
         private void rkbSpeed_Scroll(object sender, EventArgs e)
@@ -56,6 +54,20 @@ namespace AIMIS
                 MessageBox.Show("Please enter a valid mass", "Invalid mass", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             
+        }
+
+        private void btnNewSim_Click(object sender, EventArgs e)
+        {
+            gbvars.NewObjectMass = 5f;
+            gbvars.ShowTrails = true;
+            gbvars.ShortTrails = true;
+
+            tkui TKUI = new tkui();
+            TKUI.gbvars = gbvars;
+            MainUIclass = TKUI;
+
+            System.Threading.Thread newthr = new System.Threading.Thread(TKUI.Main);
+            newthr.Start();
         }
     }
 }
