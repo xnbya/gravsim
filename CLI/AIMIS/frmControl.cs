@@ -58,16 +58,15 @@ namespace AIMIS
 
         private void btnNewSim_Click(object sender, EventArgs e)
         {
-            gbvars.NewObjectMass = 5f;
-            gbvars.ShowTrails = true;
-            gbvars.ShortTrails = true;
-
             tkui TKUI = new tkui();
             TKUI.gbvars = gbvars;
             MainUIclass = TKUI;
 
-            System.Threading.Thread newthr = new System.Threading.Thread(TKUI.Main);
-            newthr.Start();
+            frmNewSim NewSimform = new frmNewSim();
+            NewSimform.gbvars = gbvars;
+            NewSimform.MainUIclass = MainUIclass;
+            NewSimform.ShowDialog();
+
         }
     }
 }

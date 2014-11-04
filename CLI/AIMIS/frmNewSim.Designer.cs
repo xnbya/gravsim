@@ -31,6 +31,7 @@
             this.rbEmpty = new System.Windows.Forms.RadioButton();
             this.rbRandom = new System.Windows.Forms.RadioButton();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.btnLaunch = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // rbEmpty
@@ -66,11 +67,22 @@
             this.radioButton3.Text = "Simple Orbit";
             this.radioButton3.UseVisualStyleBackColor = true;
             // 
+            // btnLaunch
+            // 
+            this.btnLaunch.Location = new System.Drawing.Point(27, 103);
+            this.btnLaunch.Name = "btnLaunch";
+            this.btnLaunch.Size = new System.Drawing.Size(75, 23);
+            this.btnLaunch.TabIndex = 3;
+            this.btnLaunch.Text = "button1";
+            this.btnLaunch.UseVisualStyleBackColor = true;
+            this.btnLaunch.Click += new System.EventHandler(this.btnLaunch_Click);
+            // 
             // frmNewSim
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(438, 271);
+            this.ClientSize = new System.Drawing.Size(389, 211);
+            this.Controls.Add(this.btnLaunch);
             this.Controls.Add(this.radioButton3);
             this.Controls.Add(this.rbRandom);
             this.Controls.Add(this.rbEmpty);
@@ -86,5 +98,6 @@
         private System.Windows.Forms.RadioButton rbEmpty;
         private System.Windows.Forms.RadioButton rbRandom;
         private System.Windows.Forms.RadioButton radioButton3;
+        private System.Windows.Forms.Button btnLaunch;
     }
 }

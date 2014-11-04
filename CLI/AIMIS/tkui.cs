@@ -102,24 +102,6 @@ namespace AIMIS
 
 		public void Main ()
 		{
-           // gbVariables gbvars = new gbVariables();
-            //gbvars.NewObjectMass = 5f;
-
-
-			//load the control window
-			/*threading uithread = new threading ();
-			uithread.gbvars = gbvars;
-			uithread.mainUI = this;
-            
-			System.Threading.Thread formth = new System.Threading.Thread (uithread.ShowUI);
-			formth.Start (); */
-
-
-			//show trails?
-			//gbvars.ShowTrails = true;
-
-            //short trails
-            //gbvars.ShortTrails = true;
 
 			using (var game = new GameWindow(700,500, new GraphicsMode(8,2,0))) {
                 game.Title = "AIMIS";
