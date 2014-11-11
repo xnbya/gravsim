@@ -8,3 +8,4 @@ C:\Users\08enstona.KSC\Source\Repos\gravsim\CLI\AIMIS\obj\x86\Debug\AIMIS.csproj
 C:\Users\08enstona.KSC\Source\Repos\gravsim\CLI\AIMIS\obj\x86\Debug\AIMIS.exe
 C:\Users\08enstona.KSC\Source\Repos\gravsim\CLI\AIMIS\obj\x86\Debug\AIMIS.pdb
 C:\Users\08enstona.KSC\Source\Repos\gravsim\CLI\AIMIS\obj\x86\Debug\AIMIS.frmNewSim.resources
+C:\Users\08enstona.KSC\Source\Repos\gravsim\CLI\AIMIS\obj\x86\Debug\AIMIS.frmGraphs.resources

@@ -1,4 +1,14 @@
-﻿using System;
+﻿/* AIMIS
+Copyright (C) 2014 Alexis Enston
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details. */
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -65,8 +75,21 @@ namespace AIMIS
             frmNewSim NewSimform = new frmNewSim();
             NewSimform.gbvars = gbvars;
             NewSimform.MainUIclass = MainUIclass;
-            NewSimform.ShowDialog();
+            NewSimform.ShowDialog();            
 
         }
+
+        private void btnGraphs_Click(object sender, EventArgs e)
+        {
+            frmGraphs formgraph = new frmGraphs();
+            formgraph.gbvars = gbvars;
+            formgraph.Show();
+        }
+
+        private void frmControl_Load(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }

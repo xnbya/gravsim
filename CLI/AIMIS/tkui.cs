@@ -76,14 +76,14 @@ namespace AIMIS
         public Vector2 MousePosition(float mX, float mY, GameWindow game)
         {
             Vector2 vecMousePos = new Vector2(((mX) / (float)game.Width - 0.5f) * 20f * ZoomMulti - ViewPointV.X * 10f * ZoomMulti, 0 - ((mY) / (float)game.Height - 0.5f) * 16f * ZoomMulti - ViewPointV.Y * 8f * ZoomMulti);
-            Console.WriteLine(ViewPointV);
+            //Console.WriteLine(ViewPointV);
             return vecMousePos;
 
         }
 
         //vars
         //list of planets
-        List<PlanetObject> lstPlanets = new List<PlanetObject>();
+        public List<PlanetObject> lstPlanets = new List<PlanetObject>();
 
         //list of trails of 'dead' planets
         List<List<Vector2>> lstTrails = new List<List<Vector2>>();
@@ -131,7 +131,7 @@ namespace AIMIS
                         MoCinitialvec = MousePosition(e.X, e.Y, game);
                         MoCdraw = true;
 
-                        Console.WriteLine(e.X.ToString() + ' ' + e.Y.ToString());
+                        //Console.WriteLine(e.X.ToString() + ' ' + e.Y.ToString());
 
                     };
 
@@ -377,6 +377,14 @@ namespace AIMIS
 						//planet
 			
 					}
+
+                    if (lstPlanets.Count > 0)
+                    {
+                        //graph stuff
+                        gbvars.lstVelocities.Add(lstPlanets[0].Velocity.Length);
+                        Console.WriteLine(lstPlanets[0].Velocity.Length);
+                    }
+                
 
                     //draw mouse click line
                     if (MoCdraw)

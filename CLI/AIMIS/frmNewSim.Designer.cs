@@ -88,6 +88,7 @@
             this.Controls.Add(this.rbEmpty);
             this.Name = "frmNewSim";
             this.Text = "New Simulation";
+            this.TopMost = true;
             this.ResumeLayout(false);
             this.PerformLayout();
 
