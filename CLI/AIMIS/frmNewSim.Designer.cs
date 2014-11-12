@@ -69,11 +69,11 @@
             // 
             // btnLaunch
             // 
-            this.btnLaunch.Location = new System.Drawing.Point(27, 103);
+            this.btnLaunch.Location = new System.Drawing.Point(12, 91);
             this.btnLaunch.Name = "btnLaunch";
             this.btnLaunch.Size = new System.Drawing.Size(75, 23);
             this.btnLaunch.TabIndex = 3;
-            this.btnLaunch.Text = "button1";
+            this.btnLaunch.Text = "Launch";
             this.btnLaunch.UseVisualStyleBackColor = true;
             this.btnLaunch.Click += new System.EventHandler(this.btnLaunch_Click);
             // 

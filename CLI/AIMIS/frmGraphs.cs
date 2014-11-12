@@ -35,22 +35,44 @@ namespace AIMIS
 
         private void frmGraphs_Load(object sender, EventArgs e)
         {
-            chart1.DataSource = gbvars.lstVelocities;
+            List<float> velocit = new List<float>(gbvars.lstVelocities);
 
-            chart1.DataBind();
-            chart1.Series.First().XValueMember = "X";
-            chart1.Series.First().YValueMembers = "Y";
-            chart1.Update();
+            chart1.DataSource = velocit;
+
+                chart1.DataBind();
+                chart1.Series[0].IsXValueIndexed = true;
+                chart1.Series.First().XValueMember = "Y";
+                chart1.Series.First().YValueMembers = "X";
+                chart1.Update();
         }
+            
+
+            
+        
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
+            List<float> velocit = new List<float>(gbvars.lstVelocities);
+
+            chart1.DataSource = velocit;
+
+            chart1.DataBind();
             chart1.Update();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-           
+            gbvars.lstVelocities.Clear();
+        }
+
+        private void timerUpdate_Tick(object sender, EventArgs e)
+        {
+            List<float> velocit = new List<float>(gbvars.lstVelocities);
+
+            chart1.DataSource = velocit;
+
+            chart1.DataBind();
+            chart1.Update();
         }
     }
 }
