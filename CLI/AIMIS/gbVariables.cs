@@ -22,6 +22,8 @@ namespace AIMIS
         public float NewObjectMass;
         public System.Drawing.Color NewObjectColour;
         public List<float> lstVelocities = new List<float>();
+        public bool blFollowObject = false;
+        public int intObjectToTrack = 0;
 
     }
 }

@@ -74,5 +74,14 @@ namespace AIMIS
             chart1.DataBind();
             chart1.Update();
         }
+
+
+
+        private void nudPlanetIndex_ValueChanged(object sender, EventArgs e)
+        {
+            gbvars.intObjectToTrack = (int)nudPlanetIndex.Value;
+            gbvars.lstVelocities.Clear();
+
+        }
     }
 }

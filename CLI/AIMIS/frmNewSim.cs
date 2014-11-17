@@ -60,6 +60,25 @@ namespace AIMIS
                 }
             }
 
+            if (rbSimple.Checked)
+            {
+                //add two planets
+                tkui.PlanetObject p2 = new tkui.PlanetObject();
+                p2.Mass = 1000f;
+                p2.Position = new Vector2(0f, 0f);
+                p2.Velocity = new Vector2(0f, 0f);
+                p2.Trails = new List<Vector2>();
+                MainUIclass.lstPlanets.Add(p2);
+
+
+                tkui.PlanetObject p3 = new tkui.PlanetObject();
+                p3.Mass = 3f;
+                p3.Position = new Vector2(0f, -3f);
+                p3.Velocity = new Vector2(-0.01f, 0f);
+                p3.Trails = new List<Vector2>();
+                MainUIclass.lstPlanets.Add(p3);
+            }
+
 
 
             System.Threading.Thread newthr = new System.Threading.Thread(MainUIclass.Main);

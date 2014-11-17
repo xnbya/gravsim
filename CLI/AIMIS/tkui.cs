@@ -162,16 +162,34 @@ namespace AIMIS
                         MoCdvec = MousePosition(e.X, e.Y, game); // new Vector2(((float)e.X / (float)game.Width - 0.5f) * 20f * ZoomMulti, 0 - ((float)e.Y / (float)game.Height - 0.5f) * 16f * ZoomMulti);
                     };
 
+                game.KeyPress += (sender, e) =>
+                    {
+                        switch (e.KeyChar)
+                        {
+                            case 'f':
+                                game.WindowState = WindowState.Fullscreen;
+                                break;                        
+                            case 'c':
+                                gbvars.ShowTrails = !gbvars.ShowTrails;
+                                break;
+                            case 't':
+                                lstTrails = new List<List<Vector2>> ();
+						        foreach (PlanetObject planobj in lstPlanets) {
+							        planobj.Trails = new List<Vector2> ();
+						        }
+                                break;
+                        }
+
+                    };
+
 				game.UpdateFrame += (sender, e) =>
-				{             
+				{
 				
 					
 					if (game.Keyboard [Key.Escape]) {
 						game.Exit ();
 					}
 					if (game.Keyboard [Key.A]) {
-						//col1 = Color.Red;
-						//matrix = Matrix4.C(0f,0.5f,0.5f,0f,0f,0f,0.5f,0.2f,0.2f);
 						ViewPointV.X += 0.01f;
 					}
 					if (game.Keyboard [Key.D]) {
@@ -189,23 +207,7 @@ namespace AIMIS
 					if (game.Keyboard [Key.X]) {
 						ZoomMulti -= 0.01f;
 					}
-
-
-					if (game.Keyboard [Key.B]) {
-						//delete trails
-						lstTrails = new List<List<Vector2>> ();
-
-						foreach (PlanetObject planobj in lstPlanets) {
-							planobj.Trails = new List<Vector2> ();
-						}
-					}
-
-					if (game.Keyboard [Key.T]) {
-                        gbvars.ShowTrails = !gbvars.ShowTrails;
-					}
-
-
-				
+                    			
 
 				};
 
@@ -214,52 +216,7 @@ namespace AIMIS
 
 				//gravitational constant
 				float G = 0.0000006673f;
-
-
-				//create random planets
-				for (int ii = 0; ii < 0; ii ++) {
-					PlanetObject p1 = new PlanetObject ();
-					//p1.Mass = 0.5f;
-					p1.Position = new Vector2 (((float)rand.NextDouble () - 0.5f) * 8f, ((float)rand.NextDouble () - 0.5f) * 8f);
-					p1.Velocity = new Vector2 (((float)rand.NextDouble () - 0.5f) / 20, ((float)rand.NextDouble () - 0.5f) / 50);
-//Vector2 (0.02f, 0.01f);
-					//p1.Velocity = new Vector2 (0f, 0f);
-					p1.Mass = (float)rand.NextDouble () + 0.02f;
-					p1.Trails = new List<Vector2> ();
-					lstPlanets.Add (p1); 
-					//Console.WriteLine ("Added planet!:D");
-				}
-
-				//other planets
-
-				PlanetObject p2 = new PlanetObject ();
-				p2.Mass = 1000f;
-				p2.Position = new Vector2 (0f, 0f);
-				p2.Velocity = new Vector2 (0f, 0f);
-				p2.Trails = new List<Vector2> ();
-				//lstPlanets.Add (p2);
-
-
-				PlanetObject p3 = new PlanetObject ();
-				p3.Mass = 3f;
-				p3.Position = new Vector2 (0f, -3f);
-				p3.Velocity = new Vector2 (-0.01f, 0f);
-				p3.Trails = new List<Vector2> ();
-				//lstPlanets.Add (p3);
-
-				PlanetObject p4 = new PlanetObject ();
-				p4.Mass = 3f;
-				p4.Position = new Vector2 (0f, 3f);
-				p4.Velocity = new Vector2 (0.01f, 0f);
-				p4.Trails = new List<Vector2> ();
-				//lstPlanets.Add (p4);
-					
-
-
-
-
-
-
+                
 				//Vector2 velocity = new Vector2 (0f, 0f);
 				game.RenderFrame += (sender, e) =>
 				{
@@ -267,14 +224,29 @@ namespace AIMIS
 					GL.Clear (ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
 					GL.MatrixMode (MatrixMode.Projection);
+
+
 					//trackobject
-					/*
-					ViewPointV.X = -lstPlanets[0].Position.X / 10;
-					ViewPointV.Y = -lstPlanets[0].Position.Y / 8;
-					Console.Write("plan");
-					Console.WriteLine(lstPlanets[0].Position.X);
-					Console.WriteLine(ViewPointV.X);
-					*/
+                    if (gbvars.blFollowObject)
+                    {
+                        float LargestMass = 0f;
+                        Vector2 Position = new Vector2(0f, 0f);
+                        foreach (PlanetObject planob in lstPlanets)
+                        {
+                            if (planob.Mass > LargestMass)
+                            {
+                                Position = planob.Position;
+                                LargestMass = planob.Mass;
+                            }
+                        }
+
+                        ViewPointV.X = -Position.X / 10;
+                        ViewPointV.Y = -Position.Y / 8;
+                        Console.Write("plan");
+                        //Console.WriteLine(lstPlanets[0].Position.X);
+                        Console.WriteLine(ViewPointV.X);
+                    }
+					
 
 
 
@@ -286,6 +258,19 @@ namespace AIMIS
 
 					//speedup
 					for(int zx = 0; zx < SimulationSpeed; zx ++) {
+
+                        //keep list of speeds for graphs
+                        if (lstPlanets.Count > gbvars.intObjectToTrack)
+                        {
+
+                            gbvars.lstVelocities.Add(lstPlanets[gbvars.intObjectToTrack].Velocity.Length);
+                            Console.WriteLine(lstPlanets[gbvars.intObjectToTrack].Velocity.Length);
+
+                            if (lstPlanets.Count > 500)
+                            {
+                                lstPlanets.RemoveAt(0);
+                            }
+                        }
 
 					//foreach (PlanetObject planob in lstPlanets) {
 					//calculate forces between objects
@@ -340,7 +325,7 @@ namespace AIMIS
 							foreach (Vector2 pos in TrailL) {
 								GL.Vertex2 (pos.X, pos.Y);
 							}
-							GL.End ();//
+							GL.End ();
 						}
 					}
 
@@ -378,12 +363,7 @@ namespace AIMIS
 			
 					}
 
-                    if (lstPlanets.Count > 0)
-                    {
-                        //graph stuff
-                        gbvars.lstVelocities.Add(lstPlanets[0].Velocity.Length);
-                        Console.WriteLine(lstPlanets[0].Velocity.Length);
-                    }
+
                 
 
                     //draw mouse click line
