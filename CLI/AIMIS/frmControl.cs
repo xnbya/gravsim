@@ -91,5 +91,15 @@ namespace AIMIS
 
         }
 
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            saveFileDialog1.ShowDialog();
+        }
+
+        private void saveFileDialog1_FileOk(object sender, CancelEventArgs e)
+        {
+            MainUIclass.SavePlanets(saveFileDialog1.FileName);
+        }
+
     }
 }

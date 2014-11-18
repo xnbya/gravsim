@@ -42,6 +42,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btnNewSim = new System.Windows.Forms.Button();
             this.btnGraphs = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.grbTrails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.rkbSpeed)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -203,16 +205,33 @@
             // 
             this.btnGraphs.Location = new System.Drawing.Point(394, 67);
             this.btnGraphs.Name = "btnGraphs";
-            this.btnGraphs.Size = new System.Drawing.Size(75, 40);
+            this.btnGraphs.Size = new System.Drawing.Size(75, 27);
             this.btnGraphs.TabIndex = 5;
             this.btnGraphs.Text = "View Graphs";
             this.btnGraphs.UseVisualStyleBackColor = true;
             this.btnGraphs.Click += new System.EventHandler(this.btnGraphs_Click);
             // 
+            // btnSave
+            // 
+            this.btnSave.Location = new System.Drawing.Point(394, 100);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSave.TabIndex = 6;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.DefaultExt = "txt";
+            this.saveFileDialog1.Filter = "Tab Seperated Values|*.txt";
+            this.saveFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog1_FileOk);
+            // 
             // frmControl
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(481, 177);
+            this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnGraphs);
             this.Controls.Add(this.btnNewSim);
             this.Controls.Add(this.groupBox1);
@@ -252,5 +271,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnNewSim;
         private System.Windows.Forms.Button btnGraphs;
+        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }

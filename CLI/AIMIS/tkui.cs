@@ -15,12 +15,25 @@ using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Input;
+using System.IO;
 
 namespace AIMIS
 {
 	public class tkui
 	{
         public gbVariables gbvars;
+
+        public void SavePlanets(string filename)
+        {
+            TextWriter tr = new StreamWriter(filename);
+            tr.WriteLine("Mass\tVelocity\tPosition");
+            foreach (PlanetObject planob in lstPlanets)
+            {
+                tr.WriteLine(planob.Mass.ToString() + "\t" + planob.Velocity.ToString() + "\t" + planob.Position.ToString());
+
+            }
+            tr.Close();
+        }
 
 		public void DrawCircle (int segments, float xpos, float ypos, float radius)
 		{
