@@ -87,5 +87,25 @@ namespace AIMIS
 
             this.Close();
         }
+
+        private void btnOpenSaved_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.ShowDialog();
+        }
+
+        private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
+        {
+            gbvars.NewObjectMass = 5f;
+            gbvars.ShowTrails = true;
+            gbvars.ShortTrails = true;
+
+            MainUIclass.LoadPlanets(openFileDialog1.FileName);
+
+            System.Threading.Thread newthr = new System.Threading.Thread(MainUIclass.Main);
+            newthr.Start();
+
+
+            this.Close();
+        }
     }
 }

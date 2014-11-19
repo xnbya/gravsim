@@ -32,6 +32,8 @@
             this.rbRandom = new System.Windows.Forms.RadioButton();
             this.rbSimple = new System.Windows.Forms.RadioButton();
             this.btnLaunch = new System.Windows.Forms.Button();
+            this.btnOpenSaved = new System.Windows.Forms.Button();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.SuspendLayout();
             // 
             // rbEmpty
@@ -77,11 +79,27 @@
             this.btnLaunch.UseVisualStyleBackColor = true;
             this.btnLaunch.Click += new System.EventHandler(this.btnLaunch_Click);
             // 
+            // btnOpenSaved
+            // 
+            this.btnOpenSaved.Location = new System.Drawing.Point(12, 120);
+            this.btnOpenSaved.Name = "btnOpenSaved";
+            this.btnOpenSaved.Size = new System.Drawing.Size(75, 23);
+            this.btnOpenSaved.TabIndex = 4;
+            this.btnOpenSaved.Text = "Load saved ";
+            this.btnOpenSaved.UseVisualStyleBackColor = true;
+            this.btnOpenSaved.Click += new System.EventHandler(this.btnOpenSaved_Click);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
+            // 
             // frmNewSim
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(355, 155);
+            this.Controls.Add(this.btnOpenSaved);
             this.Controls.Add(this.btnLaunch);
             this.Controls.Add(this.rbSimple);
             this.Controls.Add(this.rbRandom);
@@ -100,5 +118,7 @@
         private System.Windows.Forms.RadioButton rbRandom;
         private System.Windows.Forms.RadioButton rbSimple;
         private System.Windows.Forms.Button btnLaunch;
+        private System.Windows.Forms.Button btnOpenSaved;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }

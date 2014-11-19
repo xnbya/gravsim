@@ -16,6 +16,7 @@ using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Input;
 using System.IO;
+using System.Xml.Serialization;
 
 namespace AIMIS
 {
@@ -25,14 +26,24 @@ namespace AIMIS
 
         public void SavePlanets(string filename)
         {
-            TextWriter tr = new StreamWriter(filename);
-            tr.WriteLine("Mass\tVelocity\tPosition");
-            foreach (PlanetObject planob in lstPlanets)
-            {
-                tr.WriteLine(planob.Mass.ToString() + "\t" + planob.Velocity.ToString() + "\t" + planob.Position.ToString());
+            XmlSerializer xmlser = new XmlSerializer(typeof (List<PlanetObject>));
 
+            using(Stream stream = File.Create(filename)) {
+                xmlser.Serialize(stream, lstPlanets);
             }
-            tr.Close();
+
+        }
+
+        public void LoadPlanets(string filename)
+        {
+           XmlSerializer xmlser = new XmlSerializer(typeof (List<PlanetObject>));
+
+           using (Stream stream = File.Open(filename, FileMode.Open))
+           {
+               lstPlanets = xmlser.Deserialize(stream) as List<PlanetObject>;
+           }
+            
+
         }
 
 		public void DrawCircle (int segments, float xpos, float ypos, float radius)
