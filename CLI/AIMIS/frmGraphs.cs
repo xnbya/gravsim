@@ -41,7 +41,7 @@ namespace AIMIS
 
                 chart1.DataBind();
                 chart1.Series[0].IsXValueIndexed = true;
-                chart1.Series.First().XValueMember = "Y";
+                //chart1.Series.First().XValueMember = "Y";
                 chart1.Series.First().YValueMembers = "X";
                 chart1.Update();
         }
@@ -82,6 +82,11 @@ namespace AIMIS
             gbvars.intObjectToTrack = (int)nudPlanetIndex.Value;
             gbvars.lstVelocities.Clear();
 
+        }
+
+        private void btnTable_Click(object sender, EventArgs e)
+        {
+           Console.WriteLine(gbvars.lstVelocities.ToString());
         }
     }
 }

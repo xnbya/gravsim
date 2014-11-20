@@ -364,11 +364,17 @@ namespace AIMIS
 
 					//draw planets
 					for (int i = lstPlanets.Count - 1; i >= 0; i--) {
-						PlanetObject planob = lstPlanets [i];
-						GL.Color3 (colPlanets);
-						DrawCircle (30, planob.Position.X, planob.Position.Y, planob.Radius);		
+                        if (i == gbvars.intObjectToTrack)                        
+                            GL.Color3(Color.Yellow);
+                        else
+                            GL.Color3(colPlanets);
 
-						GL.Color3 (Color.DarkRed);
+						PlanetObject planob = lstPlanets [i];
+						
+						DrawCircle (30, planob.Position.X, planob.Position.Y, planob.Radius);	
+	
+                        GL.Color3(Color.DarkRed);
+						
 							
 						//trails
 						//planob.Trails.Add(planob.Position);

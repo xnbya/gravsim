@@ -91,7 +91,9 @@
             // 
             // openFileDialog1
             // 
+            this.openFileDialog1.DefaultExt = "xml";
             this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.Filter = "XML files|*.xml |All files|*.*";
             this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
             // 
             // frmNewSim
