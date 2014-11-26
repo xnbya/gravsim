@@ -46,20 +46,7 @@ namespace AIMIS
                 chart1.Update();
         }
             
-
-            
         
-
-        private void btnUpdate_Click(object sender, EventArgs e)
-        {
-            List<float> velocit = new List<float>(gbvars.lstVelocities);
-
-            chart1.DataSource = velocit;
-
-            chart1.DataBind();
-            chart1.Update();
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             gbvars.lstVelocities.Clear();
@@ -82,11 +69,6 @@ namespace AIMIS
             gbvars.intObjectToTrack = (int)nudPlanetIndex.Value;
             gbvars.lstVelocities.Clear();
 
-        }
-
-        private void btnTable_Click(object sender, EventArgs e)
-        {
-           Console.WriteLine(gbvars.lstVelocities.ToString());
         }
     }
 }

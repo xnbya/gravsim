@@ -24,6 +24,7 @@ namespace AIMIS
     {
         public gbVariables gbvars;
         public tkui MainUIclass;
+        public System.Threading.Thread thMainUI;
 
         public frmNewSim()
         {
@@ -45,15 +46,15 @@ namespace AIMIS
             if(rbRandom.Checked)
             {
                 //create random planets
-                for (int ii = 0; ii < 500; ii++)
+                for (int ii = 0; ii < nmRandNumber.Value; ii++)
                 {
                     tkui.PlanetObject p1 = new tkui.PlanetObject();
                     //p1.Mass = 0.5f;
                     p1.Position = new Vector2(((float)rand.NextDouble() - 0.5f) * 8f, ((float)rand.NextDouble() - 0.5f) * 8f);
-                    p1.Velocity = new Vector2(((float)rand.NextDouble() - 0.5f) / 20, ((float)rand.NextDouble() - 0.5f) / 50);
+                    p1.Velocity = new Vector2(((float)rand.NextDouble() - 0.5f) * ((float)tbSpeed.Value / 100), ((float)rand.NextDouble() - 0.5f) * ((float)tbSpeed.Value / 100));
                     //Vector2 (0.02f, 0.01f);
                     //p1.Velocity = new Vector2 (0f, 0f);
-                    p1.Mass = (float)rand.NextDouble() + 0.02f;
+                    p1.Mass = (float)rand.NextDouble() + (float)tbMass.Value / 20f;
                     p1.Trails = new List<Vector2>();
                     MainUIclass.lstPlanets.Add(p1);
                     //Console.WriteLine ("Added planet!:D");
@@ -81,8 +82,10 @@ namespace AIMIS
 
 
 
-            System.Threading.Thread newthr = new System.Threading.Thread(MainUIclass.Main);
-            newthr.Start();
+           // System.Threading.Thread newthr = new System.Threading.Thread(MainUIclass.Main);
+           // newthr.Start();
+            thMainUI.Start();
+            
 
 
             this.Close();
@@ -101,11 +104,17 @@ namespace AIMIS
 
             MainUIclass.LoadPlanets(openFileDialog1.FileName);
 
-            System.Threading.Thread newthr = new System.Threading.Thread(MainUIclass.Main);
-            newthr.Start();
+           
+            thMainUI.Start();
+            
 
 
             this.Close();
+        }
+
+        private void rbRandom_CheckedChanged(object sender, EventArgs e)
+        {
+            grbRand.Visible = rbRandom.Checked;
         }
     }
 }

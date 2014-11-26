@@ -24,6 +24,8 @@ namespace AIMIS
         public gbVariables gbvars;
         public EventHandler ClearTrails;
         public tkui MainUIclass;
+        public System.Threading.Thread thMainUI;
+        private int SimSpeed = 0;
 
         public frmControl()
         {
@@ -45,7 +47,9 @@ namespace AIMIS
 
         private void rkbSpeed_Scroll(object sender, EventArgs e)
         {
-            MainUIclass.SimulationSpeed = rkbSpeed.Value;
+            if (MainUIclass != null) 
+                MainUIclass.SimulationSpeed = rkbSpeed.Value;
+                
         }
 
         private void cboNewMass_SelectedValueChanged(object sender, EventArgs e)
@@ -68,19 +72,35 @@ namespace AIMIS
 
         private void btnNewSim_Click(object sender, EventArgs e)
         {
-            tkui TKUI = new tkui();
-            TKUI.gbvars = gbvars;
-            MainUIclass = TKUI;
+            //don't start two sims, this will lead to problems with the ui
+            if (thMainUI == null || !thMainUI.IsAlive)
+            {
 
-            frmNewSim NewSimform = new frmNewSim();
-            NewSimform.gbvars = gbvars;
-            NewSimform.MainUIclass = MainUIclass;
-            NewSimform.ShowDialog();            
+                //tkui class
+                tkui TKUI = new tkui();
+                TKUI.gbvars = gbvars;
+                MainUIclass = TKUI;
+
+                //setup thread
+                thMainUI = new System.Threading.Thread(MainUIclass.Main);
+
+                //load form for ui
+                frmNewSim NewSimform = new frmNewSim();
+                NewSimform.thMainUI = thMainUI;
+                NewSimform.gbvars = gbvars;
+                NewSimform.MainUIclass = MainUIclass;
+                NewSimform.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Please close the current simulation \n before starting a new simulation.", "Unable to start simulation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
 
         }
 
         private void btnGraphs_Click(object sender, EventArgs e)
         {
+            //load the graphs
             frmGraphs formgraph = new frmGraphs();
             formgraph.gbvars = gbvars;
             formgraph.Show();
@@ -93,12 +113,20 @@ namespace AIMIS
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            saveFileDialog1.ShowDialog();
+            if (MainUIclass == null)
+                MessageBox.Show("Please start a simulation", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else
+            {
+                SimSpeed = MainUIclass.SimulationSpeed;
+                MainUIclass.SimulationSpeed = 0;
+                saveFileDialog1.ShowDialog();
+            }
         }
 
         private void saveFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
             MainUIclass.SavePlanets(saveFileDialog1.FileName);
+            MainUIclass.SimulationSpeed = SimSpeed;
         }
 
     }

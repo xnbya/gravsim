@@ -34,6 +34,17 @@
             this.btnLaunch = new System.Windows.Forms.Button();
             this.btnOpenSaved = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.grbRand = new System.Windows.Forms.GroupBox();
+            this.nmRandNumber = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
+            this.tbSpeed = new System.Windows.Forms.TrackBar();
+            this.tbMass = new System.Windows.Forms.TrackBar();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.grbRand.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nmRandNumber)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbSpeed)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbMass)).BeginInit();
             this.SuspendLayout();
             // 
             // rbEmpty
@@ -57,6 +68,7 @@
             this.rbRandom.TabStop = true;
             this.rbRandom.Text = "Random Start";
             this.rbRandom.UseVisualStyleBackColor = true;
+            this.rbRandom.CheckedChanged += new System.EventHandler(this.rbRandom_CheckedChanged);
             // 
             // rbSimple
             // 
@@ -91,16 +103,94 @@
             // 
             // openFileDialog1
             // 
-            this.openFileDialog1.DefaultExt = "xml";
             this.openFileDialog1.FileName = "openFileDialog1";
-            this.openFileDialog1.Filter = "XML files|*.xml |All files|*.*";
+            this.openFileDialog1.Filter = "XML files|*.xml|All files|*.*";
             this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
+            // 
+            // grbRand
+            // 
+            this.grbRand.Controls.Add(this.label2);
+            this.grbRand.Controls.Add(this.nmRandNumber);
+            this.grbRand.Controls.Add(this.label1);
+            this.grbRand.Controls.Add(this.label3);
+            this.grbRand.Controls.Add(this.tbSpeed);
+            this.grbRand.Controls.Add(this.tbMass);
+            this.grbRand.Location = new System.Drawing.Point(123, 12);
+            this.grbRand.Name = "grbRand";
+            this.grbRand.Size = new System.Drawing.Size(220, 148);
+            this.grbRand.TabIndex = 5;
+            this.grbRand.TabStop = false;
+            this.grbRand.Text = "Random Start";
+            this.grbRand.Visible = false;
+            // 
+            // nmRandNumber
+            // 
+            this.nmRandNumber.Location = new System.Drawing.Point(105, 14);
+            this.nmRandNumber.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.nmRandNumber.Name = "nmRandNumber";
+            this.nmRandNumber.Size = new System.Drawing.Size(109, 20);
+            this.nmRandNumber.TabIndex = 1;
+            this.nmRandNumber.Value = new decimal(new int[] {
+            500,
+            0,
+            0,
+            0});
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 16);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(93, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Number of objects";
+            // 
+            // tbSpeed
+            // 
+            this.tbSpeed.Location = new System.Drawing.Point(9, 57);
+            this.tbSpeed.Maximum = 100;
+            this.tbSpeed.Name = "tbSpeed";
+            this.tbSpeed.Size = new System.Drawing.Size(205, 45);
+            this.tbSpeed.TabIndex = 2;
+            this.tbSpeed.TickFrequency = 10;
+            // 
+            // tbMass
+            // 
+            this.tbMass.Location = new System.Drawing.Point(9, 108);
+            this.tbMass.Maximum = 100;
+            this.tbMass.Name = "tbMass";
+            this.tbMass.Size = new System.Drawing.Size(205, 45);
+            this.tbMass.TabIndex = 3;
+            this.tbMass.TickFrequency = 10;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(20, 41);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(79, 13);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "Average speed";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(25, 89);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(74, 13);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "Average mass";
             // 
             // frmNewSim
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(355, 155);
+            this.ClientSize = new System.Drawing.Size(355, 173);
+            this.Controls.Add(this.grbRand);
             this.Controls.Add(this.btnOpenSaved);
             this.Controls.Add(this.btnLaunch);
             this.Controls.Add(this.rbSimple);
@@ -109,6 +199,11 @@
             this.Name = "frmNewSim";
             this.Text = "New Simulation";
             this.TopMost = true;
+            this.grbRand.ResumeLayout(false);
+            this.grbRand.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nmRandNumber)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbSpeed)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbMass)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -122,5 +217,12 @@
         private System.Windows.Forms.Button btnLaunch;
         private System.Windows.Forms.Button btnOpenSaved;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.GroupBox grbRand;
+        private System.Windows.Forms.NumericUpDown nmRandNumber;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TrackBar tbMass;
+        private System.Windows.Forms.TrackBar tbSpeed;
     }
 }

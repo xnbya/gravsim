@@ -24,6 +24,7 @@ namespace AIMIS
 	{
         public gbVariables gbvars;
 
+        //serialize the lstPlanets to the filename given
         public void SavePlanets(string filename)
         {
             XmlSerializer xmlser = new XmlSerializer(typeof (List<PlanetObject>));
@@ -34,6 +35,7 @@ namespace AIMIS
 
         }
 
+        //unserialize lstPlanets from the file
         public void LoadPlanets(string filename)
         {
            XmlSerializer xmlser = new XmlSerializer(typeof (List<PlanetObject>));
@@ -45,7 +47,9 @@ namespace AIMIS
             
 
         }
+        
 
+        //draw a circle on the opentk gamewindow
 		public void DrawCircle (int segments, float xpos, float ypos, float radius)
 		{
 
@@ -59,6 +63,8 @@ namespace AIMIS
 			GL.End ();
 		}
 
+
+        //the class for each object
 		public class PlanetObject
 		{
 			private float mass;
@@ -236,7 +242,7 @@ namespace AIMIS
 				};
 
 				
-				Random rand = new Random ();
+				
 
 				//gravitational constant
 				float G = 0.0000006673f;

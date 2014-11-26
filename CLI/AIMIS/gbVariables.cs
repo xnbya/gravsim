@@ -25,5 +25,7 @@ namespace AIMIS
         public bool blFollowObject = false;
         public int intObjectToTrack = 0;
 
+        
+
     }
 }
