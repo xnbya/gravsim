@@ -76,7 +76,8 @@ namespace AIMIS
 				}
 				set {
 					this.mass = value;
-					this.radius = (float)Math.Pow ((value * 3) / (Math.PI * 4 * 8000), (double)1 / 3);
+					//this.radius = (float)Math.Pow ((value * 3) / (Math.PI * 4 * 8000), (double)1 / 3);
+                    this.radius = 2.0647E-10f;
 				}
 			}
 
@@ -246,6 +247,9 @@ namespace AIMIS
 
 				//gravitational constant
 				float G = 0.0000006673f;
+                //gravitational constant in parsecs, days, and earth masses
+              
+                
                 
 				//Vector2 velocity = new Vector2 (0f, 0f);
 				game.RenderFrame += (sender, e) =>
@@ -306,7 +310,11 @@ namespace AIMIS
 					//calculate forces between objects
 					for (int i = lstPlanets.Count - 1; i >= 0; i--) {
 
+                        
+
+
 						PlanetObject planob = lstPlanets [i];
+                        Console.WriteLine(planob.Position.ToString());
 						for (int ic = lstPlanets.Count - 1; ic >= 0; ic--) {
 							PlanetObject plan2 = lstPlanets [ic];
 							if (plan2 != planob) {
