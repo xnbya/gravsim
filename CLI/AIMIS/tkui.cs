@@ -246,7 +246,7 @@ namespace AIMIS
 				
 
 				//gravitational constant
-				float G = 0.0000006673f;
+                float G = 0.0000006673f;
                 //gravitational constant in parsecs, days, and earth masses
               
                 
