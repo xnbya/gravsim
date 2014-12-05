@@ -180,6 +180,13 @@ namespace AIMIS
                         plan.Trails = new List<Vector2>();
                         //p2.Radius = 0.005f;
                         lstPlanets.Add(plan);
+
+                        //are we graphing the speed of the new planets?
+                        if (gbvars.blTrackNewObject)
+                        {
+                            gbvars.intObjectToTrack = lstPlanets.Count - 1;
+                            gbvars.lstVelocities.Clear();
+                        }
                     };
 
                 game.Mouse.WheelChanged += (sender, e) =>

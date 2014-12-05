@@ -9,3 +9,14 @@ C:\Users\08enstona.KSC\Source\Repos\gravsim\CLI\AIMIS\obj\x86\Debug\AIMIS.exe
 C:\Users\08enstona.KSC\Source\Repos\gravsim\CLI\AIMIS\obj\x86\Debug\AIMIS.pdb
 C:\Users\08enstona.KSC\Source\Repos\gravsim\CLI\AIMIS\obj\x86\Debug\AIMIS.frmNewSim.resources
 C:\Users\08enstona.KSC\Source\Repos\gravsim\CLI\AIMIS\obj\x86\Debug\AIMIS.frmGraphs.resources
+N:\comp\gravsim\CLI\AIMIS\obj\x86\Debug\AIMIS.exe
+N:\comp\gravsim\CLI\AIMIS\obj\x86\Debug\AIMIS.pdb
+N:\comp\gravsim\CLI\AIMIS\bin\Debug\AIMIS.exe
+N:\comp\gravsim\CLI\AIMIS\bin\Debug\AIMIS.pdb
+N:\comp\gravsim\CLI\AIMIS\bin\Debug\OpenTK.dll
+N:\comp\gravsim\CLI\AIMIS\bin\Debug\OpenTK.xml
+N:\comp\gravsim\CLI\AIMIS\obj\x86\Debug\AIMIS.csprojResolveAssemblyReference.cache
+N:\comp\gravsim\CLI\AIMIS\obj\x86\Debug\AIMIS.frmControl.resources
+N:\comp\gravsim\CLI\AIMIS\obj\x86\Debug\AIMIS.frmGraphs.resources
+N:\comp\gravsim\CLI\AIMIS\obj\x86\Debug\AIMIS.frmNewSim.resources
+N:\comp\gravsim\CLI\AIMIS\obj\x86\Debug\AIMIS.csproj.GenerateResource.Cache

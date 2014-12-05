@@ -56,6 +56,8 @@ namespace AIMIS
         {
             List<float> velocit = new List<float>(gbvars.lstVelocities);
 
+            nudPlanetIndex.Value = gbvars.intObjectToTrack;
+
             chart1.DataSource = velocit;
 
             chart1.DataBind();
@@ -69,6 +71,11 @@ namespace AIMIS
             gbvars.intObjectToTrack = (int)nudPlanetIndex.Value;
             gbvars.lstVelocities.Clear();
 
+        }
+
+        private void chTrackNew_CheckedChanged(object sender, EventArgs e)
+        {
+            gbvars.blTrackNewObject = chTrackNew.Checked;
         }
     }
 }
