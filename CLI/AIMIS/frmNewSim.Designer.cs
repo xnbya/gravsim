@@ -35,13 +35,12 @@
             this.btnOpenSaved = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.grbRand = new System.Windows.Forms.GroupBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.nmRandNumber = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.tbSpeed = new System.Windows.Forms.TrackBar();
             this.tbMass = new System.Windows.Forms.TrackBar();
-            this.rbSolarSystem = new System.Windows.Forms.RadioButton();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.grbRand.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmRandNumber)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbSpeed)).BeginInit();
@@ -84,7 +83,7 @@
             // 
             // btnLaunch
             // 
-            this.btnLaunch.Location = new System.Drawing.Point(12, 101);
+            this.btnLaunch.Location = new System.Drawing.Point(12, 91);
             this.btnLaunch.Name = "btnLaunch";
             this.btnLaunch.Size = new System.Drawing.Size(75, 23);
             this.btnLaunch.TabIndex = 3;
@@ -94,7 +93,7 @@
             // 
             // btnOpenSaved
             // 
-            this.btnOpenSaved.Location = new System.Drawing.Point(12, 130);
+            this.btnOpenSaved.Location = new System.Drawing.Point(12, 120);
             this.btnOpenSaved.Name = "btnOpenSaved";
             this.btnOpenSaved.Size = new System.Drawing.Size(75, 23);
             this.btnOpenSaved.TabIndex = 4;
@@ -124,15 +123,6 @@
             this.grbRand.Text = "Random Start";
             this.grbRand.Visible = false;
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(20, 41);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(79, 13);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Average speed";
-            // 
             // nmRandNumber
             // 
             this.nmRandNumber.Location = new System.Drawing.Point(105, 14);
@@ -159,15 +149,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Number of objects";
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(25, 89);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(74, 13);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "Average mass";
-            // 
             // tbSpeed
             // 
             this.tbSpeed.Location = new System.Drawing.Point(9, 57);
@@ -186,23 +167,29 @@
             this.tbMass.TabIndex = 3;
             this.tbMass.TickFrequency = 10;
             // 
-            // rbSolarSystem
+            // label2
             // 
-            this.rbSolarSystem.AutoSize = true;
-            this.rbSolarSystem.Location = new System.Drawing.Point(12, 81);
-            this.rbSolarSystem.Name = "rbSolarSystem";
-            this.rbSolarSystem.Size = new System.Drawing.Size(50, 17);
-            this.rbSolarSystem.TabIndex = 6;
-            this.rbSolarSystem.TabStop = true;
-            this.rbSolarSystem.Text = "Earth";
-            this.rbSolarSystem.UseVisualStyleBackColor = true;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(20, 41);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(79, 13);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "Average speed";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(25, 89);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(74, 13);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "Average mass";
             // 
             // frmNewSim
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(355, 173);
-            this.Controls.Add(this.rbSolarSystem);
             this.Controls.Add(this.grbRand);
             this.Controls.Add(this.btnOpenSaved);
             this.Controls.Add(this.btnLaunch);
@@ -237,6 +224,5 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TrackBar tbMass;
         private System.Windows.Forms.TrackBar tbSpeed;
-        private System.Windows.Forms.RadioButton rbSolarSystem;
     }
 }

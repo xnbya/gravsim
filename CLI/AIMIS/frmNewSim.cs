@@ -80,25 +80,6 @@ namespace AIMIS
                 MainUIclass.lstPlanets.Add(p3);
             }
 
-            if(rbSolarSystem.Checked)
-            {
-                //add sun
-                tkui.PlanetObject p2 = new tkui.PlanetObject();
-                p2.Mass = 1f;
-                p2.Position = new Vector2(0f, 0f);
-                p2.Velocity = new Vector2(0f, 0f);
-                p2.Trails = new List<Vector2>();
-                MainUIclass.lstPlanets.Add(p2);
-
-
-                //earth
-                tkui.PlanetObject p3 = new tkui.PlanetObject();
-                p3.Mass = 3.0025E-6f;
-                p3.Position = new Vector2(0f, -4.8482E-6f);
-                p3.Velocity = new Vector2(-30f, 0f);
-                p3.Trails = new List<Vector2>();
-                MainUIclass.lstPlanets.Add(p3);
-            }
 
 
            // System.Threading.Thread newthr = new System.Threading.Thread(MainUIclass.Main);
