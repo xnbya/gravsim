@@ -264,24 +264,14 @@ namespace AIMIS
 
 
 					//trackobject
-                    if (gbvars.blFollowObject)
+                    if (gbvars.blFollowObject && lstPlanets.Count > gbvars.intDispObToFollow)
                     {
-                        float LargestMass = 0f;
-                        Vector2 Position = new Vector2(0f, 0f);
-                        foreach (PlanetObject planob in lstPlanets)
-                        {
-                            if (planob.Mass > LargestMass)
-                            {
-                                Position = planob.Position;
-                                LargestMass = planob.Mass;
-                            }
-                        }
-
+                        Vector2 Position = lstPlanets[gbvars.intDispObToFollow].Position;
                         ViewPointV.X = -Position.X / 10;
                         ViewPointV.Y = -Position.Y / 8;
-                        Console.Write("plan");
+                        //Console.Write("plan");
                         //Console.WriteLine(lstPlanets[0].Position.X);
-                        Console.WriteLine(ViewPointV.X);
+                        //Console.WriteLine(ViewPointV.X);
                     }
 					
 
@@ -301,7 +291,7 @@ namespace AIMIS
                         {
 
                             gbvars.lstVelocities.Add(lstPlanets[gbvars.intObjectToTrack].Velocity.Length);
-                            Console.WriteLine(lstPlanets[gbvars.intObjectToTrack].Velocity.Length);
+                            //Console.WriteLine(lstPlanets[gbvars.intObjectToTrack].Velocity.Length);
 
                             if (lstPlanets.Count > 500)
                             {
@@ -316,7 +306,7 @@ namespace AIMIS
 						PlanetObject planob = lstPlanets [i];
 						for (int ic = lstPlanets.Count - 1; ic >= 0; ic--) {
 							PlanetObject plan2 = lstPlanets [ic];
-							if (plan2 != planob) {
+							if (plan2.Position != planob.Position) {
 
 								//calculate force with vectors
 								float dissqu = (float)Math.Pow ((planob.Position.X - plan2.Position.X), 2)

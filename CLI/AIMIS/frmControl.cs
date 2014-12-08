@@ -129,5 +129,15 @@ namespace AIMIS
             MainUIclass.SimulationSpeed = SimSpeed;
         }
 
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            gbvars.blFollowObject = ckDispObjToFollow.Checked;
+        }
+
+        private void nmObjToFollow_ValueChanged(object sender, EventArgs e)
+        {
+            gbvars.intDispObToFollow = (int)nmObjToFollow.Value;
+        }
+
     }
 }

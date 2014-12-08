@@ -23,7 +23,7 @@ namespace AIMIS
         public System.Drawing.Color NewObjectColour;
         public List<float> lstVelocities = new List<float>();
         public bool blFollowObject = true;
-        public int intObToFollow = 0;
+        public int intDispObToFollow = 0;
         public int intObjectToTrack = 0;
         public bool blTrackNewObject = true;
 

@@ -42,9 +42,12 @@
             this.btnGraphs = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.ckDispObjToFollow = new System.Windows.Forms.CheckBox();
+            this.nmObjToFollow = new System.Windows.Forms.NumericUpDown();
             this.grbTrails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.rkbSpeed)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nmObjToFollow)).BeginInit();
             this.SuspendLayout();
             // 
             // grbTrails
@@ -55,16 +58,16 @@
             this.grbTrails.Controls.Add(this.rbNoTrails);
             this.grbTrails.Location = new System.Drawing.Point(12, 12);
             this.grbTrails.Name = "grbTrails";
-            this.grbTrails.Size = new System.Drawing.Size(165, 102);
+            this.grbTrails.Size = new System.Drawing.Size(99, 121);
             this.grbTrails.TabIndex = 0;
             this.grbTrails.TabStop = false;
             this.grbTrails.Text = "Trails";
             // 
             // btnClearTrails
             // 
-            this.btnClearTrails.Location = new System.Drawing.Point(86, 30);
+            this.btnClearTrails.Location = new System.Drawing.Point(6, 87);
             this.btnClearTrails.Name = "btnClearTrails";
-            this.btnClearTrails.Size = new System.Drawing.Size(55, 40);
+            this.btnClearTrails.Size = new System.Drawing.Size(84, 28);
             this.btnClearTrails.TabIndex = 3;
             this.btnClearTrails.Text = "Clear Trails";
             this.btnClearTrails.UseVisualStyleBackColor = true;
@@ -109,17 +112,17 @@
             // 
             // rkbSpeed
             // 
-            this.rkbSpeed.Location = new System.Drawing.Point(18, 133);
+            this.rkbSpeed.Location = new System.Drawing.Point(15, 152);
             this.rkbSpeed.Maximum = 100;
             this.rkbSpeed.Name = "rkbSpeed";
-            this.rkbSpeed.Size = new System.Drawing.Size(402, 45);
+            this.rkbSpeed.Size = new System.Drawing.Size(339, 45);
             this.rkbSpeed.TabIndex = 1;
             this.rkbSpeed.Scroll += new System.EventHandler(this.rkbSpeed_Scroll);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(15, 117);
+            this.label1.Location = new System.Drawing.Point(12, 136);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(99, 13);
             this.label1.TabIndex = 2;
@@ -129,7 +132,7 @@
             // 
             this.groupBox1.Controls.Add(this.cboNewMass);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Location = new System.Drawing.Point(183, 12);
+            this.groupBox1.Location = new System.Drawing.Point(117, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(237, 49);
             this.groupBox1.TabIndex = 3;
@@ -165,9 +168,9 @@
             // 
             // btnNewSim
             // 
-            this.btnNewSim.Location = new System.Drawing.Point(183, 67);
+            this.btnNewSim.Location = new System.Drawing.Point(117, 90);
             this.btnNewSim.Name = "btnNewSim";
-            this.btnNewSim.Size = new System.Drawing.Size(75, 47);
+            this.btnNewSim.Size = new System.Drawing.Size(75, 43);
             this.btnNewSim.TabIndex = 4;
             this.btnNewSim.Text = "New Simulation";
             this.btnNewSim.UseVisualStyleBackColor = true;
@@ -175,9 +178,9 @@
             // 
             // btnGraphs
             // 
-            this.btnGraphs.Location = new System.Drawing.Point(264, 67);
+            this.btnGraphs.Location = new System.Drawing.Point(198, 90);
             this.btnGraphs.Name = "btnGraphs";
-            this.btnGraphs.Size = new System.Drawing.Size(75, 47);
+            this.btnGraphs.Size = new System.Drawing.Size(75, 43);
             this.btnGraphs.TabIndex = 5;
             this.btnGraphs.Text = "View Graphs";
             this.btnGraphs.UseVisualStyleBackColor = true;
@@ -185,9 +188,9 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(345, 67);
+            this.btnSave.Location = new System.Drawing.Point(279, 90);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 47);
+            this.btnSave.Size = new System.Drawing.Size(75, 43);
             this.btnSave.TabIndex = 6;
             this.btnSave.Text = "Save Simulation";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -199,10 +202,31 @@
             this.saveFileDialog1.Filter = "XML file |*.xml";
             this.saveFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog1_FileOk);
             // 
+            // ckDispObjToFollow
+            // 
+            this.ckDispObjToFollow.AutoSize = true;
+            this.ckDispObjToFollow.Location = new System.Drawing.Point(117, 67);
+            this.ckDispObjToFollow.Name = "ckDispObjToFollow";
+            this.ckDispObjToFollow.Size = new System.Drawing.Size(90, 17);
+            this.ckDispObjToFollow.TabIndex = 7;
+            this.ckDispObjToFollow.Text = "Follow Object";
+            this.ckDispObjToFollow.UseVisualStyleBackColor = true;
+            this.ckDispObjToFollow.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // nmObjToFollow
+            // 
+            this.nmObjToFollow.Location = new System.Drawing.Point(213, 66);
+            this.nmObjToFollow.Name = "nmObjToFollow";
+            this.nmObjToFollow.Size = new System.Drawing.Size(141, 20);
+            this.nmObjToFollow.TabIndex = 8;
+            this.nmObjToFollow.ValueChanged += new System.EventHandler(this.nmObjToFollow_ValueChanged);
+            // 
             // frmControl
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(432, 177);
+            this.ClientSize = new System.Drawing.Size(363, 201);
+            this.Controls.Add(this.nmObjToFollow);
+            this.Controls.Add(this.ckDispObjToFollow);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnGraphs);
             this.Controls.Add(this.btnNewSim);
@@ -212,7 +236,6 @@
             this.Controls.Add(this.grbTrails);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmControl";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "AIMIS control window";
             this.TopMost = true;
             this.Load += new System.EventHandler(this.frmControl_Load);
@@ -221,6 +244,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.rkbSpeed)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nmObjToFollow)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -242,5 +266,7 @@
         private System.Windows.Forms.Button btnGraphs;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.CheckBox ckDispObjToFollow;
+        private System.Windows.Forms.NumericUpDown nmObjToFollow;
     }
 }

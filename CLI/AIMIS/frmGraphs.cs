@@ -77,5 +77,7 @@ namespace AIMIS
         {
             gbvars.blTrackNewObject = chTrackNew.Checked;
         }
+
+
     }
 }
