@@ -22,10 +22,15 @@ namespace AIMIS
         public float NewObjectMass;
         public System.Drawing.Color NewObjectColour;
         public List<float> lstVelocities = new List<float>();
-        public bool blFollowObject = true;
+        public bool blFollowObject = false;
         public int intDispObToFollow = 0;
         public int intObjectToTrack = 0;
+        public bool blGraphTrack = false;
         public bool blTrackNewObject = true;
+
+
+        //gravitational constant
+        public float G = 0.0000006673f;
 
         
 

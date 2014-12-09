@@ -36,6 +36,21 @@ namespace AIMIS
 
         }
 
+        private void NewPlanet(float Mass, float PosX, float PosY, float VelX, float VelY)
+        {
+            tkui.PlanetObject p2 = new tkui.PlanetObject();
+            p2.Mass = Mass;
+            p2.Position = new Vector2(PosX, PosY);
+            p2.Velocity = new Vector2(VelX, VelY);
+            p2.Trails = new List<Vector2>();
+            MainUIclass.lstPlanets.Add(p2);
+        }
+
+        private void NewOrbitingPlanet(float Mass, float PosX, float PosY, float OrbitPosX, float OrbitPosY, float OrbitMass)
+        {
+            float Speed = Math.Sqrt()
+        }
+
         private void btnLaunch_Click(object sender, EventArgs e)
         {
             gbvars.NewObjectMass = 5f;
@@ -63,21 +78,11 @@ namespace AIMIS
 
             if (rbSimple.Checked)
             {
-                //add two planets
-                tkui.PlanetObject p2 = new tkui.PlanetObject();
-                p2.Mass = 1000f;
-                p2.Position = new Vector2(0f, 0f);
-                p2.Velocity = new Vector2(0f, 0f);
-                p2.Trails = new List<Vector2>();
-                MainUIclass.lstPlanets.Add(p2);
 
-
-                tkui.PlanetObject p3 = new tkui.PlanetObject();
-                p3.Mass = 3f;
-                p3.Position = new Vector2(0f, -3f);
-                p3.Velocity = new Vector2(-0.01f, 0f);
-                p3.Trails = new List<Vector2>();
-                MainUIclass.lstPlanets.Add(p3);
+                NewPlanet(1000f, 0f, 0f, 0f, 0f);
+                NewPlanet(3f, 0f, -3f, -0.0149f, 0f);
+                NewPlanet(4f,0f,5f,)
+           
             }
 
 

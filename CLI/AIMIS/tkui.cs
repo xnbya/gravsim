@@ -105,7 +105,9 @@ namespace AIMIS
 
         public Vector2 MousePosition(float mX, float mY, GameWindow game)
         {
-            Vector2 vecMousePos = new Vector2(((mX) / (float)game.Width - 0.5f) * 20f * ZoomMulti - ViewPointV.X * 10f * ZoomMulti, 0 - ((mY) / (float)game.Height - 0.5f) * 16f * ZoomMulti - ViewPointV.Y * 8f * ZoomMulti);
+            Vector2 vecMousePos = new Vector2(((mX) / (float)game.Width - 0.5f) * game.Width * 2 * 
+                ZoomMulti - ViewPointV.X * game.Width * ZoomMulti, 0 - ((mY) / (float)game.Height - 0.5f)
+                * game.Height * 2 * ZoomMulti - ViewPointV.Y * game.Height * ZoomMulti);
             //Console.WriteLine(ViewPointV);
             return vecMousePos;
 
@@ -123,7 +125,7 @@ namespace AIMIS
 
         //viewpoint
         Vector3 ViewPointV = new Vector3(0f, 0f, 0f);
-        float ZoomMulti = 1f;
+        float ZoomMulti = 0.01f;
 
 
 
@@ -161,22 +163,18 @@ namespace AIMIS
                         MoCinitialvec = MousePosition(e.X, e.Y, game);
                         MoCdraw = true;
 
-                        //Console.WriteLine(e.X.ToString() + ' ' + e.Y.ToString());
 
                     };
 
                 game.Mouse.ButtonUp += (sender, e) =>
                     {
                         MoCdraw = false;
-                       // float MoCfinalX = ((float)e.X / (float)game.Width - 0.5f) * 20f * ZoomMulti;
-                       // float MoCfinalY = 0 - ((float)e.Y / (float)game.Height - 0.5f) * 16f * ZoomMulti;
-
 
                         MoCdvec = MousePosition(e.X, e.Y, game);
                         PlanetObject plan = new PlanetObject();
                         plan.Mass = gbvars.NewObjectMass;
                         plan.Position = MoCinitialvec;
-                        plan.Velocity = (MoCdvec - MoCinitialvec) * 0.05f; // new Vector2((MoCfinalX - MoCinitialX) / 50f, (MoCfinalY - MoCinitialY) / 50f);
+                        plan.Velocity = (MoCdvec - MoCinitialvec) * 0.05f;
                         plan.Trails = new List<Vector2>();
                         //p2.Radius = 0.005f;
                         lstPlanets.Add(plan);
@@ -191,12 +189,12 @@ namespace AIMIS
 
                 game.Mouse.WheelChanged += (sender, e) =>
                     {
-                        ZoomMulti -= e.DeltaPrecise * 0.05f;
+                        ZoomMulti -= e.DeltaPrecise * 0.005f;
                     };
 
                 game.Mouse.Move += (sender, e) =>
                     {
-                        MoCdvec = MousePosition(e.X, e.Y, game); // new Vector2(((float)e.X / (float)game.Width - 0.5f) * 20f * ZoomMulti, 0 - ((float)e.Y / (float)game.Height - 0.5f) * 16f * ZoomMulti);
+                        MoCdvec = MousePosition(e.X, e.Y, game); 
                     };
 
                 game.KeyPress += (sender, e) =>
@@ -239,25 +237,24 @@ namespace AIMIS
 						ViewPointV.Y += 0.01f;
 					}
 					if (game.Keyboard [Key.Z]) {
-						ZoomMulti += 0.01f;
+						ZoomMulti += 0.001f;
 					}
 					if (game.Keyboard [Key.X]) {
-						ZoomMulti -= 0.01f;
+						ZoomMulti -= 0.001f;
 					}
                     			
 
 				};
 
-				
-				
 
-				//gravitational constant
-				float G = 0.0000006673f;
+
+                float G = gbvars.G;
                 
 				//Vector2 velocity = new Vector2 (0f, 0f);
 				game.RenderFrame += (sender, e) =>
 				{
 					// render graphics
+                    //clears screen
 					GL.Clear (ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
 					GL.MatrixMode (MatrixMode.Projection);
@@ -267,11 +264,8 @@ namespace AIMIS
                     if (gbvars.blFollowObject && lstPlanets.Count > gbvars.intDispObToFollow)
                     {
                         Vector2 Position = lstPlanets[gbvars.intDispObToFollow].Position;
-                        ViewPointV.X = -Position.X / 10;
-                        ViewPointV.Y = -Position.Y / 8;
-                        //Console.Write("plan");
-                        //Console.WriteLine(lstPlanets[0].Position.X);
-                        //Console.WriteLine(ViewPointV.X);
+                        ViewPointV.X = -Position.X / (game.Width * ZoomMulti);
+                        ViewPointV.Y = -Position.Y / (game.Height * ZoomMulti);
                     }
 					
 
@@ -281,7 +275,7 @@ namespace AIMIS
 					matrix = Matrix4.CreateTranslation (ViewPointV);
 
 					GL.LoadMatrix (ref matrix);
-					GL.Ortho (-10.0 * ZoomMulti, 10.0 * ZoomMulti, -8.0 * ZoomMulti, 8.0 * ZoomMulti, 0.0, 4.0);
+					GL.Ortho (-game.Width * ZoomMulti, game.Width * ZoomMulti, -game.Height * ZoomMulti, game.Height * ZoomMulti, 0.0, 4.0);
 
 					//speedup
 					for(int zx = 0; zx < SimulationSpeed; zx ++) {
@@ -367,8 +361,10 @@ namespace AIMIS
 
 					//draw planets
 					for (int i = lstPlanets.Count - 1; i >= 0; i--) {
-                        if (i == gbvars.intObjectToTrack)                        
+                        if (i == gbvars.intObjectToTrack && gbvars.blGraphTrack)
                             GL.Color3(Color.Yellow);
+                        else if (gbvars.blFollowObject && i == gbvars.intDispObToFollow)
+                            GL.Color3(Color.Blue);
                         else
                             GL.Color3(colPlanets);
 
@@ -380,9 +376,6 @@ namespace AIMIS
 						
 							
 						//trails
-						//planob.Trails.Add(planob.Position);
-						//planob.Position += planob.Velocity;
-
 
                         if (gbvars.ShowTrails)
                         {
@@ -415,14 +408,11 @@ namespace AIMIS
 
 
 					game.SwapBuffers ();
-					//Console.WriteLine (game.UpdateFrequency);
-					//Console.WriteLine (lstPlanets.Count);
-					//Console.WriteLine (lstPlanets [0].Trails.Count * lstPlanets.Count);
 				};
 
 
 
-				// Run the game at 60 updates per second
+				// Run the simulaton at 60 updates per second
 				game.Run (60.0);
 			}
 		}
