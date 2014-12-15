@@ -17,10 +17,13 @@ namespace AIMIS
 {
     public class gbVariables
     {
+        //show trails?
         public bool ShowTrails;
+        //use short trails - helps performance
         public bool ShortTrails;
+        //mass of objects added
         public float NewObjectMass;
-        public System.Drawing.Color NewObjectColour;
+        //for graph
         public List<float> lstVelocities = new List<float>();
         public bool blFollowObject = false;
         public int intDispObToFollow = 0;
@@ -31,6 +34,9 @@ namespace AIMIS
 
         //gravitational constant
         public float G = 0.0000006673f;
+
+        //add moon with new object
+        public bool blAddMoon = false;
 
         
 

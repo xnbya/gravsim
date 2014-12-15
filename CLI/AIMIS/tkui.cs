@@ -185,6 +185,20 @@ namespace AIMIS
                             gbvars.intObjectToTrack = lstPlanets.Count - 1;
                             gbvars.lstVelocities.Clear();
                         }
+
+                        //add a moon?
+                        if (gbvars.blAddMoon)
+                        {
+                            float distance = plan.Radius * 3;
+                            PlanetObject moon = new PlanetObject();
+                            moon.Mass = gbvars.NewObjectMass / 10;
+                            moon.Position = MoCinitialvec;
+                            moon.Position.X += distance;
+                            moon.Velocity =  (MoCdvec - MoCinitialvec) * 0.05f;
+                            moon.Velocity.Y += (float)Math.Sqrt((gbvars.G * ( moon.Mass + plan.Mass )) / distance);
+                            moon.Trails = new List<Vector2>();
+                            lstPlanets.Add(moon);
+                        }
                     };
 
                 game.Mouse.WheelChanged += (sender, e) =>
@@ -259,13 +273,14 @@ namespace AIMIS
 
 					GL.MatrixMode (MatrixMode.Projection);
 
+                    Vector2 followPosition = new Vector2(0, 0);
 
 					//trackobject
                     if (gbvars.blFollowObject && lstPlanets.Count > gbvars.intDispObToFollow)
                     {
-                        Vector2 Position = lstPlanets[gbvars.intDispObToFollow].Position;
-                        ViewPointV.X = -Position.X / (game.Width * ZoomMulti);
-                        ViewPointV.Y = -Position.Y / (game.Height * ZoomMulti);
+                        followPosition = lstPlanets[gbvars.intDispObToFollow].Position;
+                        ViewPointV.X = -followPosition.X / (game.Width * ZoomMulti);
+                        ViewPointV.Y = -followPosition.Y / (game.Height * ZoomMulti);
                     }
 					
 
@@ -354,7 +369,15 @@ namespace AIMIS
 						if(gbvars.ShortTrails && planob.Trails.Count > 500 ) {
 							planob.Trails.RemoveAt(0);
 						}
-						planob.Trails.Add (planob.Position);
+                        if (gbvars.blFollowObject)
+                        {
+                            planob.Trails.Add(planob.Position - followPosition);
+                        }
+
+                        else
+                        {
+                            planob.Trails.Add(planob.Position);
+                        }
 						planob.Position += planob.Velocity;
 					}
 					}
@@ -379,10 +402,13 @@ namespace AIMIS
 
                         if (gbvars.ShowTrails)
                         {
-							GL.Begin (PrimitiveType.LineStrip);	
-							foreach (Vector2 pos in planob.Trails) {
-								GL.Vertex2 (pos.X, pos.Y);
-							}
+
+							GL.Begin (PrimitiveType.LineStrip);                           
+                                foreach (Vector2 pos in planob.Trails)
+                                {
+                                    GL.Vertex2(pos.X, pos.Y);
+                                }
+                            
 							GL.End ();
 						}
 						//planet

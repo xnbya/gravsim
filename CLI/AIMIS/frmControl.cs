@@ -139,5 +139,37 @@ namespace AIMIS
             gbvars.intDispObToFollow = (int)nmObjToFollow.Value;
         }
 
+        private void ckMoon_CheckedChanged(object sender, EventArgs e)
+        {
+            gbvars.blAddMoon = ckMoon.Checked;
+        }
+
+        private int frmWidth;
+        private int frmHeight;
+        private bool blShowHide;
+
+        private void btnShowHide_Click(object sender, EventArgs e)
+        {
+            if (blShowHide)
+            {
+                
+                this.Width = frmWidth;
+                this.Height = frmHeight;
+                btnShowHide.Text = "Collapse";
+                blShowHide = false;
+                this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            }
+            else
+            {
+                this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+                frmWidth = this.Width;
+                frmHeight = this.Height;
+                this.Width = 94;
+                this.Height = 26;
+                btnShowHide.Text = "Expand";
+                blShowHide = true;
+            }
+        }
+
     }
 }

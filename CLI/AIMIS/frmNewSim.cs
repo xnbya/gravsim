@@ -48,7 +48,7 @@ namespace AIMIS
 
         private void NewOrbitingPlanet(float Mass, float PosX, float PosY, float OrbitPosX, float OrbitPosY, float OrbitMass)
         {
-            float Speed = Math.Sqrt()
+           // float Speed = Math.Sqrt();
         }
 
         private void btnLaunch_Click(object sender, EventArgs e)
@@ -81,7 +81,7 @@ namespace AIMIS
 
                 NewPlanet(1000f, 0f, 0f, 0f, 0f);
                 NewPlanet(3f, 0f, -3f, -0.0149f, 0f);
-                NewPlanet(4f,0f,5f,)
+                NewPlanet(4f,0f,5f,0f, 0f);
            
             }
 

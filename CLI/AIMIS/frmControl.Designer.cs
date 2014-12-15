@@ -44,6 +44,8 @@
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.ckDispObjToFollow = new System.Windows.Forms.CheckBox();
             this.nmObjToFollow = new System.Windows.Forms.NumericUpDown();
+            this.ckMoon = new System.Windows.Forms.CheckBox();
+            this.btnShowHide = new System.Windows.Forms.Button();
             this.grbTrails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.rkbSpeed)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -56,7 +58,7 @@
             this.grbTrails.Controls.Add(this.rbLongTrails);
             this.grbTrails.Controls.Add(this.rbShortTrails);
             this.grbTrails.Controls.Add(this.rbNoTrails);
-            this.grbTrails.Location = new System.Drawing.Point(12, 12);
+            this.grbTrails.Location = new System.Drawing.Point(12, 39);
             this.grbTrails.Name = "grbTrails";
             this.grbTrails.Size = new System.Drawing.Size(99, 121);
             this.grbTrails.TabIndex = 0;
@@ -112,7 +114,7 @@
             // 
             // rkbSpeed
             // 
-            this.rkbSpeed.Location = new System.Drawing.Point(15, 152);
+            this.rkbSpeed.Location = new System.Drawing.Point(15, 179);
             this.rkbSpeed.Maximum = 100;
             this.rkbSpeed.Name = "rkbSpeed";
             this.rkbSpeed.Size = new System.Drawing.Size(339, 45);
@@ -122,7 +124,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 136);
+            this.label1.Location = new System.Drawing.Point(12, 163);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(99, 13);
             this.label1.TabIndex = 2;
@@ -130,11 +132,12 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.ckMoon);
             this.groupBox1.Controls.Add(this.cboNewMass);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Location = new System.Drawing.Point(117, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(237, 49);
+            this.groupBox1.Size = new System.Drawing.Size(237, 75);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "New Objects";
@@ -168,7 +171,7 @@
             // 
             // btnNewSim
             // 
-            this.btnNewSim.Location = new System.Drawing.Point(117, 90);
+            this.btnNewSim.Location = new System.Drawing.Point(117, 117);
             this.btnNewSim.Name = "btnNewSim";
             this.btnNewSim.Size = new System.Drawing.Size(75, 43);
             this.btnNewSim.TabIndex = 4;
@@ -178,7 +181,7 @@
             // 
             // btnGraphs
             // 
-            this.btnGraphs.Location = new System.Drawing.Point(198, 90);
+            this.btnGraphs.Location = new System.Drawing.Point(198, 117);
             this.btnGraphs.Name = "btnGraphs";
             this.btnGraphs.Size = new System.Drawing.Size(75, 43);
             this.btnGraphs.TabIndex = 5;
@@ -188,7 +191,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(279, 90);
+            this.btnSave.Location = new System.Drawing.Point(279, 117);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 43);
             this.btnSave.TabIndex = 6;
@@ -205,7 +208,7 @@
             // ckDispObjToFollow
             // 
             this.ckDispObjToFollow.AutoSize = true;
-            this.ckDispObjToFollow.Location = new System.Drawing.Point(117, 67);
+            this.ckDispObjToFollow.Location = new System.Drawing.Point(117, 94);
             this.ckDispObjToFollow.Name = "ckDispObjToFollow";
             this.ckDispObjToFollow.Size = new System.Drawing.Size(90, 17);
             this.ckDispObjToFollow.TabIndex = 7;
@@ -215,16 +218,38 @@
             // 
             // nmObjToFollow
             // 
-            this.nmObjToFollow.Location = new System.Drawing.Point(213, 66);
+            this.nmObjToFollow.Location = new System.Drawing.Point(213, 93);
             this.nmObjToFollow.Name = "nmObjToFollow";
             this.nmObjToFollow.Size = new System.Drawing.Size(141, 20);
             this.nmObjToFollow.TabIndex = 8;
             this.nmObjToFollow.ValueChanged += new System.EventHandler(this.nmObjToFollow_ValueChanged);
             // 
+            // ckMoon
+            // 
+            this.ckMoon.AutoSize = true;
+            this.ckMoon.Location = new System.Drawing.Point(56, 45);
+            this.ckMoon.Name = "ckMoon";
+            this.ckMoon.Size = new System.Drawing.Size(75, 17);
+            this.ckMoon.TabIndex = 2;
+            this.ckMoon.Text = "Add Moon";
+            this.ckMoon.UseVisualStyleBackColor = true;
+            this.ckMoon.CheckedChanged += new System.EventHandler(this.ckMoon_CheckedChanged);
+            // 
+            // btnShowHide
+            // 
+            this.btnShowHide.Location = new System.Drawing.Point(2, 1);
+            this.btnShowHide.Name = "btnShowHide";
+            this.btnShowHide.Size = new System.Drawing.Size(90, 23);
+            this.btnShowHide.TabIndex = 9;
+            this.btnShowHide.Text = "Collapse";
+            this.btnShowHide.UseVisualStyleBackColor = true;
+            this.btnShowHide.Click += new System.EventHandler(this.btnShowHide_Click);
+            // 
             // frmControl
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(363, 201);
+            this.ClientSize = new System.Drawing.Size(363, 222);
+            this.Controls.Add(this.btnShowHide);
             this.Controls.Add(this.nmObjToFollow);
             this.Controls.Add(this.ckDispObjToFollow);
             this.Controls.Add(this.btnSave);
@@ -268,5 +293,7 @@
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.CheckBox ckDispObjToFollow;
         private System.Windows.Forms.NumericUpDown nmObjToFollow;
+        private System.Windows.Forms.CheckBox ckMoon;
+        private System.Windows.Forms.Button btnShowHide;
     }
 }
