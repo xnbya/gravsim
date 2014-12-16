@@ -36,6 +36,7 @@
             this.rkbSpeed = new System.Windows.Forms.TrackBar();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.ckMoon = new System.Windows.Forms.CheckBox();
             this.cboNewMass = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.btnNewSim = new System.Windows.Forms.Button();
@@ -44,7 +45,6 @@
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.ckDispObjToFollow = new System.Windows.Forms.CheckBox();
             this.nmObjToFollow = new System.Windows.Forms.NumericUpDown();
-            this.ckMoon = new System.Windows.Forms.CheckBox();
             this.btnShowHide = new System.Windows.Forms.Button();
             this.grbTrails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.rkbSpeed)).BeginInit();
@@ -141,6 +141,18 @@
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "New Objects";
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // ckMoon
+            // 
+            this.ckMoon.AutoSize = true;
+            this.ckMoon.Location = new System.Drawing.Point(56, 45);
+            this.ckMoon.Name = "ckMoon";
+            this.ckMoon.Size = new System.Drawing.Size(75, 17);
+            this.ckMoon.TabIndex = 2;
+            this.ckMoon.Text = "Add Moon";
+            this.ckMoon.UseVisualStyleBackColor = true;
+            this.ckMoon.CheckedChanged += new System.EventHandler(this.ckMoon_CheckedChanged);
             // 
             // cboNewMass
             // 
@@ -224,17 +236,6 @@
             this.nmObjToFollow.TabIndex = 8;
             this.nmObjToFollow.ValueChanged += new System.EventHandler(this.nmObjToFollow_ValueChanged);
             // 
-            // ckMoon
-            // 
-            this.ckMoon.AutoSize = true;
-            this.ckMoon.Location = new System.Drawing.Point(56, 45);
-            this.ckMoon.Name = "ckMoon";
-            this.ckMoon.Size = new System.Drawing.Size(75, 17);
-            this.ckMoon.TabIndex = 2;
-            this.ckMoon.Text = "Add Moon";
-            this.ckMoon.UseVisualStyleBackColor = true;
-            this.ckMoon.CheckedChanged += new System.EventHandler(this.ckMoon_CheckedChanged);
-            // 
             // btnShowHide
             // 
             this.btnShowHide.Location = new System.Drawing.Point(2, 1);
@@ -263,6 +264,7 @@
             this.Name = "frmControl";
             this.Text = "AIMIS control window";
             this.TopMost = true;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmControl_FormClosing);
             this.Load += new System.EventHandler(this.frmControl_Load);
             this.grbTrails.ResumeLayout(false);
             this.grbTrails.PerformLayout();

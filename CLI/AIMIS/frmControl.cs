@@ -171,5 +171,25 @@ namespace AIMIS
             }
         }
 
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void frmControl_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (thMainUI != null)
+            {
+                if (thMainUI.IsAlive)
+                    if (MessageBox.Show("Are you sure you want to quit the simulation?", "Terminate Simulation?", MessageBoxButtons.YesNo,MessageBoxIcon.Information) == System.Windows.Forms.DialogResult.Yes)
+                        thMainUI.Abort();
+                    else
+                        e.Cancel = true;
+                        
+
+            }
+
+        }
+
     }
 }

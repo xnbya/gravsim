@@ -136,7 +136,7 @@ namespace AIMIS
 		{
 
 			using (var game = new GameWindow(700,500, new GraphicsMode(8,2,0))) {
-                game.Title = "AIMIS";
+                game.Title = "AIMIS Simulation";
                // game.WindowState = WindowState.Fullscreen;
               //  DisplayDevice.Default.ChangeResolution(1280, 1024,2, 30);
                
@@ -253,8 +253,9 @@ namespace AIMIS
 					if (game.Keyboard [Key.Z]) {
 						ZoomMulti += 0.001f;
 					}
-					if (game.Keyboard [Key.X]) {
-						ZoomMulti -= 0.001f;
+					if (game.Keyboard [Key.X] && ZoomMulti > 0.001f) {
+                        
+						    ZoomMulti -= 0.001f;
 					}
                     			
 
@@ -369,15 +370,10 @@ namespace AIMIS
 						if(gbvars.ShortTrails && planob.Trails.Count > 500 ) {
 							planob.Trails.RemoveAt(0);
 						}
-                        if (gbvars.blFollowObject)
-                        {
-                            planob.Trails.Add(planob.Position - followPosition);
-                        }
-
-                        else
-                        {
+                       
+                        
                             planob.Trails.Add(planob.Position);
-                        }
+                        
 						planob.Position += planob.Velocity;
 					}
 					}
@@ -403,12 +399,12 @@ namespace AIMIS
                         if (gbvars.ShowTrails)
                         {
 
-							GL.Begin (PrimitiveType.LineStrip);                           
-                                foreach (Vector2 pos in planob.Trails)
-                                {
-                                    GL.Vertex2(pos.X, pos.Y);
-                                }
-                            
+							GL.Begin (PrimitiveType.LineStrip);
+
+                            for (int j = 0; j < planob.Trails.Count; j++)
+                            {
+                                GL.Vertex2(planob.Trails[j].X, planob.Trails[j].Y);
+                            }
 							GL.End ();
 						}
 						//planet

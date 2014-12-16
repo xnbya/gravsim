@@ -24,9 +24,12 @@ namespace AIMIS
         [STAThread]
         public static void Main()
         {
+            
+
             frmControl form = new frmControl();
             gbVariables gbvars = new gbVariables();
             form.gbvars = gbvars;
+
 
             Application.EnableVisualStyles();
             Application.Run(form);
