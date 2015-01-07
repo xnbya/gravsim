@@ -191,5 +191,10 @@ namespace AIMIS
 
         }
 
+        private void chkAddObjAdvanced_CheckedChanged(object sender, EventArgs e)
+        {
+            gbvars.blAddObjAdvanced = chkAddObjAdvanced.Checked;
+        }
+
     }
 }

@@ -46,6 +46,7 @@
             this.ckDispObjToFollow = new System.Windows.Forms.CheckBox();
             this.nmObjToFollow = new System.Windows.Forms.NumericUpDown();
             this.btnShowHide = new System.Windows.Forms.Button();
+            this.chkAddObjAdvanced = new System.Windows.Forms.CheckBox();
             this.grbTrails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.rkbSpeed)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -132,6 +133,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.chkAddObjAdvanced);
             this.groupBox1.Controls.Add(this.ckMoon);
             this.groupBox1.Controls.Add(this.cboNewMass);
             this.groupBox1.Controls.Add(this.label2);
@@ -146,7 +148,7 @@
             // ckMoon
             // 
             this.ckMoon.AutoSize = true;
-            this.ckMoon.Location = new System.Drawing.Point(56, 45);
+            this.ckMoon.Location = new System.Drawing.Point(156, 45);
             this.ckMoon.Name = "ckMoon";
             this.ckMoon.Size = new System.Drawing.Size(75, 17);
             this.ckMoon.TabIndex = 2;
@@ -246,6 +248,17 @@
             this.btnShowHide.UseVisualStyleBackColor = true;
             this.btnShowHide.Click += new System.EventHandler(this.btnShowHide_Click);
             // 
+            // chkAddObjAdvanced
+            // 
+            this.chkAddObjAdvanced.AutoSize = true;
+            this.chkAddObjAdvanced.Location = new System.Drawing.Point(9, 45);
+            this.chkAddObjAdvanced.Name = "chkAddObjAdvanced";
+            this.chkAddObjAdvanced.Size = new System.Drawing.Size(128, 17);
+            this.chkAddObjAdvanced.TabIndex = 3;
+            this.chkAddObjAdvanced.Text = "chkAddObjAdvanced";
+            this.chkAddObjAdvanced.UseVisualStyleBackColor = true;
+            this.chkAddObjAdvanced.CheckedChanged += new System.EventHandler(this.chkAddObjAdvanced_CheckedChanged);
+            // 
             // frmControl
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -297,5 +310,6 @@
         private System.Windows.Forms.NumericUpDown nmObjToFollow;
         private System.Windows.Forms.CheckBox ckMoon;
         private System.Windows.Forms.Button btnShowHide;
+        private System.Windows.Forms.CheckBox chkAddObjAdvanced;
     }
 }

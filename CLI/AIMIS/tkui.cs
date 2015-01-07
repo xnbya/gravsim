@@ -168,6 +168,12 @@ namespace AIMIS
 
                 game.Mouse.ButtonUp += (sender, e) =>
                     {
+                        if (gbvars.blAddObjAdvanced)
+                        {
+                            frmNewObjAdv frmobj = new frmNewObjAdv();
+                            frmobj.ShowDialog();
+                        }
+
                         MoCdraw = false;
 
                         MoCdvec = MousePosition(e.X, e.Y, game);
@@ -382,10 +388,13 @@ namespace AIMIS
 					for (int i = lstPlanets.Count - 1; i >= 0; i--) {
                         if (i == gbvars.intObjectToTrack && gbvars.blGraphTrack)
                             GL.Color3(Color.Yellow);
-                        else if (gbvars.blFollowObject && i == gbvars.intDispObToFollow)
-                            GL.Color3(Color.Blue);
                         else
-                            GL.Color3(colPlanets);
+                        {
+                            if (gbvars.blFollowObject && i == gbvars.intDispObToFollow)
+                                GL.Color3(Color.Blue);
+                            else
+                                GL.Color3(colPlanets);
+                        }
 
 						PlanetObject planob = lstPlanets [i];
 						

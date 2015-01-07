@@ -57,6 +57,12 @@
     <Compile Include="frmGraphs.Designer.cs">
       <DependentUpon>frmGraphs.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmNewObjAdv.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmNewObjAdv.Designer.cs">
+      <DependentUpon>frmNewObjAdv.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmNewSim.cs">
       <SubType>Form</SubType>
     </Compile>
