@@ -161,6 +161,7 @@ namespace AIMIS
                 game.Mouse.ButtonDown += (sender, e) =>
                     {
                         MoCinitialvec = MousePosition(e.X, e.Y, game);
+                        MoCdvec = MoCinitialvec;
                         MoCdraw = true;
 
 
@@ -168,43 +169,57 @@ namespace AIMIS
 
                 game.Mouse.ButtonUp += (sender, e) =>
                     {
+
+
+
                         if (gbvars.blAddObjAdvanced)
                         {
                             frmNewObjAdv frmobj = new frmNewObjAdv();
+                            frmobj.gbvars = gbvars;
                             frmobj.ShowDialog();
+                            if (frmobj.DialogResult == System.Windows.Forms.DialogResult.OK)
+                            {
+
+                            }
+                        }
+
+                        else
+                        {
+
+                            
+
+                            MoCdvec = MousePosition(e.X, e.Y, game);
+                            PlanetObject plan = new PlanetObject();
+                            plan.Mass = gbvars.NewObjectMass;
+                            plan.Position = MoCinitialvec;
+                            plan.Velocity = (MoCdvec - MoCinitialvec) * 0.05f;
+                            plan.Trails = new List<Vector2>();
+                            //p2.Radius = 0.005f;
+                            lstPlanets.Add(plan);
+
+                            //are we graphing the speed of the new planets?
+                            if (gbvars.blTrackNewObject)
+                            {
+                                gbvars.intObjectToTrack = lstPlanets.Count - 1;
+                                gbvars.lstVelocities.Clear();
+                            }
+
+                            //add a moon?
+                            if (gbvars.blAddMoon)
+                            {
+                                float distance = plan.Radius * 3;
+                                PlanetObject moon = new PlanetObject();
+                                moon.Mass = gbvars.NewObjectMass / 10;
+                                moon.Position = MoCinitialvec;
+                                moon.Position.X += distance;
+                                moon.Velocity = (MoCdvec - MoCinitialvec) * 0.05f;
+                                moon.Velocity.Y += (float)Math.Sqrt((gbvars.G * (moon.Mass + plan.Mass)) / distance);
+                                moon.Trails = new List<Vector2>();
+                                lstPlanets.Add(moon);
+                            }
                         }
 
                         MoCdraw = false;
-
-                        MoCdvec = MousePosition(e.X, e.Y, game);
-                        PlanetObject plan = new PlanetObject();
-                        plan.Mass = gbvars.NewObjectMass;
-                        plan.Position = MoCinitialvec;
-                        plan.Velocity = (MoCdvec - MoCinitialvec) * 0.05f;
-                        plan.Trails = new List<Vector2>();
-                        //p2.Radius = 0.005f;
-                        lstPlanets.Add(plan);
-
-                        //are we graphing the speed of the new planets?
-                        if (gbvars.blTrackNewObject)
-                        {
-                            gbvars.intObjectToTrack = lstPlanets.Count - 1;
-                            gbvars.lstVelocities.Clear();
-                        }
-
-                        //add a moon?
-                        if (gbvars.blAddMoon)
-                        {
-                            float distance = plan.Radius * 3;
-                            PlanetObject moon = new PlanetObject();
-                            moon.Mass = gbvars.NewObjectMass / 10;
-                            moon.Position = MoCinitialvec;
-                            moon.Position.X += distance;
-                            moon.Velocity =  (MoCdvec - MoCinitialvec) * 0.05f;
-                            moon.Velocity.Y += (float)Math.Sqrt((gbvars.G * ( moon.Mass + plan.Mass )) / distance);
-                            moon.Trails = new List<Vector2>();
-                            lstPlanets.Add(moon);
-                        }
                     };
 
                 game.Mouse.WheelChanged += (sender, e) =>
@@ -214,7 +229,8 @@ namespace AIMIS
 
                 game.Mouse.Move += (sender, e) =>
                     {
-                        MoCdvec = MousePosition(e.X, e.Y, game); 
+                        if(!gbvars.blAddObjAdvanced)
+                            MoCdvec = MousePosition(e.X, e.Y, game); 
                     };
 
                 game.KeyPress += (sender, e) =>

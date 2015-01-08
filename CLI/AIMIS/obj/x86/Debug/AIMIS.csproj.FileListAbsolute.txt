@@ -20,3 +20,4 @@ N:\comp\gravsim\CLI\AIMIS\obj\x86\Debug\AIMIS.frmControl.resources
 N:\comp\gravsim\CLI\AIMIS\obj\x86\Debug\AIMIS.frmGraphs.resources
 N:\comp\gravsim\CLI\AIMIS\obj\x86\Debug\AIMIS.frmNewSim.resources
 N:\comp\gravsim\CLI\AIMIS\obj\x86\Debug\AIMIS.csproj.GenerateResource.Cache
+N:\comp\gravsim\CLI\AIMIS\obj\x86\Debug\AIMIS.frmNewObjAdv.resources

@@ -85,6 +85,9 @@
     <EmbeddedResource Include="frmGraphs.resx">
       <DependentUpon>frmGraphs.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmNewObjAdv.resx">
+      <DependentUpon>frmNewObjAdv.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmNewSim.resx">
       <DependentUpon>frmNewSim.cs</DependentUpon>
     </EmbeddedResource>
