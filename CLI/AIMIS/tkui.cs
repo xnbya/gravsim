@@ -1,5 +1,5 @@
 ﻿  /* AIMIS
-Copyright (C) 2014 Alexis Enston
+Copyright (C) 2014, 2015 Alexis Enston
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation; either version 2 of the License, or
@@ -157,69 +157,110 @@ namespace AIMIS
                 Vector2 MoCinitialvec = new Vector2(0f, 0f);
                 Vector2 MoCdvec = new Vector2(0f, 0f);
                 bool MoCdraw = false;
+                Vector3 PrevViewpoint = new Vector3(0f, 0f, 0f);
+                
+                bool blMoveViewpoint = false;
 
                 game.Mouse.ButtonDown += (sender, e) =>
                     {
-                        MoCinitialvec = MousePosition(e.X, e.Y, game);
-                        MoCdvec = MoCinitialvec;
-                        MoCdraw = true;
+                        if (e.Button == MouseButton.Left)
+                        {
+
+                            MoCinitialvec = MousePosition(e.X, e.Y, game);
+                            MoCdvec = MoCinitialvec;
+                            MoCdraw = true;
+                        }
+                        if (e.Button == MouseButton.Right) {
+                            //MovePrev = MousePosition(e.X, e.Y, game);
+                            PrevViewpoint = ViewPointV;
+                            MoCinitialvec = MousePosition(e.X, e.Y, game);
+                        }
 
 
                     };
 
                 game.Mouse.ButtonUp += (sender, e) =>
                     {
-
-
-
-                        if (gbvars.blAddObjAdvanced)
-                        {
-                            frmNewObjAdv frmobj = new frmNewObjAdv();
-                            frmobj.gbvars = gbvars;
-                            frmobj.ShowDialog();
-                            if (frmobj.DialogResult == System.Windows.Forms.DialogResult.OK)
-                            {
-
-                            }
-                        }
-
-                        else
+                        if (e.Button == MouseButton.Left)
                         {
 
-                            
 
-                            MoCdvec = MousePosition(e.X, e.Y, game);
-                            PlanetObject plan = new PlanetObject();
-                            plan.Mass = gbvars.NewObjectMass;
-                            plan.Position = MoCinitialvec;
-                            plan.Velocity = (MoCdvec - MoCinitialvec) * 0.05f;
-                            plan.Trails = new List<Vector2>();
-                            //p2.Radius = 0.005f;
-                            lstPlanets.Add(plan);
-
-                            //are we graphing the speed of the new planets?
-                            if (gbvars.blTrackNewObject)
+                            if (gbvars.blAddObjAdvanced)
                             {
-                                gbvars.intObjectToTrack = lstPlanets.Count - 1;
-                                gbvars.lstVelocities.Clear();
+                                frmNewObjAdv frmobj = new frmNewObjAdv();
+                                frmobj.gbvars = gbvars;
+                                frmobj.ShowDialog();
+                                if (frmobj.DialogResult == System.Windows.Forms.DialogResult.OK)
+                                {
+                                    PlanetObject plan = new PlanetObject();
+                                    plan.Mass = frmobj.fMass;
+                                    plan.Position = MoCinitialvec;
+                                    plan.Velocity = new Vector2((float)Math.Cos(frmobj.fAngle) * frmobj.fSpeed, -(float)Math.Sin(frmobj.fAngle) * frmobj.fSpeed);
+                                    plan.Trails = new List<Vector2>();
+                                    //p2.Radius = 0.005f;
+                                    lstPlanets.Add(plan);
+
+                                    //are we graphing the speed of the new planets?
+                                    if (gbvars.blTrackNewObject)
+                                    {
+                                        gbvars.intObjectToTrack = lstPlanets.Count - 1;
+                                        gbvars.lstVelocities.Clear();
+                                    }
+
+                                    //add a moon?
+                                    if (gbvars.blAddMoon)
+                                    {
+                                        float distance = plan.Radius * 3;
+                                        PlanetObject moon = new PlanetObject();
+                                        moon.Mass = gbvars.NewObjectMass / 10;
+                                        moon.Position = MoCinitialvec;
+                                        moon.Position.X += distance;
+                                        moon.Velocity = (MoCdvec - MoCinitialvec) * 0.05f;
+                                        moon.Velocity.Y += (float)Math.Sqrt((gbvars.G * (moon.Mass + plan.Mass)) / distance);
+                                        moon.Trails = new List<Vector2>();
+                                        lstPlanets.Add(moon);
+                                    }
+                                }
                             }
 
-                            //add a moon?
-                            if (gbvars.blAddMoon)
+                            else
                             {
-                                float distance = plan.Radius * 3;
-                                PlanetObject moon = new PlanetObject();
-                                moon.Mass = gbvars.NewObjectMass / 10;
-                                moon.Position = MoCinitialvec;
-                                moon.Position.X += distance;
-                                moon.Velocity = (MoCdvec - MoCinitialvec) * 0.05f;
-                                moon.Velocity.Y += (float)Math.Sqrt((gbvars.G * (moon.Mass + plan.Mass)) / distance);
-                                moon.Trails = new List<Vector2>();
-                                lstPlanets.Add(moon);
+
+
+
+                                MoCdvec = MousePosition(e.X, e.Y, game);
+                                PlanetObject plan = new PlanetObject();
+                                plan.Mass = gbvars.NewObjectMass;
+                                plan.Position = MoCinitialvec;
+                                plan.Velocity = (MoCdvec - MoCinitialvec) * 0.05f;
+                                plan.Trails = new List<Vector2>();
+                                //p2.Radius = 0.005f;
+                                lstPlanets.Add(plan);
+
+                                //are we graphing the speed of the new planets?
+                                if (gbvars.blTrackNewObject)
+                                {
+                                    gbvars.intObjectToTrack = lstPlanets.Count - 1;
+                                    gbvars.lstVelocities.Clear();
+                                }
+
+                                //add a moon?
+                                if (gbvars.blAddMoon)
+                                {
+                                    float distance = plan.Radius * 3;
+                                    PlanetObject moon = new PlanetObject();
+                                    moon.Mass = gbvars.NewObjectMass / 10;
+                                    moon.Position = MoCinitialvec;
+                                    moon.Position.X += distance;
+                                    moon.Velocity = (MoCdvec - MoCinitialvec) * 0.05f;
+                                    moon.Velocity.Y += (float)Math.Sqrt((gbvars.G * (moon.Mass + plan.Mass)) / distance);
+                                    moon.Trails = new List<Vector2>();
+                                    lstPlanets.Add(moon);
+                                }
                             }
+
+                                MoCdraw = false;
                         }
-
-                        MoCdraw = false;
                     };
 
                 game.Mouse.WheelChanged += (sender, e) =>
@@ -230,7 +271,15 @@ namespace AIMIS
                 game.Mouse.Move += (sender, e) =>
                     {
                         if(!gbvars.blAddObjAdvanced)
-                            MoCdvec = MousePosition(e.X, e.Y, game); 
+                            MoCdvec = MousePosition(e.X, e.Y, game);
+
+                        if(e.Mouse.RightButton == ButtonState.Pressed)
+                        {
+
+                            ViewPointV = new Vector3((MoCdvec - MoCinitialvec).X / (game.Width * ZoomMulti), (MoCdvec - MoCinitialvec).Y / (game.Height * ZoomMulti), 0) + PrevViewpoint;
+                            
+                        }
+                        
                     };
 
                 game.KeyPress += (sender, e) =>

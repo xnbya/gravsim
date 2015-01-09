@@ -17,6 +17,7 @@ namespace AIMIS
         public bool blAddMoon;
         public float fMoonMass;
         public float fMoonDistance;
+        public float fSpeed;
 
 
         public frmNewObjAdv()
@@ -59,6 +60,7 @@ namespace AIMIS
             fMoonMass = (float)nmMoonMass.Value;
             fMoonDistance = (float)nmMoonRadius.Value;
             blAddMoon = ckAddMoon.Checked;
+            fSpeed = (float)nmSpeed.Value;
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.Close();
         }

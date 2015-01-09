@@ -134,6 +134,12 @@
             // 
             // nmSpeed
             // 
+            this.nmSpeed.DecimalPlaces = 3;
+            this.nmSpeed.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
             this.nmSpeed.Location = new System.Drawing.Point(97, 43);
             this.nmSpeed.Name = "nmSpeed";
             this.nmSpeed.Size = new System.Drawing.Size(120, 20);
@@ -142,7 +148,7 @@
             5,
             0,
             0,
-            0});
+            131072});
             // 
             // grpDirection
             // 
