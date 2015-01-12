@@ -78,6 +78,11 @@ namespace AIMIS
             gbvars.blTrackNewObject = chTrackNew.Checked;
         }
 
+        private void chTrackObject_CheckedChanged(object sender, EventArgs e)
+        {
+            gbvars.blGraphTrack = chTrackObject.Checked;
+        }
+
 
     }
 }

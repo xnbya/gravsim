@@ -39,9 +39,8 @@ namespace AIMIS
         public bool blAddMoon = false;
 
         //add new object advanced option
-        public bool blAddObjAdvanced = true;
+        public bool blAddObjAdvanced = false;
 
-        
 
     }
 }

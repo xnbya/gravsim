@@ -36,6 +36,7 @@
             this.rkbSpeed = new System.Windows.Forms.TrackBar();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.chkAddObjAdvanced = new System.Windows.Forms.CheckBox();
             this.ckMoon = new System.Windows.Forms.CheckBox();
             this.cboNewMass = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -46,7 +47,6 @@
             this.ckDispObjToFollow = new System.Windows.Forms.CheckBox();
             this.nmObjToFollow = new System.Windows.Forms.NumericUpDown();
             this.btnShowHide = new System.Windows.Forms.Button();
-            this.chkAddObjAdvanced = new System.Windows.Forms.CheckBox();
             this.grbTrails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.rkbSpeed)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -144,6 +144,17 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "New Objects";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // chkAddObjAdvanced
+            // 
+            this.chkAddObjAdvanced.AutoSize = true;
+            this.chkAddObjAdvanced.Location = new System.Drawing.Point(9, 45);
+            this.chkAddObjAdvanced.Name = "chkAddObjAdvanced";
+            this.chkAddObjAdvanced.Size = new System.Drawing.Size(114, 17);
+            this.chkAddObjAdvanced.TabIndex = 3;
+            this.chkAddObjAdvanced.Text = "Advanced Options";
+            this.chkAddObjAdvanced.UseVisualStyleBackColor = true;
+            this.chkAddObjAdvanced.CheckedChanged += new System.EventHandler(this.chkAddObjAdvanced_CheckedChanged);
             // 
             // ckMoon
             // 
@@ -247,17 +258,6 @@
             this.btnShowHide.Text = "Collapse";
             this.btnShowHide.UseVisualStyleBackColor = true;
             this.btnShowHide.Click += new System.EventHandler(this.btnShowHide_Click);
-            // 
-            // chkAddObjAdvanced
-            // 
-            this.chkAddObjAdvanced.AutoSize = true;
-            this.chkAddObjAdvanced.Location = new System.Drawing.Point(9, 45);
-            this.chkAddObjAdvanced.Name = "chkAddObjAdvanced";
-            this.chkAddObjAdvanced.Size = new System.Drawing.Size(128, 17);
-            this.chkAddObjAdvanced.TabIndex = 3;
-            this.chkAddObjAdvanced.Text = "chkAddObjAdvanced";
-            this.chkAddObjAdvanced.UseVisualStyleBackColor = true;
-            this.chkAddObjAdvanced.CheckedChanged += new System.EventHandler(this.chkAddObjAdvanced_CheckedChanged);
             // 
             // frmControl
             // 

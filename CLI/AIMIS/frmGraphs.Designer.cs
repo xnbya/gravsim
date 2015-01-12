@@ -37,6 +37,7 @@
             this.nudPlanetIndex = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.chTrackNew = new System.Windows.Forms.CheckBox();
+            this.chTrackObject = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudPlanetIndex)).BeginInit();
             this.SuspendLayout();
@@ -48,7 +49,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             chartArea1.Name = "ChartArea1";
             this.chart1.ChartAreas.Add(chartArea1);
-            this.chart1.Location = new System.Drawing.Point(12, 12);
+            this.chart1.Location = new System.Drawing.Point(2, 2);
             this.chart1.Name = "chart1";
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
@@ -56,7 +57,7 @@
             series1.Name = "Series1";
             series1.YValuesPerPoint = 6;
             this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(538, 308);
+            this.chart1.Size = new System.Drawing.Size(560, 308);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
             this.chart1.Click += new System.EventHandler(this.chart1_Click);
@@ -80,6 +81,7 @@
             // 
             // nudPlanetIndex
             // 
+            this.nudPlanetIndex.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.nudPlanetIndex.Location = new System.Drawing.Point(107, 327);
             this.nudPlanetIndex.Name = "nudPlanetIndex";
             this.nudPlanetIndex.Size = new System.Drawing.Size(120, 20);
@@ -88,6 +90,7 @@
             // 
             // label1
             // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(22, 329);
             this.label1.Name = "label1";
@@ -97,6 +100,7 @@
             // 
             // chTrackNew
             // 
+            this.chTrackNew.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.chTrackNew.AutoSize = true;
             this.chTrackNew.Checked = true;
             this.chTrackNew.CheckState = System.Windows.Forms.CheckState.Checked;
@@ -108,11 +112,24 @@
             this.chTrackNew.UseVisualStyleBackColor = true;
             this.chTrackNew.CheckedChanged += new System.EventHandler(this.chTrackNew_CheckedChanged);
             // 
+            // chTrackObject
+            // 
+            this.chTrackObject.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.chTrackObject.AutoSize = true;
+            this.chTrackObject.Location = new System.Drawing.Point(434, 330);
+            this.chTrackObject.Name = "chTrackObject";
+            this.chTrackObject.Size = new System.Drawing.Size(99, 17);
+            this.chTrackObject.TabIndex = 6;
+            this.chTrackObject.Text = "Highlight object";
+            this.chTrackObject.UseVisualStyleBackColor = true;
+            this.chTrackObject.CheckedChanged += new System.EventHandler(this.chTrackObject_CheckedChanged);
+            // 
             // frmGraphs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(562, 364);
+            this.Controls.Add(this.chTrackObject);
             this.Controls.Add(this.chTrackNew);
             this.Controls.Add(this.chart1);
             this.Controls.Add(this.label1);
@@ -136,5 +153,6 @@
         private System.Windows.Forms.NumericUpDown nudPlanetIndex;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox chTrackNew;
+        private System.Windows.Forms.CheckBox chTrackObject;
     }
 }

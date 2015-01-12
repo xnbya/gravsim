@@ -65,7 +65,7 @@ namespace AIMIS
                 {
                     tkui.PlanetObject p1 = new tkui.PlanetObject();
                     //p1.Mass = 0.5f;
-                    p1.Position = new Vector2(((float)rand.NextDouble() - 0.5f) * 8f, ((float)rand.NextDouble() - 0.5f) * 8f);
+                    p1.Position = new Vector2(((float)rand.NextDouble() - 0.5f) * 8f * (float)tbSpread.Value, ((float)rand.NextDouble() - 0.5f) * 8f * (float)tbSpread.Value);
                     p1.Velocity = new Vector2(((float)rand.NextDouble() - 0.5f) * ((float)tbSpeed.Value / 100), ((float)rand.NextDouble() - 0.5f) * ((float)tbSpeed.Value / 100));
                     //Vector2 (0.02f, 0.01f);
                     //p1.Velocity = new Vector2 (0f, 0f);
