@@ -208,11 +208,11 @@ namespace AIMIS
                                     }
 
                                     //add a moon?
-                                    if (gbvars.blAddMoon)
+                                    if (frmobj.blAddMoon)
                                     {
-                                        float distance = plan.Radius * 3;
+                                        float distance = frmobj.fMoonDistance;
                                         PlanetObject moon = new PlanetObject();
-                                        moon.Mass = gbvars.NewObjectMass / 10;
+                                        moon.Mass = frmobj.fMoonMass;
                                         moon.Position = MoCinitialvec;
                                         moon.Position.X += distance;
                                         moon.Velocity = (MoCdvec - MoCinitialvec) * 0.05f;
