@@ -159,21 +159,19 @@ namespace AIMIS
                 bool MoCdraw = false;
                 Vector3 PrevViewpoint = new Vector3(0f, 0f, 0f);
                 
-                bool blMoveViewpoint = false;
 
                 game.Mouse.ButtonDown += (sender, e) =>
                     {
+                        MoCinitialvec = MousePosition(e.X, e.Y, game);
+                        MoCdvec = MoCinitialvec;
+
                         if (e.Button == MouseButton.Left)
                         {
-
-                            MoCinitialvec = MousePosition(e.X, e.Y, game);
-                            MoCdvec = MoCinitialvec;
                             MoCdraw = true;
                         }
                         if (e.Button == MouseButton.Right) {
                             //MovePrev = MousePosition(e.X, e.Y, game);
                             PrevViewpoint = ViewPointV;
-                            MoCinitialvec = MousePosition(e.X, e.Y, game);
                         }
 
 
@@ -215,7 +213,7 @@ namespace AIMIS
                                         moon.Mass = frmobj.fMoonMass;
                                         moon.Position = MoCinitialvec;
                                         moon.Position.X += distance;
-                                        moon.Velocity = (MoCdvec - MoCinitialvec) * 0.05f;
+                                        moon.Velocity = plan.Velocity; //(MoCdvec - MoCinitialvec) * 0.05f;
                                         moon.Velocity.Y += (float)Math.Sqrt((gbvars.G * (moon.Mass + plan.Mass)) / distance);
                                         moon.Trails = new List<Vector2>();
                                         lstPlanets.Add(moon);
@@ -270,8 +268,8 @@ namespace AIMIS
 
                 game.Mouse.Move += (sender, e) =>
                     {
-                        if(!gbvars.blAddObjAdvanced)
-                            MoCdvec = MousePosition(e.X, e.Y, game);
+                        //if(!gbvars.blAddObjAdvanced)
+                        MoCdvec = MousePosition(e.X, e.Y, game);
 
                         if(e.Mouse.RightButton == ButtonState.Pressed)
                         {

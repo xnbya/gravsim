@@ -64,5 +64,15 @@ namespace AIMIS
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.Close();
         }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void nmMass_ValueChanged(object sender, EventArgs e)
+        {
+            lbRadius.Text = Math.Pow(((double)nmMass.Value * 3) / (Math.PI * 4 * 8000), (double)1 / 3).ToString();
+        }
     }
 }

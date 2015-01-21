@@ -35,13 +35,13 @@
             this.btnOpenSaved = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.grbRand = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.nmRandNumber = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.tbSpeed = new System.Windows.Forms.TrackBar();
             this.tbMass = new System.Windows.Forms.TrackBar();
-            this.label4 = new System.Windows.Forms.Label();
             this.tbSpread = new System.Windows.Forms.TrackBar();
             this.grbRand.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmRandNumber)).BeginInit();
@@ -112,6 +112,7 @@
             // 
             // grbRand
             // 
+            this.grbRand.Controls.Add(this.tbSpread);
             this.grbRand.Controls.Add(this.label4);
             this.grbRand.Controls.Add(this.label2);
             this.grbRand.Controls.Add(this.nmRandNumber);
@@ -121,11 +122,20 @@
             this.grbRand.Controls.Add(this.tbMass);
             this.grbRand.Location = new System.Drawing.Point(123, 12);
             this.grbRand.Name = "grbRand";
-            this.grbRand.Size = new System.Drawing.Size(220, 191);
+            this.grbRand.Size = new System.Drawing.Size(220, 202);
             this.grbRand.TabIndex = 5;
             this.grbRand.TabStop = false;
             this.grbRand.Text = "Random Start";
             this.grbRand.Visible = false;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(20, 140);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(41, 13);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "Spread";
             // 
             // label2
             // 
@@ -189,18 +199,9 @@
             this.tbMass.TabIndex = 3;
             this.tbMass.TickFrequency = 10;
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(20, 140);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(41, 13);
-            this.label4.TabIndex = 6;
-            this.label4.Text = "Spread";
-            // 
             // tbSpread
             // 
-            this.tbSpread.Location = new System.Drawing.Point(132, 168);
+            this.tbSpread.Location = new System.Drawing.Point(9, 156);
             this.tbSpread.Name = "tbSpread";
             this.tbSpread.Size = new System.Drawing.Size(205, 45);
             this.tbSpread.TabIndex = 7;
@@ -209,8 +210,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(355, 215);
-            this.Controls.Add(this.tbSpread);
+            this.ClientSize = new System.Drawing.Size(355, 226);
             this.Controls.Add(this.grbRand);
             this.Controls.Add(this.btnOpenSaved);
             this.Controls.Add(this.btnLaunch);

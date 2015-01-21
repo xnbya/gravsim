@@ -42,6 +42,14 @@
             this.label5 = new System.Windows.Forms.Label();
             this.nmDirectionAngle = new System.Windows.Forms.NumericUpDown();
             this.btnOK = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.grLocation = new System.Windows.Forms.GroupBox();
+            this.nmPosX = new System.Windows.Forms.NumericUpDown();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.nmPosY = new System.Windows.Forms.NumericUpDown();
+            this.label8 = new System.Windows.Forms.Label();
+            this.lbRadius = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.nmMass)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nmMoonMass)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nmMoonRadius)).BeginInit();
@@ -49,6 +57,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.nmSpeed)).BeginInit();
             this.grpDirection.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmDirectionAngle)).BeginInit();
+            this.grLocation.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nmPosX)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmPosY)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -66,6 +77,7 @@
             this.nmMass.Name = "nmMass";
             this.nmMass.Size = new System.Drawing.Size(120, 20);
             this.nmMass.TabIndex = 1;
+            this.nmMass.ValueChanged += new System.EventHandler(this.nmMass_ValueChanged);
             // 
             // ckAddMoon
             // 
@@ -104,6 +116,12 @@
             // 
             // nmMoonRadius
             // 
+            this.nmMoonRadius.DecimalPlaces = 2;
+            this.nmMoonRadius.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
             this.nmMoonRadius.Location = new System.Drawing.Point(99, 63);
             this.nmMoonRadius.Name = "nmMoonRadius";
             this.nmMoonRadius.Size = new System.Drawing.Size(120, 20);
@@ -111,12 +129,13 @@
             // 
             // grpMoon
             // 
+            this.grpMoon.Controls.Add(this.lbRadius);
             this.grpMoon.Controls.Add(this.label2);
             this.grpMoon.Controls.Add(this.nmMoonRadius);
             this.grpMoon.Controls.Add(this.ckAddMoon);
             this.grpMoon.Controls.Add(this.label3);
             this.grpMoon.Controls.Add(this.nmMoonMass);
-            this.grpMoon.Location = new System.Drawing.Point(223, 8);
+            this.grpMoon.Location = new System.Drawing.Point(223, 98);
             this.grpMoon.Name = "grpMoon";
             this.grpMoon.Size = new System.Drawing.Size(235, 103);
             this.grpMoon.TabIndex = 7;
@@ -196,7 +215,7 @@
             // 
             // btnOK
             // 
-            this.btnOK.Location = new System.Drawing.Point(351, 160);
+            this.btnOK.Location = new System.Drawing.Point(383, 207);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
             this.btnOK.TabIndex = 11;
@@ -204,11 +223,87 @@
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
+            // btnCancel
+            // 
+            this.btnCancel.Location = new System.Drawing.Point(302, 207);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.TabIndex = 12;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // grLocation
+            // 
+            this.grLocation.Controls.Add(this.label8);
+            this.grLocation.Controls.Add(this.nmPosY);
+            this.grLocation.Controls.Add(this.label7);
+            this.grLocation.Controls.Add(this.label6);
+            this.grLocation.Controls.Add(this.nmPosX);
+            this.grLocation.Location = new System.Drawing.Point(223, 12);
+            this.grLocation.Name = "grLocation";
+            this.grLocation.Size = new System.Drawing.Size(235, 80);
+            this.grLocation.TabIndex = 13;
+            this.grLocation.TabStop = false;
+            this.grLocation.Text = "Position";
+            // 
+            // nmPosX
+            // 
+            this.nmPosX.Location = new System.Drawing.Point(29, 19);
+            this.nmPosX.Name = "nmPosX";
+            this.nmPosX.Size = new System.Drawing.Size(79, 20);
+            this.nmPosX.TabIndex = 0;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(6, 21);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(17, 13);
+            this.label6.TabIndex = 1;
+            this.label6.Text = "X:";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(127, 21);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(17, 13);
+            this.label7.TabIndex = 2;
+            this.label7.Text = "Y:";
+            // 
+            // nmPosY
+            // 
+            this.nmPosY.Location = new System.Drawing.Point(150, 19);
+            this.nmPosY.Name = "nmPosY";
+            this.nmPosY.Size = new System.Drawing.Size(79, 20);
+            this.nmPosY.TabIndex = 3;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(26, 55);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(134, 13);
+            this.label8.TabIndex = 4;
+            this.label8.Text = "(Simulation is currently 5x6)";
+            // 
+            // lbRadius
+            // 
+            this.lbRadius.AutoSize = true;
+            this.lbRadius.Location = new System.Drawing.Point(14, 86);
+            this.lbRadius.Name = "lbRadius";
+            this.lbRadius.Size = new System.Drawing.Size(117, 13);
+            this.lbRadius.TabIndex = 7;
+            this.lbRadius.Text = "(Radius of planet is XX)";
+            // 
             // frmNewObjAdv
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(472, 397);
+            this.ClientSize = new System.Drawing.Size(472, 247);
+            this.Controls.Add(this.grLocation);
+            this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.grpDirection);
             this.Controls.Add(this.nmSpeed);
@@ -229,6 +324,10 @@
             this.grpDirection.ResumeLayout(false);
             this.grpDirection.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmDirectionAngle)).EndInit();
+            this.grLocation.ResumeLayout(false);
+            this.grLocation.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nmPosX)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmPosY)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -250,5 +349,13 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.NumericUpDown nmDirectionAngle;
         private System.Windows.Forms.Button btnOK;
+        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.GroupBox grLocation;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.NumericUpDown nmPosY;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.NumericUpDown nmPosX;
+        private System.Windows.Forms.Label lbRadius;
     }
 }
