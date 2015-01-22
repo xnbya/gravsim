@@ -53,6 +53,12 @@
     <Compile Include="frmControl.Designer.cs">
       <DependentUpon>frmControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmEarthOrbit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEarthOrbit.Designer.cs">
+      <DependentUpon>frmEarthOrbit.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmGraphs.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -84,6 +90,9 @@
   <ItemGroup>
     <EmbeddedResource Include="frmControl.resx">
       <DependentUpon>frmControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEarthOrbit.resx">
+      <DependentUpon>frmEarthOrbit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmGraphs.resx">
       <DependentUpon>frmGraphs.cs</DependentUpon>

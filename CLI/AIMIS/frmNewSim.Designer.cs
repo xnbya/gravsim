@@ -35,6 +35,7 @@
             this.btnOpenSaved = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.grbRand = new System.Windows.Forms.GroupBox();
+            this.tbSpread = new System.Windows.Forms.TrackBar();
             this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.nmRandNumber = new System.Windows.Forms.NumericUpDown();
@@ -42,12 +43,12 @@
             this.label3 = new System.Windows.Forms.Label();
             this.tbSpeed = new System.Windows.Forms.TrackBar();
             this.tbMass = new System.Windows.Forms.TrackBar();
-            this.tbSpread = new System.Windows.Forms.TrackBar();
+            this.rbEarthOrbit = new System.Windows.Forms.RadioButton();
             this.grbRand.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbSpread)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nmRandNumber)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbSpeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbMass)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbSpread)).BeginInit();
             this.SuspendLayout();
             // 
             // rbEmpty
@@ -86,7 +87,7 @@
             // 
             // btnLaunch
             // 
-            this.btnLaunch.Location = new System.Drawing.Point(12, 91);
+            this.btnLaunch.Location = new System.Drawing.Point(12, 129);
             this.btnLaunch.Name = "btnLaunch";
             this.btnLaunch.Size = new System.Drawing.Size(75, 23);
             this.btnLaunch.TabIndex = 3;
@@ -96,7 +97,7 @@
             // 
             // btnOpenSaved
             // 
-            this.btnOpenSaved.Location = new System.Drawing.Point(12, 120);
+            this.btnOpenSaved.Location = new System.Drawing.Point(12, 158);
             this.btnOpenSaved.Name = "btnOpenSaved";
             this.btnOpenSaved.Size = new System.Drawing.Size(75, 23);
             this.btnOpenSaved.TabIndex = 4;
@@ -127,6 +128,13 @@
             this.grbRand.TabStop = false;
             this.grbRand.Text = "Random Start";
             this.grbRand.Visible = false;
+            // 
+            // tbSpread
+            // 
+            this.tbSpread.Location = new System.Drawing.Point(9, 156);
+            this.tbSpread.Name = "tbSpread";
+            this.tbSpread.Size = new System.Drawing.Size(205, 45);
+            this.tbSpread.TabIndex = 7;
             // 
             // label4
             // 
@@ -199,18 +207,23 @@
             this.tbMass.TabIndex = 3;
             this.tbMass.TickFrequency = 10;
             // 
-            // tbSpread
+            // rbEarthOrbit
             // 
-            this.tbSpread.Location = new System.Drawing.Point(9, 156);
-            this.tbSpread.Name = "tbSpread";
-            this.tbSpread.Size = new System.Drawing.Size(205, 45);
-            this.tbSpread.TabIndex = 7;
+            this.rbEarthOrbit.AutoSize = true;
+            this.rbEarthOrbit.Location = new System.Drawing.Point(12, 81);
+            this.rbEarthOrbit.Name = "rbEarthOrbit";
+            this.rbEarthOrbit.Size = new System.Drawing.Size(75, 17);
+            this.rbEarthOrbit.TabIndex = 6;
+            this.rbEarthOrbit.TabStop = true;
+            this.rbEarthOrbit.Text = "Earth Orbit";
+            this.rbEarthOrbit.UseVisualStyleBackColor = true;
             // 
             // frmNewSim
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(355, 226);
+            this.Controls.Add(this.rbEarthOrbit);
             this.Controls.Add(this.grbRand);
             this.Controls.Add(this.btnOpenSaved);
             this.Controls.Add(this.btnLaunch);
@@ -222,10 +235,10 @@
             this.TopMost = true;
             this.grbRand.ResumeLayout(false);
             this.grbRand.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbSpread)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nmRandNumber)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbSpeed)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbMass)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbSpread)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -248,5 +261,6 @@
         private System.Windows.Forms.TrackBar tbSpeed;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TrackBar tbSpread;
+        private System.Windows.Forms.RadioButton rbEarthOrbit;
     }
 }

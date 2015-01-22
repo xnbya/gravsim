@@ -89,7 +89,7 @@ namespace AIMIS
 			public Vector2 Velocity;
 			public Vector2 Position;
 			public List<Vector2> Trails;
-            public Color PColour;
+            public float RotationTime;
 		}
 
         public void ClearTrails()
@@ -498,8 +498,9 @@ namespace AIMIS
                         DrawCircle(30, MoCinitialvec.X, MoCinitialvec.Y, 0.1f);
                     }
 
-				
 
+                    Console.WriteLine(game.RenderFrequency);
+                    
 
 					game.SwapBuffers ();
 				};
@@ -508,6 +509,7 @@ namespace AIMIS
 
 				// Run the simulaton at 60 updates per second
 				game.Run (60.0);
+                
 			}
 		}
 	}

@@ -72,7 +72,8 @@ namespace AIMIS
 
         private void nmMass_ValueChanged(object sender, EventArgs e)
         {
-            lbRadius.Text = Math.Pow(((double)nmMass.Value * 3) / (Math.PI * 4 * 8000), (double)1 / 3).ToString();
+            lbRadius.Text = "(Radius of main planet is " + Decimal.Round((decimal)Math.Pow(((double)nmMass.Value * 3) / (Math.PI * 4 * 8000), (double)1 / 3), 2).ToString() + " )";
+        
         }
     }
 }
