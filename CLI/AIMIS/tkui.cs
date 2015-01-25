@@ -17,6 +17,7 @@ using OpenTK.Graphics.OpenGL;
 using OpenTK.Input;
 using System.IO;
 using System.Xml.Serialization;
+using System.Drawing.Imaging;
 
 namespace AIMIS
 {
@@ -113,6 +114,29 @@ namespace AIMIS
 
         }
 
+		//For the textures - image of earth
+		public int LoadTexture(Bitmap bitmap)
+		{
+			int texture;
+			GL.GenTextures(1, out texture);
+			GL.BindTexture(TextureTarget.Texture2D, texture);
+
+			BitmapData data = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height),
+			                                  ImageLockMode.ReadOnly, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+
+			GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba, data.Width, data.Height, 0,
+			              OpenTK.Graphics.OpenGL.PixelFormat.Bgra, PixelType.UnsignedByte, data.Scan0);
+
+			bitmap.UnlockBits(data);
+			bitmap.Dispose();
+
+
+			GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)All.Linear);
+
+		
+			return texture;
+		}
+
         //vars
         //list of planets
         public List<PlanetObject> lstPlanets = new List<PlanetObject>();
@@ -159,6 +183,13 @@ namespace AIMIS
                 bool MoCdraw = false;
                 Vector3 PrevViewpoint = new Vector3(0f, 0f, 0f);
                 
+				//load textures
+				GL.Enable (EnableCap.Texture2D);
+				GL.Enable (EnableCap.Blend);
+				GL.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
+				int EarthTexture = LoadTexture(new Bitmap("earth.png"));
+
+			
 
                 game.Mouse.ButtonDown += (sender, e) =>
                     {
@@ -498,6 +529,24 @@ namespace AIMIS
                         DrawCircle(30, MoCinitialvec.X, MoCinitialvec.Y, 0.1f);
                     }
 
+
+					//Draw planet
+					GL.BindTexture(TextureTarget.Texture2D, EarthTexture);
+					//GL.Enable(EnableCap.Blend);
+
+					GL.Begin(PrimitiveType.Quads);
+					GL.TexCoord2(0, 0);
+					GL.Vertex2(0f, 0f);
+					GL.TexCoord2(1, 0);
+					GL.Vertex2(5f, 0f);
+					GL.TexCoord2(1, 1);
+					GL.Vertex2(5f, 5f);
+					GL.TexCoord2(0, 1);
+					GL.Vertex2(0f, 5f);
+					GL.End();
+
+					GL.BindTexture(TextureTarget.Texture2D, 0);
+					GL.Flush();
 
                     Console.WriteLine(game.RenderFrequency);
                     

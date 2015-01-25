@@ -4,3 +4,15 @@
 /home/alexis/dev/project/gravsim/CLI/AIMIS/obj/x86/Debug/opentktest.exe
 /home/alexis/dev/project/gravsim/CLI/AIMIS/obj/x86/Debug/opentktest.exe.mdb
 /home/alexis/dev/project/gravsim/CLI/AIMIS/bin/Debug/OpenTK.dll
+/home/alexis/dev/gravsim/CLI/AIMIS/obj/x86/Debug/.NETFramework,Version=v4.0.AssemblyAttribute.cs
+/home/alexis/dev/gravsim/CLI/AIMIS/obj/x86/Debug/AIMIS.frmControl.resources
+/home/alexis/dev/gravsim/CLI/AIMIS/obj/x86/Debug/AIMIS.frmEarthOrbit.resources
+/home/alexis/dev/gravsim/CLI/AIMIS/obj/x86/Debug/AIMIS.frmGraphs.resources
+/home/alexis/dev/gravsim/CLI/AIMIS/obj/x86/Debug/AIMIS.frmNewObjAdv.resources
+/home/alexis/dev/gravsim/CLI/AIMIS/obj/x86/Debug/AIMIS.frmNewSim.resources
+/home/alexis/dev/gravsim/CLI/AIMIS/bin/Debug/AIMIS.exe.mdb
+/home/alexis/dev/gravsim/CLI/AIMIS/bin/Debug/AIMIS.exe
+/home/alexis/dev/gravsim/CLI/AIMIS/obj/x86/Debug/AIMIS.exe
+/home/alexis/dev/gravsim/CLI/AIMIS/obj/x86/Debug/AIMIS.exe.mdb
+/home/alexis/dev/gravsim/CLI/AIMIS/bin/Debug/OpenTK.dll
+/home/alexis/dev/gravsim/CLI/AIMIS/bin/Debug/earth.png
