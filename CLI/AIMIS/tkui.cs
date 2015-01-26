@@ -91,6 +91,8 @@ namespace AIMIS
 			public Vector2 Position;
 			public List<Vector2> Trails;
             public float RotationTime;
+            //texture
+            public int Texture;
 		}
 
         public void ClearTrails()
@@ -491,9 +493,37 @@ namespace AIMIS
                         }
 
 						PlanetObject planob = lstPlanets [i];
-						
-						DrawCircle (30, planob.Position.X, planob.Position.Y, planob.Radius);	
-	
+                       
+                        if (i == 0)
+                        {
+                            //Draw planet
+                            GL.BindTexture(TextureTarget.Texture2D, EarthTexture);
+                            GL.Enable(EnableCap.Blend);
+
+                            GL.Color3(Color.White);
+                            GL.Begin(PrimitiveType.Quads);
+
+                            GL.TexCoord2(0, 0);
+                            GL.Vertex2(planob.Position.X - planob.Radius, planob.Position.Y - planob.Radius);
+                            GL.TexCoord2(1, 0);
+                            GL.Vertex2(planob.Position.X + planob.Radius, planob.Position.Y - planob.Radius);
+                            GL.TexCoord2(1, 1);
+                            GL.Vertex2(planob.Position.X + planob.Radius, planob.Position.Y + planob.Radius);
+                            GL.TexCoord2(0, 1);
+                            GL.Vertex2(planob.Position.X - planob.Radius, planob.Position.Y + planob.Radius);
+                            GL.End();
+
+                            GL.BindTexture(TextureTarget.Texture2D, 0);
+
+                        }
+                        
+                        else
+                        {
+                            DrawCircle(30, planob.Position.X, planob.Position.Y, planob.Radius);
+                            
+                        }
+                       // GL.Color4(255, 255, 255, 50);
+                        
                         GL.Color3(Color.DarkRed);
 						
 							
@@ -530,23 +560,7 @@ namespace AIMIS
                     }
 
 
-					//Draw planet
-					GL.BindTexture(TextureTarget.Texture2D, EarthTexture);
-					//GL.Enable(EnableCap.Blend);
 
-					GL.Begin(PrimitiveType.Quads);
-					GL.TexCoord2(0, 0);
-					GL.Vertex2(0f, 0f);
-					GL.TexCoord2(1, 0);
-					GL.Vertex2(5f, 0f);
-					GL.TexCoord2(1, 1);
-					GL.Vertex2(5f, 5f);
-					GL.TexCoord2(0, 1);
-					GL.Vertex2(0f, 5f);
-					GL.End();
-
-					GL.BindTexture(TextureTarget.Texture2D, 0);
-					GL.Flush();
 
                     Console.WriteLine(game.RenderFrequency);
                     
