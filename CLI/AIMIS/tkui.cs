@@ -93,6 +93,7 @@ namespace AIMIS
             public float RotationTime;
             //texture
             public int Texture;
+            public bool DrawTexture;
 		}
 
         public void ClearTrails()
@@ -190,7 +191,7 @@ namespace AIMIS
 				GL.Enable (EnableCap.Blend);
 				GL.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
 				int EarthTexture = LoadTexture(new Bitmap("earth.png"));
-
+                float RotAngle = 0f;
 			
 
                 game.Mouse.ButtonDown += (sender, e) =>
@@ -296,7 +297,13 @@ namespace AIMIS
 
                 game.Mouse.WheelChanged += (sender, e) =>
                     {
-                        ZoomMulti -= e.DeltaPrecise * 0.005f;
+                        
+                        if (ZoomMulti - e.DeltaPrecise * 0.001f > 0)
+                        {
+
+                            ZoomMulti -= e.DeltaPrecise * 0.001f;
+                        }
+
                     };
 
                 game.Mouse.Move += (sender, e) =>
@@ -390,7 +397,7 @@ namespace AIMIS
 
 
 					//GL.LoadIdentity();
-					matrix = Matrix4.CreateTranslation (ViewPointV);
+                    matrix = Matrix4.CreateTranslation(ViewPointV);
 
 					GL.LoadMatrix (ref matrix);
 					GL.Ortho (-game.Width * ZoomMulti, game.Width * ZoomMulti, -game.Height * ZoomMulti, game.Height * ZoomMulti, 0.0, 4.0);
@@ -496,24 +503,45 @@ namespace AIMIS
                        
                         if (i == 0)
                         {
-                            //Draw planet
+                            //Draw planet with texture
                             GL.BindTexture(TextureTarget.Texture2D, EarthTexture);
                             GL.Enable(EnableCap.Blend);
 
                             GL.Color3(Color.White);
+
+                            
+
+                            Matrix4 rotmatrix = Matrix4.CreateFromAxisAngle(new Vector3(0, 0, 1), RotAngle);
+                            rotmatrix = rotmatrix * Matrix4.CreateTranslation(planob.Position.X, planob.Position.Y, 0);
+                            
+                            GL.MultMatrix(ref rotmatrix);
+
+                            //GL.LoadMatrix(ref rotmatrix);
+                            //GL.Ortho(-game.Width * ZoomMulti, game.Width * ZoomMulti, -game.Height * ZoomMulti, game.Height * ZoomMulti, 0.0, 4.0);
+                            
+
+                            RotAngle -= 0.01f;
+                            GL.MatrixMode(MatrixMode.Modelview);
+
                             GL.Begin(PrimitiveType.Quads);
 
                             GL.TexCoord2(0, 0);
-                            GL.Vertex2(planob.Position.X - planob.Radius, planob.Position.Y - planob.Radius);
+                            GL.Vertex2(- planob.Radius,  - planob.Radius);
                             GL.TexCoord2(1, 0);
-                            GL.Vertex2(planob.Position.X + planob.Radius, planob.Position.Y - planob.Radius);
+                            GL.Vertex2(planob.Radius, - planob.Radius);
                             GL.TexCoord2(1, 1);
-                            GL.Vertex2(planob.Position.X + planob.Radius, planob.Position.Y + planob.Radius);
+                            GL.Vertex2( planob.Radius, planob.Radius);
                             GL.TexCoord2(0, 1);
-                            GL.Vertex2(planob.Position.X - planob.Radius, planob.Position.Y + planob.Radius);
+                            GL.Vertex2(- planob.Radius, planob.Radius);
                             GL.End();
 
                             GL.BindTexture(TextureTarget.Texture2D, 0);
+
+                           
+                            GL.MatrixMode(MatrixMode.Projection);
+                            GL.LoadMatrix(ref matrix);
+                            GL.Ortho(-game.Width * ZoomMulti, game.Width * ZoomMulti, -game.Height * ZoomMulti, game.Height * ZoomMulti, 0.0, 4.0);
+
 
                         }
                         
