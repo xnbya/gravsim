@@ -68,9 +68,11 @@ namespace AIMIS
         //the class for each object
 		public class PlanetObject
 		{
+            
 			private float mass;
+            
 			private float radius;
-
+            //mass
 			public float Mass {
 				get {
 					return this.mass;
@@ -80,20 +82,46 @@ namespace AIMIS
 					this.radius = (float)Math.Pow ((value * 3) / (Math.PI * 4 * 8000), (double)1 / 3);
 				}
 			}
-
+            //radius calculated from mass
 			public float Radius {
 				get {
 					return this.radius;
 				}
 			}
 
+            //position and movement
 			public Vector2 Velocity;
 			public Vector2 Position;
+            //Trails
 			public List<Vector2> Trails;
+            //Rotation - angle to add each step
+            //Used for planets with textures
             public float RotationTime;
+            public float RotationAngle;
             //texture
-            public int Texture;
-            public bool DrawTexture;
+            private int texture;
+            //load texture if called
+            public int Texture
+            {
+                get
+                {
+                    if (this.texture > 0)
+                        return this.texture;
+                    else if (this.BitmapTexture != null)
+                    {
+                        this.texture = tkui.LoadTexture(this.BitmapTexture);
+                        return this.texture;
+                    }
+                    else
+                        return 0;
+                }
+                set
+                {
+                    this.texture = value;
+                }
+            }
+
+            public Bitmap BitmapTexture;
 		}
 
         public void ClearTrails()
@@ -118,7 +146,7 @@ namespace AIMIS
         }
 
 		//For the textures - image of earth
-		public int LoadTexture(Bitmap bitmap)
+		public static int LoadTexture(Bitmap bitmap)
 		{
 			int texture;
 			GL.GenTextures(1, out texture);
@@ -144,6 +172,8 @@ namespace AIMIS
         //list of planets
         public List<PlanetObject> lstPlanets = new List<PlanetObject>();
 
+        
+
         //list of trails of 'dead' planets
         List<List<Vector2>> lstTrails = new List<List<Vector2>>();
 
@@ -163,7 +193,7 @@ namespace AIMIS
 		{
 
 			using (var game = new GameWindow(700,500, new GraphicsMode(8,2,0))) {
-                game.Title = "AIMIS Simulation";
+                
                // game.WindowState = WindowState.Fullscreen;
               //  DisplayDevice.Default.ChangeResolution(1280, 1024,2, 30);
                
@@ -173,6 +203,7 @@ namespace AIMIS
 				{
 					// setup settings, load textures, sounds
 					game.VSync = VSyncMode.On;
+                    game.Title = "AIMIS Simulation";
 				};
 
 				game.Resize += (sender, e) =>
@@ -188,10 +219,11 @@ namespace AIMIS
                 
 				//load textures
 				GL.Enable (EnableCap.Texture2D);
-				GL.Enable (EnableCap.Blend);
+				//GL.Enable (EnableCap.Blend);
 				GL.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
-				int EarthTexture = LoadTexture(new Bitmap("earth.png"));
-                float RotAngle = 0f;
+				//int EarthTexture = LoadTexture(new Bitmap("earth.png"));
+                //lstPlanets[0].Texture = EarthTexture;
+               // float RotAngle = 0f;
 			
 
                 game.Mouse.ButtonDown += (sender, e) =>
@@ -229,6 +261,7 @@ namespace AIMIS
                                     plan.Position = MoCinitialvec;
                                     plan.Velocity = new Vector2((float)Math.Cos(frmobj.fAngle) * frmobj.fSpeed, -(float)Math.Sin(frmobj.fAngle) * frmobj.fSpeed);
                                     plan.Trails = new List<Vector2>();
+                                   
                                     //p2.Radius = 0.005f;
                                     lstPlanets.Add(plan);
 
@@ -258,14 +291,13 @@ namespace AIMIS
                             else
                             {
 
-
-
                                 MoCdvec = MousePosition(e.X, e.Y, game);
                                 PlanetObject plan = new PlanetObject();
                                 plan.Mass = gbvars.NewObjectMass;
                                 plan.Position = MoCinitialvec;
                                 plan.Velocity = (MoCdvec - MoCinitialvec) * 0.05f;
                                 plan.Trails = new List<Vector2>();
+                                plan.BitmapTexture = new Bitmap("ship.png");
                                 //p2.Radius = 0.005f;
                                 lstPlanets.Add(plan);
 
@@ -437,6 +469,11 @@ namespace AIMIS
 								//collision detection, merge objects
 								if (Math.Abs (planob.Position.X - plan2.Position.X) < planob.Radius && Math.Abs (planob.Position.Y - plan2.Position.Y) < planob.Radius) {
 									Vector2 CombVelocity = planob.Velocity * planob.Mass + plan2.Velocity * plan2.Mass;
+                                    //Keep texture of largest object
+                                    if (planob.Mass < plan2.Mass)
+                                    {
+                                        planob.Texture = plan2.Texture;
+                                    }
 									planob.Mass += plan2.Mass;
 									//planob.Radius = (float)Math.Sqrt( Math.Pow(plan2.Radius,2) + Math.Pow(planob.Radius,2));
 									CombVelocity = CombVelocity / planob.Mass;
@@ -501,17 +538,17 @@ namespace AIMIS
 
 						PlanetObject planob = lstPlanets [i];
                        
-                        if (i == 0)
+                        if (planob.Texture > 0)
                         {
                             //Draw planet with texture
-                            GL.BindTexture(TextureTarget.Texture2D, EarthTexture);
+                            GL.BindTexture(TextureTarget.Texture2D, planob.Texture);
                             GL.Enable(EnableCap.Blend);
 
                             GL.Color3(Color.White);
 
                             
 
-                            Matrix4 rotmatrix = Matrix4.CreateFromAxisAngle(new Vector3(0, 0, 1), RotAngle);
+                            Matrix4 rotmatrix = Matrix4.CreateFromAxisAngle(new Vector3(0, 0, 1), planob.RotationAngle);
                             rotmatrix = rotmatrix * Matrix4.CreateTranslation(planob.Position.X, planob.Position.Y, 0);
                             
                             GL.MultMatrix(ref rotmatrix);
@@ -519,8 +556,7 @@ namespace AIMIS
                             //GL.LoadMatrix(ref rotmatrix);
                             //GL.Ortho(-game.Width * ZoomMulti, game.Width * ZoomMulti, -game.Height * ZoomMulti, game.Height * ZoomMulti, 0.0, 4.0);
                             
-
-                            RotAngle -= 0.01f;
+                            planob.RotationAngle += planob.RotationTime;
                             GL.MatrixMode(MatrixMode.Modelview);
 
                             GL.Begin(PrimitiveType.Quads);
