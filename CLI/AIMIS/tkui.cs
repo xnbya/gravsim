@@ -31,7 +31,8 @@ namespace AIMIS
             XmlSerializer xmlser = new XmlSerializer(typeof (List<PlanetObject>));
 
             using(Stream stream = File.Create(filename)) {
-                xmlser.Serialize(stream, lstPlanets);
+                    xmlser.Serialize(stream, lstPlanets);
+              
             }
 
         }
@@ -45,10 +46,29 @@ namespace AIMIS
            {
                lstPlanets = xmlser.Deserialize(stream) as List<PlanetObject>;
            }
+
+            //reset textures
+           foreach (PlanetObject planob in lstPlanets)
+           {
+               planob.Texture = 0;
+           }
             
 
         }
-        
+
+        //Add an object / planet to the simulation
+        public void NewPlanet(float Mass, float PosX, float PosY, float VelX, float VelY, string TextureFilename = null, float Rotation = 0)
+        {
+            tkui.PlanetObject p2 = new tkui.PlanetObject();
+            p2.Mass = Mass;
+            p2.Position = new Vector2(PosX, PosY);
+            p2.Velocity = new Vector2(VelX, VelY);
+            p2.Trails = new List<Vector2>();
+            p2.BitmapFilename = TextureFilename;
+            p2.RotationAngle = 0f;
+            p2.RotationTime = Rotation;
+            lstPlanets.Add(p2);
+        }
 
         //draw a circle on the opentk gamewindow
 		public void DrawCircle (int segments, float xpos, float ypos, float radius)
@@ -107,9 +127,9 @@ namespace AIMIS
                 {
                     if (this.texture > 0)
                         return this.texture;
-                    else if (this.BitmapTexture != null)
+                    else if (this.BitmapFilename != null)
                     {
-                        this.texture = tkui.LoadTexture(this.BitmapTexture);
+                        this.texture = tkui.LoadTexture(new Bitmap(this.BitmapFilename));
                         return this.texture;
                     }
                     else
@@ -121,7 +141,8 @@ namespace AIMIS
                 }
             }
 
-            public Bitmap BitmapTexture;
+            //public Bitmap BitmapTexture;
+            public string BitmapFilename;
 		}
 
         public void ClearTrails()
@@ -188,6 +209,8 @@ namespace AIMIS
 
         //speed
         public int SimulationSpeed = 1;
+
+        //are we 
 
 		public void Main ()
 		{
@@ -297,7 +320,7 @@ namespace AIMIS
                                 plan.Position = MoCinitialvec;
                                 plan.Velocity = (MoCdvec - MoCinitialvec) * 0.05f;
                                 plan.Trails = new List<Vector2>();
-                                plan.BitmapTexture = new Bitmap("ship.png");
+                                //plan.BitmapTexture = new Bitmap("ship.png");
                                 //p2.Radius = 0.005f;
                                 lstPlanets.Add(plan);
 
@@ -468,7 +491,8 @@ namespace AIMIS
 
 								//collision detection, merge objects
 								if (Math.Abs (planob.Position.X - plan2.Position.X) < planob.Radius && Math.Abs (planob.Position.Y - plan2.Position.Y) < planob.Radius) {
-									Vector2 CombVelocity = planob.Velocity * planob.Mass + plan2.Velocity * plan2.Mass;
+								
+                                    Vector2 CombVelocity = planob.Velocity * planob.Mass + plan2.Velocity * plan2.Mass;
                                     //Keep texture of largest object
                                     if (planob.Mass < plan2.Mass)
                                     {
@@ -483,7 +507,7 @@ namespace AIMIS
 									}
 									lstPlanets.RemoveAt (ic);
 									
-									i --;
+									i --; 
 								}
 
 
@@ -556,7 +580,7 @@ namespace AIMIS
                             //GL.LoadMatrix(ref rotmatrix);
                             //GL.Ortho(-game.Width * ZoomMulti, game.Width * ZoomMulti, -game.Height * ZoomMulti, game.Height * ZoomMulti, 0.0, 4.0);
                             
-                            planob.RotationAngle += planob.RotationTime;
+                            planob.RotationAngle += planob.RotationTime * SimulationSpeed;
                             GL.MatrixMode(MatrixMode.Modelview);
 
                             GL.Begin(PrimitiveType.Quads);

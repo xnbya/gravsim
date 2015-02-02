@@ -36,18 +36,7 @@ namespace AIMIS
 
         }
 
-        private void NewPlanet(float Mass, float PosX, float PosY, float VelX, float VelY, Bitmap Texture = null, float Rotation = 0)
-        {
-            tkui.PlanetObject p2 = new tkui.PlanetObject();
-            p2.Mass = Mass;
-            p2.Position = new Vector2(PosX, PosY);
-            p2.Velocity = new Vector2(VelX, VelY);
-            p2.Trails = new List<Vector2>();
-            p2.BitmapTexture = Texture;
-            p2.RotationAngle = 0f;
-            p2.RotationTime = Rotation;
-            MainUIclass.lstPlanets.Add(p2);
-        }
+
 
         private void NewOrbitingPlanet(float Mass, float PosX, float PosY, float OrbitPosX, float OrbitPosY, float OrbitMass)
         {
@@ -82,18 +71,20 @@ namespace AIMIS
             if (rbSimple.Checked)
             {
 
-                NewPlanet(1000f, 0f, 0f, 0f, 0f);
-                NewPlanet(3f, 0f, -3f, -0.0149f, 0f);
-                NewPlanet(4f,0f,5f,0f, 0f);
+                MainUIclass.NewPlanet(1000f, 0f, 0f, 0f, 0f);
+                MainUIclass.NewPlanet(3f, 0f, -3f, -0.0149f, 0f);
+                MainUIclass.NewPlanet(4f, 0f, 5f, 0f, 0f);
            
             }
 
             if (rbEarthOrbit.Checked)
             {
+                frmEarthOrbit formearth = new frmEarthOrbit();
+                formearth.Show();
                 //int Texture = MainUIclass.LoadTexture();
-                NewPlanet(1000f, 0f, 0f, 0f, 0f, new Bitmap("earth.png"), 0.01f);
-                NewPlanet(3f, 0f, -3f, -0.0149f, 0f, new Bitmap("ship.png"));
-                NewPlanet(4f, 0f, 5f, 0f, 0f);
+                MainUIclass.NewPlanet(1000f, 0f, 0f, 0f, 0f,  "earth.png", -0.003f);
+                //NewPlanet(3f, 0f, -3f, -0.0149f, 0f, new Bitmap("ship.png"));
+                //NewPlanet(4f, 0f, 5f, 0f, 0f);
             }
 
 

@@ -36,6 +36,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.nmMoonRadius = new System.Windows.Forms.NumericUpDown();
             this.grpMoon = new System.Windows.Forms.GroupBox();
+            this.lbRadius = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.nmSpeed = new System.Windows.Forms.NumericUpDown();
             this.grpDirection = new System.Windows.Forms.GroupBox();
@@ -44,12 +45,14 @@
             this.btnOK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.grLocation = new System.Windows.Forms.GroupBox();
-            this.nmPosX = new System.Windows.Forms.NumericUpDown();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.nmPosY = new System.Windows.Forms.NumericUpDown();
             this.label8 = new System.Windows.Forms.Label();
-            this.lbRadius = new System.Windows.Forms.Label();
+            this.nmPosY = new System.Windows.Forms.NumericUpDown();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.nmPosX = new System.Windows.Forms.NumericUpDown();
+            this.label9 = new System.Windows.Forms.Label();
+            this.txtTexture = new System.Windows.Forms.TextBox();
+            this.btnLoadTexture = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nmMass)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nmMoonMass)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nmMoonRadius)).BeginInit();
@@ -58,14 +61,14 @@
             this.grpDirection.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmDirectionAngle)).BeginInit();
             this.grLocation.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nmPosX)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nmPosY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmPosX)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(54, 19);
+            this.label1.Location = new System.Drawing.Point(40, 17);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 0;
@@ -73,7 +76,7 @@
             // 
             // nmMass
             // 
-            this.nmMass.Location = new System.Drawing.Point(97, 17);
+            this.nmMass.Location = new System.Drawing.Point(81, 15);
             this.nmMass.Name = "nmMass";
             this.nmMass.Size = new System.Drawing.Size(120, 20);
             this.nmMass.TabIndex = 1;
@@ -142,10 +145,19 @@
             this.grpMoon.TabStop = false;
             this.grpMoon.Text = "Moon";
             // 
+            // lbRadius
+            // 
+            this.lbRadius.AutoSize = true;
+            this.lbRadius.Location = new System.Drawing.Point(14, 86);
+            this.lbRadius.Name = "lbRadius";
+            this.lbRadius.Size = new System.Drawing.Size(117, 13);
+            this.lbRadius.TabIndex = 7;
+            this.lbRadius.Text = "(Radius of planet is XX)";
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(23, 45);
+            this.label4.Location = new System.Drawing.Point(9, 43);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(68, 13);
             this.label4.TabIndex = 8;
@@ -159,7 +171,7 @@
             0,
             0,
             131072});
-            this.nmSpeed.Location = new System.Drawing.Point(97, 43);
+            this.nmSpeed.Location = new System.Drawing.Point(81, 41);
             this.nmSpeed.Name = "nmSpeed";
             this.nmSpeed.Size = new System.Drawing.Size(120, 20);
             this.nmSpeed.TabIndex = 9;
@@ -173,7 +185,7 @@
             // 
             this.grpDirection.Controls.Add(this.label5);
             this.grpDirection.Controls.Add(this.nmDirectionAngle);
-            this.grpDirection.Location = new System.Drawing.Point(12, 76);
+            this.grpDirection.Location = new System.Drawing.Point(12, 98);
             this.grpDirection.Name = "grpDirection";
             this.grpDirection.Size = new System.Drawing.Size(205, 154);
             this.grpDirection.TabIndex = 10;
@@ -215,7 +227,7 @@
             // 
             // btnOK
             // 
-            this.btnOK.Location = new System.Drawing.Point(383, 207);
+            this.btnOK.Location = new System.Drawing.Point(385, 241);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
             this.btnOK.TabIndex = 11;
@@ -225,7 +237,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(302, 207);
+            this.btnCancel.Location = new System.Drawing.Point(304, 241);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 12;
@@ -247,21 +259,21 @@
             this.grLocation.TabStop = false;
             this.grLocation.Text = "Position";
             // 
-            // nmPosX
+            // label8
             // 
-            this.nmPosX.Location = new System.Drawing.Point(29, 19);
-            this.nmPosX.Name = "nmPosX";
-            this.nmPosX.Size = new System.Drawing.Size(79, 20);
-            this.nmPosX.TabIndex = 0;
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(26, 55);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(134, 13);
+            this.label8.TabIndex = 4;
+            this.label8.Text = "(Simulation is currently 5x6)";
             // 
-            // label6
+            // nmPosY
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(6, 21);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(17, 13);
-            this.label6.TabIndex = 1;
-            this.label6.Text = "X:";
+            this.nmPosY.Location = new System.Drawing.Point(150, 19);
+            this.nmPosY.Name = "nmPosY";
+            this.nmPosY.Size = new System.Drawing.Size(79, 20);
+            this.nmPosY.TabIndex = 3;
             // 
             // label7
             // 
@@ -272,36 +284,55 @@
             this.label7.TabIndex = 2;
             this.label7.Text = "Y:";
             // 
-            // nmPosY
+            // label6
             // 
-            this.nmPosY.Location = new System.Drawing.Point(150, 19);
-            this.nmPosY.Name = "nmPosY";
-            this.nmPosY.Size = new System.Drawing.Size(79, 20);
-            this.nmPosY.TabIndex = 3;
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(6, 21);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(17, 13);
+            this.label6.TabIndex = 1;
+            this.label6.Text = "X:";
             // 
-            // label8
+            // nmPosX
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(26, 55);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(134, 13);
-            this.label8.TabIndex = 4;
-            this.label8.Text = "(Simulation is currently 5x6)";
+            this.nmPosX.Location = new System.Drawing.Point(29, 19);
+            this.nmPosX.Name = "nmPosX";
+            this.nmPosX.Size = new System.Drawing.Size(79, 20);
+            this.nmPosX.TabIndex = 0;
             // 
-            // lbRadius
+            // label9
             // 
-            this.lbRadius.AutoSize = true;
-            this.lbRadius.Location = new System.Drawing.Point(14, 86);
-            this.lbRadius.Name = "lbRadius";
-            this.lbRadius.Size = new System.Drawing.Size(117, 13);
-            this.lbRadius.TabIndex = 7;
-            this.lbRadius.Text = "(Radius of planet is XX)";
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(29, 70);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(46, 13);
+            this.label9.TabIndex = 14;
+            this.label9.Text = "Texture:";
+            // 
+            // txtTexture
+            // 
+            this.txtTexture.Location = new System.Drawing.Point(81, 67);
+            this.txtTexture.Name = "txtTexture";
+            this.txtTexture.Size = new System.Drawing.Size(108, 20);
+            this.txtTexture.TabIndex = 15;
+            // 
+            // btnLoadTexture
+            // 
+            this.btnLoadTexture.Location = new System.Drawing.Point(195, 65);
+            this.btnLoadTexture.Name = "btnLoadTexture";
+            this.btnLoadTexture.Size = new System.Drawing.Size(25, 23);
+            this.btnLoadTexture.TabIndex = 16;
+            this.btnLoadTexture.Text = "...";
+            this.btnLoadTexture.UseVisualStyleBackColor = true;
             // 
             // frmNewObjAdv
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(472, 247);
+            this.ClientSize = new System.Drawing.Size(472, 276);
+            this.Controls.Add(this.btnLoadTexture);
+            this.Controls.Add(this.txtTexture);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.grLocation);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
@@ -326,8 +357,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.nmDirectionAngle)).EndInit();
             this.grLocation.ResumeLayout(false);
             this.grLocation.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nmPosX)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nmPosY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmPosX)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -357,5 +388,8 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.NumericUpDown nmPosX;
         private System.Windows.Forms.Label lbRadius;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox txtTexture;
+        private System.Windows.Forms.Button btnLoadTexture;
     }
 }
