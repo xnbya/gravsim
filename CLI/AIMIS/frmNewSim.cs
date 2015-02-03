@@ -80,19 +80,20 @@ namespace AIMIS
             if (rbEarthOrbit.Checked)
             {
                 frmEarthOrbit formearth = new frmEarthOrbit();
+                formearth.MainUIclass = MainUIclass;
+                formearth.thMainUI = thMainUI;
+                formearth.gbvars = gbvars;
                 formearth.Show();
+                this.Hide();
                 //int Texture = MainUIclass.LoadTexture();
+                
                 MainUIclass.NewPlanet(1000f, 0f, 0f, 0f, 0f,  "earth.png", -0.003f);
                 //NewPlanet(3f, 0f, -3f, -0.0149f, 0f, new Bitmap("ship.png"));
                 //NewPlanet(4f, 0f, 5f, 0f, 0f);
             }
 
 
-
-           // System.Threading.Thread newthr = new System.Threading.Thread(MainUIclass.Main);
-           // newthr.Start();
             thMainUI.Start();
-            
 
 
             this.Close();

@@ -69,6 +69,7 @@
             // 
             // nmHeight
             // 
+            this.nmHeight.DecimalPlaces = 2;
             this.nmHeight.Location = new System.Drawing.Point(130, 12);
             this.nmHeight.Name = "nmHeight";
             this.nmHeight.Size = new System.Drawing.Size(120, 20);
@@ -76,6 +77,12 @@
             // 
             // nmSpeed
             // 
+            this.nmSpeed.DecimalPlaces = 2;
+            this.nmSpeed.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
             this.nmSpeed.Location = new System.Drawing.Point(130, 38);
             this.nmSpeed.Name = "nmSpeed";
             this.nmSpeed.Size = new System.Drawing.Size(120, 20);
@@ -96,6 +103,7 @@
             this.btnLaunch.TabIndex = 6;
             this.btnLaunch.Text = "Launch";
             this.btnLaunch.UseVisualStyleBackColor = true;
+            this.btnLaunch.Click += new System.EventHandler(this.btnLaunch_Click);
             // 
             // frmEarthOrbit
             // 
