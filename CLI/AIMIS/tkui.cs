@@ -57,7 +57,7 @@ namespace AIMIS
         }
 
         //Add an object / planet to the simulation
-        public void NewPlanet(float Mass, float PosX, float PosY, float VelX, float VelY, string TextureFilename = null, float Rotation = 0)
+        public void NewPlanet(float Mass, float PosX, float PosY, float VelX, float VelY, string TextureFilename = null, float Rotation = 0, bool Fixed = false)
         {
             tkui.PlanetObject p2 = new tkui.PlanetObject();
             p2.Mass = Mass;
@@ -67,6 +67,7 @@ namespace AIMIS
             p2.BitmapFilename = TextureFilename;
             p2.RotationAngle = 0f;
             p2.RotationTime = Rotation;
+            p2.Fixed = Fixed;
             lstPlanets.Add(p2);
         }
 
@@ -143,6 +144,8 @@ namespace AIMIS
 
             //public Bitmap BitmapTexture;
             public string BitmapFilename;
+            //dont move this object, ie keep it at center for earth sims
+            public bool Fixed;
 		}
 
         public void ClearTrails()
@@ -211,7 +214,7 @@ namespace AIMIS
         public int SimulationSpeed = 1;
 
         //are we 
-
+        [STAThread]
 		public void Main ()
 		{
 
@@ -279,11 +282,18 @@ namespace AIMIS
                                 frmobj.ShowDialog();
                                 if (frmobj.DialogResult == System.Windows.Forms.DialogResult.OK)
                                 {
+
                                     PlanetObject plan = new PlanetObject();
                                     plan.Mass = frmobj.fMass;
                                     plan.Position = MoCinitialvec;
                                     plan.Velocity = new Vector2((float)Math.Cos(frmobj.fAngle) * frmobj.fSpeed, -(float)Math.Sin(frmobj.fAngle) * frmobj.fSpeed);
                                     plan.Trails = new List<Vector2>();
+                                    if (File.Exists(frmobj.stTextureFilename))
+                                    {
+                                        plan.BitmapFilename = frmobj.stTextureFilename;
+                                    }
+                                    plan.RotationAngle = 0f;
+                                    plan.RotationTime = frmobj.fRotation;
                                    
                                     //p2.Radius = 0.005f;
                                     lstPlanets.Add(plan);
@@ -487,7 +497,7 @@ namespace AIMIS
 									+ (float)Math.Pow ((planob.Position.Y - plan2.Position.Y), 2);
 								Vector2 Force = - G * ((planob.Mass * plan2.Mass) / dissqu) * ((planob.Position - plan2.Position) / (float)Math.Sqrt (dissqu));
 								Vector2 Acceleration = Force / planob.Mass;
-								planob.Velocity += Acceleration; 
+                                planob.Velocity += Acceleration; 
 
 								//collision detection, merge objects
 								if (Math.Abs (planob.Position.X - plan2.Position.X) < planob.Radius && Math.Abs (planob.Position.Y - plan2.Position.Y) < planob.Radius) {

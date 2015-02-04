@@ -18,7 +18,8 @@ namespace AIMIS
         public float fMoonMass;
         public float fMoonDistance;
         public float fSpeed;
-
+        public string stTextureFilename;
+        public float fRotation;
 
         public frmNewObjAdv()
         {
@@ -61,6 +62,9 @@ namespace AIMIS
             fMoonDistance = (float)nmMoonRadius.Value;
             blAddMoon = ckAddMoon.Checked;
             fSpeed = (float)nmSpeed.Value;
+            stTextureFilename = txtTexture.Text;
+            fRotation = (float)nmRotation.Value;
+
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.Close();
         }
@@ -74,6 +78,16 @@ namespace AIMIS
         {
             lbRadius.Text = "(Radius of main planet is " + Decimal.Round((decimal)Math.Pow(((double)nmMass.Value * 3) / (Math.PI * 4 * 8000), (double)1 / 3), 2).ToString() + " )";
         
+        }
+
+        private void btnLoadTexture_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.ShowDialog();
+        }
+
+        private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
+        {
+            txtTexture.Text = openFileDialog1.FileName;
         }
     }
 }

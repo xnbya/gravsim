@@ -53,6 +53,9 @@
             this.label9 = new System.Windows.Forms.Label();
             this.txtTexture = new System.Windows.Forms.TextBox();
             this.btnLoadTexture = new System.Windows.Forms.Button();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.label10 = new System.Windows.Forms.Label();
+            this.nmRotation = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.nmMass)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nmMoonMass)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nmMoonRadius)).BeginInit();
@@ -63,6 +66,7 @@
             this.grLocation.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmPosY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nmPosX)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmRotation)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -138,7 +142,7 @@
             this.grpMoon.Controls.Add(this.ckAddMoon);
             this.grpMoon.Controls.Add(this.label3);
             this.grpMoon.Controls.Add(this.nmMoonMass);
-            this.grpMoon.Location = new System.Drawing.Point(223, 98);
+            this.grpMoon.Location = new System.Drawing.Point(225, 132);
             this.grpMoon.Name = "grpMoon";
             this.grpMoon.Size = new System.Drawing.Size(235, 103);
             this.grpMoon.TabIndex = 7;
@@ -185,7 +189,7 @@
             // 
             this.grpDirection.Controls.Add(this.label5);
             this.grpDirection.Controls.Add(this.nmDirectionAngle);
-            this.grpDirection.Location = new System.Drawing.Point(12, 98);
+            this.grpDirection.Location = new System.Drawing.Point(12, 143);
             this.grpDirection.Name = "grpDirection";
             this.grpDirection.Size = new System.Drawing.Size(205, 154);
             this.grpDirection.TabIndex = 10;
@@ -324,12 +328,42 @@
             this.btnLoadTexture.TabIndex = 16;
             this.btnLoadTexture.Text = "...";
             this.btnLoadTexture.UseVisualStyleBackColor = true;
+            this.btnLoadTexture.Click += new System.EventHandler(this.btnLoadTexture_Click);
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.Filter = "PNG images|*.png";
+            this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(27, 95);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(50, 13);
+            this.label10.TabIndex = 17;
+            this.label10.Text = "Rotation:";
+            // 
+            // nmRotation
+            // 
+            this.nmRotation.DecimalPlaces = 2;
+            this.nmRotation.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.nmRotation.Location = new System.Drawing.Point(81, 93);
+            this.nmRotation.Name = "nmRotation";
+            this.nmRotation.Size = new System.Drawing.Size(120, 20);
+            this.nmRotation.TabIndex = 18;
             // 
             // frmNewObjAdv
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(472, 276);
+            this.ClientSize = new System.Drawing.Size(472, 311);
+            this.Controls.Add(this.nmRotation);
+            this.Controls.Add(this.label10);
             this.Controls.Add(this.btnLoadTexture);
             this.Controls.Add(this.txtTexture);
             this.Controls.Add(this.label9);
@@ -359,6 +393,7 @@
             this.grLocation.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmPosY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nmPosX)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nmRotation)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -391,5 +426,8 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox txtTexture;
         private System.Windows.Forms.Button btnLoadTexture;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.NumericUpDown nmRotation;
     }
 }

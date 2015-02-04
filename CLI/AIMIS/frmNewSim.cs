@@ -87,7 +87,7 @@ namespace AIMIS
                 this.Hide();
                 //int Texture = MainUIclass.LoadTexture();
                 
-                MainUIclass.NewPlanet(1000f, 0f, 0f, 0f, 0f,  "earth.png", -0.003f);
+                MainUIclass.NewPlanet(1000f, 0f, 0f, 0f, 0f,  "earth.png", -0.003f, true);
                 //NewPlanet(3f, 0f, -3f, -0.0149f, 0f, new Bitmap("ship.png"));
                 //NewPlanet(4f, 0f, 5f, 0f, 0f);
             }

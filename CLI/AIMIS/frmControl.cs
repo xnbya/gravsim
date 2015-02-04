@@ -83,6 +83,7 @@ namespace AIMIS
 
                 //setup thread
                 thMainUI = new System.Threading.Thread(MainUIclass.Main);
+                thMainUI.SetApartmentState(System.Threading.ApartmentState.STA);
 
                 //load form for ui
                 frmNewSim NewSimform = new frmNewSim();
