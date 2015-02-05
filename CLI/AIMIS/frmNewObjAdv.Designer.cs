@@ -44,18 +44,13 @@
             this.nmDirectionAngle = new System.Windows.Forms.NumericUpDown();
             this.btnOK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.grLocation = new System.Windows.Forms.GroupBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.nmPosY = new System.Windows.Forms.NumericUpDown();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.nmPosX = new System.Windows.Forms.NumericUpDown();
             this.label9 = new System.Windows.Forms.Label();
             this.txtTexture = new System.Windows.Forms.TextBox();
             this.btnLoadTexture = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.label10 = new System.Windows.Forms.Label();
             this.nmRotation = new System.Windows.Forms.NumericUpDown();
+            this.chFixed = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.nmMass)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nmMoonMass)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nmMoonRadius)).BeginInit();
@@ -63,9 +58,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.nmSpeed)).BeginInit();
             this.grpDirection.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmDirectionAngle)).BeginInit();
-            this.grLocation.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nmPosY)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nmPosX)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nmRotation)).BeginInit();
             this.SuspendLayout();
             // 
@@ -81,8 +73,13 @@
             // nmMass
             // 
             this.nmMass.Location = new System.Drawing.Point(81, 15);
+            this.nmMass.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
             this.nmMass.Name = "nmMass";
-            this.nmMass.Size = new System.Drawing.Size(120, 20);
+            this.nmMass.Size = new System.Drawing.Size(136, 20);
             this.nmMass.TabIndex = 1;
             this.nmMass.ValueChanged += new System.EventHandler(this.nmMass_ValueChanged);
             // 
@@ -142,7 +139,7 @@
             this.grpMoon.Controls.Add(this.ckAddMoon);
             this.grpMoon.Controls.Add(this.label3);
             this.grpMoon.Controls.Add(this.nmMoonMass);
-            this.grpMoon.Location = new System.Drawing.Point(225, 132);
+            this.grpMoon.Location = new System.Drawing.Point(1, 142);
             this.grpMoon.Name = "grpMoon";
             this.grpMoon.Size = new System.Drawing.Size(235, 103);
             this.grpMoon.TabIndex = 7;
@@ -177,10 +174,10 @@
             131072});
             this.nmSpeed.Location = new System.Drawing.Point(81, 41);
             this.nmSpeed.Name = "nmSpeed";
-            this.nmSpeed.Size = new System.Drawing.Size(120, 20);
+            this.nmSpeed.Size = new System.Drawing.Size(136, 20);
             this.nmSpeed.TabIndex = 9;
             this.nmSpeed.Value = new decimal(new int[] {
-            5,
+            1,
             0,
             0,
             131072});
@@ -189,7 +186,7 @@
             // 
             this.grpDirection.Controls.Add(this.label5);
             this.grpDirection.Controls.Add(this.nmDirectionAngle);
-            this.grpDirection.Location = new System.Drawing.Point(12, 143);
+            this.grpDirection.Location = new System.Drawing.Point(242, 15);
             this.grpDirection.Name = "grpDirection";
             this.grpDirection.Size = new System.Drawing.Size(205, 154);
             this.grpDirection.TabIndex = 10;
@@ -231,7 +228,7 @@
             // 
             // btnOK
             // 
-            this.btnOK.Location = new System.Drawing.Point(385, 241);
+            this.btnOK.Location = new System.Drawing.Point(371, 218);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 23);
             this.btnOK.TabIndex = 11;
@@ -241,68 +238,13 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(304, 241);
+            this.btnCancel.Location = new System.Drawing.Point(290, 218);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 12;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
-            // grLocation
-            // 
-            this.grLocation.Controls.Add(this.label8);
-            this.grLocation.Controls.Add(this.nmPosY);
-            this.grLocation.Controls.Add(this.label7);
-            this.grLocation.Controls.Add(this.label6);
-            this.grLocation.Controls.Add(this.nmPosX);
-            this.grLocation.Location = new System.Drawing.Point(223, 12);
-            this.grLocation.Name = "grLocation";
-            this.grLocation.Size = new System.Drawing.Size(235, 80);
-            this.grLocation.TabIndex = 13;
-            this.grLocation.TabStop = false;
-            this.grLocation.Text = "Position";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(26, 55);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(134, 13);
-            this.label8.TabIndex = 4;
-            this.label8.Text = "(Simulation is currently 5x6)";
-            // 
-            // nmPosY
-            // 
-            this.nmPosY.Location = new System.Drawing.Point(150, 19);
-            this.nmPosY.Name = "nmPosY";
-            this.nmPosY.Size = new System.Drawing.Size(79, 20);
-            this.nmPosY.TabIndex = 3;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(127, 21);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(17, 13);
-            this.label7.TabIndex = 2;
-            this.label7.Text = "Y:";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(6, 21);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(17, 13);
-            this.label6.TabIndex = 1;
-            this.label6.Text = "X:";
-            // 
-            // nmPosX
-            // 
-            this.nmPosX.Location = new System.Drawing.Point(29, 19);
-            this.nmPosX.Name = "nmPosX";
-            this.nmPosX.Size = new System.Drawing.Size(79, 20);
-            this.nmPosX.TabIndex = 0;
             // 
             // label9
             // 
@@ -322,9 +264,9 @@
             // 
             // btnLoadTexture
             // 
-            this.btnLoadTexture.Location = new System.Drawing.Point(195, 65);
+            this.btnLoadTexture.Location = new System.Drawing.Point(192, 67);
             this.btnLoadTexture.Name = "btnLoadTexture";
-            this.btnLoadTexture.Size = new System.Drawing.Size(25, 23);
+            this.btnLoadTexture.Size = new System.Drawing.Size(25, 20);
             this.btnLoadTexture.TabIndex = 16;
             this.btnLoadTexture.Text = "...";
             this.btnLoadTexture.UseVisualStyleBackColor = true;
@@ -332,7 +274,7 @@
             // 
             // openFileDialog1
             // 
-            this.openFileDialog1.Filter = "PNG images|*.png";
+            this.openFileDialog1.Filter = "PNG images|*.png|JPEG Image|*.jpg";
             this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
             // 
             // label10
@@ -354,20 +296,30 @@
             131072});
             this.nmRotation.Location = new System.Drawing.Point(81, 93);
             this.nmRotation.Name = "nmRotation";
-            this.nmRotation.Size = new System.Drawing.Size(120, 20);
+            this.nmRotation.Size = new System.Drawing.Size(136, 20);
             this.nmRotation.TabIndex = 18;
+            // 
+            // chFixed
+            // 
+            this.chFixed.AutoSize = true;
+            this.chFixed.Location = new System.Drawing.Point(81, 119);
+            this.chFixed.Name = "chFixed";
+            this.chFixed.Size = new System.Drawing.Size(83, 17);
+            this.chFixed.TabIndex = 2;
+            this.chFixed.Text = "Fixed object";
+            this.chFixed.UseVisualStyleBackColor = true;
             // 
             // frmNewObjAdv
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(472, 311);
+            this.ClientSize = new System.Drawing.Size(458, 261);
+            this.Controls.Add(this.chFixed);
             this.Controls.Add(this.nmRotation);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.btnLoadTexture);
             this.Controls.Add(this.txtTexture);
             this.Controls.Add(this.label9);
-            this.Controls.Add(this.grLocation);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.grpDirection);
@@ -389,10 +341,6 @@
             this.grpDirection.ResumeLayout(false);
             this.grpDirection.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmDirectionAngle)).EndInit();
-            this.grLocation.ResumeLayout(false);
-            this.grLocation.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nmPosY)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nmPosX)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nmRotation)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -416,12 +364,6 @@
         private System.Windows.Forms.NumericUpDown nmDirectionAngle;
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.GroupBox grLocation;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.NumericUpDown nmPosY;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.NumericUpDown nmPosX;
         private System.Windows.Forms.Label lbRadius;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox txtTexture;
@@ -429,5 +371,6 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.NumericUpDown nmRotation;
+        private System.Windows.Forms.CheckBox chFixed;
     }
 }

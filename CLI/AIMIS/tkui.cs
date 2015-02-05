@@ -294,6 +294,7 @@ namespace AIMIS
                                     }
                                     plan.RotationAngle = 0f;
                                     plan.RotationTime = frmobj.fRotation;
+                                    plan.Fixed = frmobj.blFixed;
                                    
                                     //p2.Radius = 0.005f;
                                     lstPlanets.Add(plan);

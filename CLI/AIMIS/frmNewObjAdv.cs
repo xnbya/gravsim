@@ -20,6 +20,7 @@ namespace AIMIS
         public float fSpeed;
         public string stTextureFilename;
         public float fRotation;
+        public bool blFixed;
 
         public frmNewObjAdv()
         {
@@ -61,9 +62,10 @@ namespace AIMIS
             fMoonMass = (float)nmMoonMass.Value;
             fMoonDistance = (float)nmMoonRadius.Value;
             blAddMoon = ckAddMoon.Checked;
-            fSpeed = (float)nmSpeed.Value;
+            fSpeed = (float)nmSpeed.Value / 1000f;
             stTextureFilename = txtTexture.Text;
             fRotation = (float)nmRotation.Value;
+            blFixed = chFixed.Checked;
 
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.Close();

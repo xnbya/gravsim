@@ -114,10 +114,15 @@ namespace AIMIS
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+
+
             if (MainUIclass == null)
                 MessageBox.Show("Please start a simulation", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else
             {
+                if (MessageBox.Show("Clear trails when saving. This will result in a smaller file size.", "Clear trails?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
+                    MainUIclass.ClearTrails();
+                
                 SimSpeed = MainUIclass.SimulationSpeed;
                 MainUIclass.SimulationSpeed = 0;
                 saveFileDialog1.ShowDialog();
