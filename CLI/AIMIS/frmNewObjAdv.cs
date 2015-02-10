@@ -27,28 +27,7 @@ namespace AIMIS
             InitializeComponent();
 
         }
-
-        private void grpDirection_Paint(object sender, PaintEventArgs e)
-        {
-            //draw the direction line
-            //center 120,90
-            //length 50
-            Pen pen = new Pen(Color.Red);
-            e.Graphics.DrawEllipse(pen, 70, 40, 100, 100);
-
-            e.Graphics.DrawLine(pen, 120, 90,  120 + (float)Math.Cos(fAngle) * 50, 90 + (float)Math.Sin(fAngle) * 50);
-        }
-
-        private void nmDirectionAngle_ValueChanged(object sender, EventArgs e)
-        {
-            if (nmDirectionAngle.Value == 360)
-                nmDirectionAngle.Value = 0;
-            if (nmDirectionAngle.Value == -1)
-                nmDirectionAngle.Value = 350;
-
-            fAngle = ((float)nmDirectionAngle.Value * (float)Math.PI) / 180;
-            grpDirection.Refresh();
-        }
+        
 
         private void frmNewObjAdv_Load(object sender, EventArgs e)
         {
@@ -58,6 +37,7 @@ namespace AIMIS
 
         private void btnOK_Click(object sender, EventArgs e)
         {
+            fAngle = ctlDirection1.fAngle;
             fMass = (float)nmMass.Value;
             fMoonMass = (float)nmMoonMass.Value;
             fMoonDistance = (float)nmMoonRadius.Value;

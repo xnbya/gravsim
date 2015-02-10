@@ -36,13 +36,7 @@ namespace AIMIS
 
         }
 
-
-
-        private void NewOrbitingPlanet(float Mass, float PosX, float PosY, float OrbitPosX, float OrbitPosY, float OrbitMass)
-        {
-           // float Speed = Math.Sqrt();
-        }
-
+        
         private void btnLaunch_Click(object sender, EventArgs e)
         {
             gbvars.NewObjectMass = 5f;
@@ -87,7 +81,14 @@ namespace AIMIS
                 this.Hide();
                 //int Texture = MainUIclass.LoadTexture();
                 
-                MainUIclass.NewPlanet(1000f, 0f, 0f, 0f, 0f,  "earth.png", -0.003f, true);
+                //Mass in x10^20 kg
+                MainUIclass.NewPlanet(59720f, 0f, 0f, 0f, 0f,  "earth.png", -0.003f, true);
+                //radius in MM
+                MainUIclass.lstPlanets[0].Radius = 6.371f;
+
+                //ISS test
+
+
                 //NewPlanet(3f, 0f, -3f, -0.0149f, 0f, new Bitmap("ship.png"));
                 //NewPlanet(4f, 0f, 5f, 0f, 0f);
             }

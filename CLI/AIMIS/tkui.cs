@@ -91,6 +91,9 @@ namespace AIMIS
 		{
             
 			private float mass;
+
+            //do we calc radius based on mass?
+            private bool calcradius = true;
             
 			private float radius;
             //mass
@@ -100,7 +103,8 @@ namespace AIMIS
 				}
 				set {
 					this.mass = value;
-					this.radius = (float)Math.Pow ((value * 3) / (Math.PI * 4 * 8000), (double)1 / 3);
+                    if(calcradius)
+					    this.radius = (float)Math.Pow ((value * 3) / (Math.PI * 4 * 8000), (double)1 / 3);
 				}
 			}
             //radius calculated from mass
@@ -108,6 +112,10 @@ namespace AIMIS
 				get {
 					return this.radius;
 				}
+                set
+                {
+                    this.radius = value;
+                }
 			}
 
             //position and movement
@@ -494,28 +502,38 @@ namespace AIMIS
 							if (plan2.Position != planob.Position) {
 
 								//calculate force with vectors
-								float dissqu = (float)Math.Pow ((planob.Position.X - plan2.Position.X), 2)
-									+ (float)Math.Pow ((planob.Position.Y - plan2.Position.Y), 2);
-								Vector2 Force = - G * ((planob.Mass * plan2.Mass) / dissqu) * ((planob.Position - plan2.Position) / (float)Math.Sqrt (dissqu));
-								Vector2 Acceleration = Force / planob.Mass;
-                                planob.Velocity += Acceleration; 
+                                //Skip this if we have a 'fixed' object
+                                if (planob.Fixed != true)
+                                {
+                                    float dissqu = (float)Math.Pow((planob.Position.X - plan2.Position.X), 2)
+                                        + (float)Math.Pow((planob.Position.Y - plan2.Position.Y), 2);
+                                    Vector2 Force = -G * ((planob.Mass * plan2.Mass) / dissqu) * ((planob.Position - plan2.Position) / (float)Math.Sqrt(dissqu));
+                                    Vector2 Acceleration = Force / planob.Mass;
+                                    planob.Velocity += Acceleration;
+                                }
 
 								//collision detection, merge objects
-								if (Math.Abs (planob.Position.X - plan2.Position.X) < planob.Radius && Math.Abs (planob.Position.Y - plan2.Position.Y) < planob.Radius) {
-								
-                                    Vector2 CombVelocity = planob.Velocity * planob.Mass + plan2.Velocity * plan2.Mass;
-                                    //Keep texture of largest object
-                                    if (planob.Mass < plan2.Mass)
-                                    {
-                                        planob.Texture = plan2.Texture;
-                                    }
-									planob.Mass += plan2.Mass;
-									//planob.Radius = (float)Math.Sqrt( Math.Pow(plan2.Radius,2) + Math.Pow(planob.Radius,2));
-									CombVelocity = CombVelocity / planob.Mass;
-									planob.Velocity = CombVelocity;
-									if (!gbvars.ShortTrails) {
-										lstTrails.Add (plan2.Trails);
-									}
+                                //check if they overlap, and if we have a fixed object
+								if (Math.Abs (planob.Position.X - plan2.Position.X) < planob.Radius && 
+                                    Math.Abs (planob.Position.Y - plan2.Position.Y) < planob.Radius) {
+
+                                        if (plan2.Fixed)
+                                        {
+                                            planob = plan2;
+                                        }
+                                        if (planob.Fixed != true) { 
+
+                                            Vector2 CombVelocity = planob.Velocity * planob.Mass + plan2.Velocity * plan2.Mass;
+                                            //Keep texture of largest object
+                                            if (planob.Mass < plan2.Mass)
+                                                planob.Texture = plan2.Texture;
+                                    
+									        planob.Mass += plan2.Mass;
+									        //planob.Radius = (float)Math.Sqrt( Math.Pow(plan2.Radius,2) + Math.Pow(planob.Radius,2));
+									        CombVelocity = CombVelocity / planob.Mass;    
+                                        }
+									lstTrails.Add (plan2.Trails);
+									
 									lstPlanets.RemoveAt (ic);
 									
 									i --; 
@@ -658,7 +676,18 @@ namespace AIMIS
                         DrawCircle(30, MoCinitialvec.X, MoCinitialvec.Y, 0.1f);
                     }
 
-
+                    //Draw lines for geostationary simulation
+                    if (gbvars.blGeoStat && lstPlanets.Count > 1)
+                    {
+                        for (int i = 1; i < lstPlanets.Count; i++)
+                        {
+                            GL.Begin(PrimitiveType.Lines);
+                            GL.Color3(Color.Aqua);
+                            GL.Vertex2(lstPlanets[0].Position);
+                            GL.Vertex2(lstPlanets[i].Position);
+                            GL.End();
+                        }
+                    }
 
 
                     Console.WriteLine(game.RenderFrequency);

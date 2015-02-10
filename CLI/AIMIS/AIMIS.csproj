@@ -44,6 +44,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ctlDirection.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ctlDirection.Designer.cs">
+      <DependentUpon>ctlDirection.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmControl.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -85,6 +91,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="ctlDirection.resx">
+      <DependentUpon>ctlDirection.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmControl.resx">
       <DependentUpon>frmControl.cs</DependentUpon>
     </EmbeddedResource>

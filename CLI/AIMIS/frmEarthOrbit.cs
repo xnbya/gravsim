@@ -22,7 +22,17 @@ namespace AIMIS
 
         private void btnLaunch_Click(object sender, EventArgs e)
         {
-            MainUIclass.NewPlanet(5f, 0f, (float)nmHeight.Value, (float)nmSpeed.Value, 0f);
+            MainUIclass.NewPlanet(5f, 0f, (float)nmHeight.Value, (float)nmSpeed.Value / 10, 0f);
+        }
+
+        private void frmEarthOrbit_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            MainUIclass.lstPlanets.RemoveRange(1, MainUIclass.lstPlanets.Count - 1);
         }
     }
 }

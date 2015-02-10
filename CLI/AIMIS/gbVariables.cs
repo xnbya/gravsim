@@ -41,6 +41,9 @@ namespace AIMIS
         //add new object advanced option
         public bool blAddObjAdvanced = false;
 
+        //Draw lines for showing geostyationary orbit?
+        public bool blGeoStat = true;
+
 
     }
 }

@@ -39,9 +39,6 @@
             this.lbRadius = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.nmSpeed = new System.Windows.Forms.NumericUpDown();
-            this.grpDirection = new System.Windows.Forms.GroupBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.nmDirectionAngle = new System.Windows.Forms.NumericUpDown();
             this.btnOK = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
@@ -51,13 +48,12 @@
             this.label10 = new System.Windows.Forms.Label();
             this.nmRotation = new System.Windows.Forms.NumericUpDown();
             this.chFixed = new System.Windows.Forms.CheckBox();
+            this.ctlDirection1 = new AIMIS.ctlDirection();
             ((System.ComponentModel.ISupportInitialize)(this.nmMass)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nmMoonMass)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nmMoonRadius)).BeginInit();
             this.grpMoon.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmSpeed)).BeginInit();
-            this.grpDirection.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nmDirectionAngle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nmRotation)).BeginInit();
             this.SuspendLayout();
             // 
@@ -166,65 +162,21 @@
             // 
             // nmSpeed
             // 
-            this.nmSpeed.DecimalPlaces = 3;
+            this.nmSpeed.DecimalPlaces = 2;
             this.nmSpeed.Increment = new decimal(new int[] {
-            1,
+            5,
             0,
             0,
-            131072});
+            65536});
             this.nmSpeed.Location = new System.Drawing.Point(81, 41);
             this.nmSpeed.Name = "nmSpeed";
             this.nmSpeed.Size = new System.Drawing.Size(136, 20);
             this.nmSpeed.TabIndex = 9;
             this.nmSpeed.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            131072});
-            // 
-            // grpDirection
-            // 
-            this.grpDirection.Controls.Add(this.label5);
-            this.grpDirection.Controls.Add(this.nmDirectionAngle);
-            this.grpDirection.Location = new System.Drawing.Point(242, 15);
-            this.grpDirection.Name = "grpDirection";
-            this.grpDirection.Size = new System.Drawing.Size(205, 154);
-            this.grpDirection.TabIndex = 10;
-            this.grpDirection.TabStop = false;
-            this.grpDirection.Text = "Direction";
-            this.grpDirection.Paint += new System.Windows.Forms.PaintEventHandler(this.grpDirection_Paint);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(14, 17);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(37, 13);
-            this.label5.TabIndex = 1;
-            this.label5.Text = "Angle:";
-            // 
-            // nmDirectionAngle
-            // 
-            this.nmDirectionAngle.Increment = new decimal(new int[] {
-            10,
+            5,
             0,
             0,
             0});
-            this.nmDirectionAngle.Location = new System.Drawing.Point(57, 15);
-            this.nmDirectionAngle.Maximum = new decimal(new int[] {
-            360,
-            0,
-            0,
-            0});
-            this.nmDirectionAngle.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            -2147483648});
-            this.nmDirectionAngle.Name = "nmDirectionAngle";
-            this.nmDirectionAngle.Size = new System.Drawing.Size(120, 20);
-            this.nmDirectionAngle.TabIndex = 0;
-            this.nmDirectionAngle.ValueChanged += new System.EventHandler(this.nmDirectionAngle_ValueChanged);
             // 
             // btnOK
             // 
@@ -309,11 +261,19 @@
             this.chFixed.Text = "Fixed object";
             this.chFixed.UseVisualStyleBackColor = true;
             // 
+            // ctlDirection1
+            // 
+            this.ctlDirection1.Location = new System.Drawing.Point(242, 12);
+            this.ctlDirection1.Name = "ctlDirection1";
+            this.ctlDirection1.Size = new System.Drawing.Size(215, 163);
+            this.ctlDirection1.TabIndex = 19;
+            // 
             // frmNewObjAdv
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(458, 261);
+            this.Controls.Add(this.ctlDirection1);
             this.Controls.Add(this.chFixed);
             this.Controls.Add(this.nmRotation);
             this.Controls.Add(this.label10);
@@ -322,7 +282,6 @@
             this.Controls.Add(this.label9);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOK);
-            this.Controls.Add(this.grpDirection);
             this.Controls.Add(this.nmSpeed);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.grpMoon);
@@ -338,9 +297,6 @@
             this.grpMoon.ResumeLayout(false);
             this.grpMoon.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmSpeed)).EndInit();
-            this.grpDirection.ResumeLayout(false);
-            this.grpDirection.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nmDirectionAngle)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nmRotation)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -359,9 +315,6 @@
         private System.Windows.Forms.GroupBox grpMoon;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.NumericUpDown nmSpeed;
-        private System.Windows.Forms.GroupBox grpDirection;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.NumericUpDown nmDirectionAngle;
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Label lbRadius;
@@ -372,5 +325,6 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.NumericUpDown nmRotation;
         private System.Windows.Forms.CheckBox chFixed;
+        private ctlDirection ctlDirection1;
     }
 }

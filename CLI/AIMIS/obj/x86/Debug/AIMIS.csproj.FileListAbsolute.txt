@@ -38,3 +38,4 @@ N:\Project\gravsim\CLI\AIMIS\obj\x86\Debug\AIMIS.frmNewObjAdv.resources
 N:\Project\gravsim\CLI\AIMIS\obj\x86\Debug\AIMIS.frmNewSim.resources
 N:\Project\gravsim\CLI\AIMIS\obj\x86\Debug\AIMIS.csproj.GenerateResource.Cache
 N:\Project\gravsim\CLI\AIMIS\bin\Debug\ship.png
+N:\Project\gravsim\CLI\AIMIS\obj\x86\Debug\AIMIS.ctlDirection.resources

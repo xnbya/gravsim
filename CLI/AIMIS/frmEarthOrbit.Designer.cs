@@ -30,14 +30,13 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.nmHeight = new System.Windows.Forms.NumericUpDown();
             this.nmSpeed = new System.Windows.Forms.NumericUpDown();
-            this.nmDirection = new System.Windows.Forms.NumericUpDown();
             this.btnLaunch = new System.Windows.Forms.Button();
+            this.ctlDirection1 = new AIMIS.ctlDirection();
+            this.btnClear = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nmHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nmSpeed)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nmDirection)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -57,15 +56,6 @@
             this.label2.Size = new System.Drawing.Size(41, 13);
             this.label2.TabIndex = 1;
             this.label2.Text = "Speed:";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(72, 66);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(52, 13);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Direction:";
             // 
             // nmHeight
             // 
@@ -88,16 +78,9 @@
             this.nmSpeed.Size = new System.Drawing.Size(120, 20);
             this.nmSpeed.TabIndex = 4;
             // 
-            // nmDirection
-            // 
-            this.nmDirection.Location = new System.Drawing.Point(130, 64);
-            this.nmDirection.Name = "nmDirection";
-            this.nmDirection.Size = new System.Drawing.Size(120, 20);
-            this.nmDirection.TabIndex = 5;
-            // 
             // btnLaunch
             // 
-            this.btnLaunch.Location = new System.Drawing.Point(175, 90);
+            this.btnLaunch.Location = new System.Drawing.Point(165, 233);
             this.btnLaunch.Name = "btnLaunch";
             this.btnLaunch.Size = new System.Drawing.Size(75, 23);
             this.btnLaunch.TabIndex = 6;
@@ -105,23 +88,40 @@
             this.btnLaunch.UseVisualStyleBackColor = true;
             this.btnLaunch.Click += new System.EventHandler(this.btnLaunch_Click);
             // 
+            // ctlDirection1
+            // 
+            this.ctlDirection1.Location = new System.Drawing.Point(35, 64);
+            this.ctlDirection1.Name = "ctlDirection1";
+            this.ctlDirection1.Size = new System.Drawing.Size(215, 163);
+            this.ctlDirection1.TabIndex = 7;
+            // 
+            // btnClear
+            // 
+            this.btnClear.Location = new System.Drawing.Point(86, 233);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(75, 23);
+            this.btnClear.TabIndex = 8;
+            this.btnClear.Text = "Clear";
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            // 
             // frmEarthOrbit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(263, 134);
+            this.ClientSize = new System.Drawing.Size(263, 274);
+            this.Controls.Add(this.btnClear);
+            this.Controls.Add(this.ctlDirection1);
             this.Controls.Add(this.btnLaunch);
-            this.Controls.Add(this.nmDirection);
             this.Controls.Add(this.nmSpeed);
             this.Controls.Add(this.nmHeight);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "frmEarthOrbit";
-            this.Text = "frmEarthOrbit";
+            this.Text = "Orbit Simulator";
+            this.Load += new System.EventHandler(this.frmEarthOrbit_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nmHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nmSpeed)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nmDirection)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -131,10 +131,10 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.NumericUpDown nmHeight;
         private System.Windows.Forms.NumericUpDown nmSpeed;
-        private System.Windows.Forms.NumericUpDown nmDirection;
         private System.Windows.Forms.Button btnLaunch;
+        private ctlDirection ctlDirection1;
+        private System.Windows.Forms.Button btnClear;
     }
 }
