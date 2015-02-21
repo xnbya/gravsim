@@ -120,6 +120,7 @@
             this.rkbSpeed.Name = "rkbSpeed";
             this.rkbSpeed.Size = new System.Drawing.Size(339, 45);
             this.rkbSpeed.TabIndex = 1;
+            this.rkbSpeed.Value = 20;
             this.rkbSpeed.Scroll += new System.EventHandler(this.rkbSpeed_Scroll);
             // 
             // label1

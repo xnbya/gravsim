@@ -219,7 +219,7 @@ namespace AIMIS
 
 
         //speed
-        public int SimulationSpeed = 1;
+        public int SimulationSpeed = 20;
 
         //are we 
         [STAThread]
@@ -447,6 +447,8 @@ namespace AIMIS
 
 
                 float G = gbvars.G;
+
+                int SimulationSlowDownStep = 0;
                 
 				//Vector2 velocity = new Vector2 (0f, 0f);
 				game.RenderFrame += (sender, e) =>
@@ -476,8 +478,19 @@ namespace AIMIS
 					GL.LoadMatrix (ref matrix);
 					GL.Ortho (-game.Width * ZoomMulti, game.Width * ZoomMulti, -game.Height * ZoomMulti, game.Height * ZoomMulti, 0.0, 4.0);
 
-					//speedup
-					for(int zx = 0; zx < SimulationSpeed; zx ++) {
+					//speedup / slowdown
+                    //slowdown?
+                    if (SimulationSpeed < 20)
+                    {
+                        SimulationSlowDownStep += SimulationSpeed;
+                        if (SimulationSlowDownStep > 20)
+                            SimulationSlowDownStep = 0;
+                    }
+                    else
+                        SimulationSlowDownStep = 0;
+                        
+
+					for(int zx = 20; (zx < SimulationSpeed || zx == 20) && SimulationSlowDownStep == 0; zx ++) {
 
                         //keep list of speeds for graphs
                         if (lstPlanets.Count > gbvars.intObjectToTrack)
@@ -512,10 +525,13 @@ namespace AIMIS
                                     planob.Velocity += Acceleration;
                                 }
 
+                                //spin a planet, but only do it if we have a texture, otherwise its pointless
+                                if(planob.Texture > 0)
+                                    planob.RotationAngle += planob.RotationTime * SimulationSpeed;
+
 								//collision detection, merge objects
                                 //check if they overlap, and if we have a fixed object
-								if (Math.Abs (planob.Position.X - plan2.Position.X) < planob.Radius && 
-                                    Math.Abs (planob.Position.Y - plan2.Position.Y) < planob.Radius) {
+                                if((planob.Position - plan2.Position).Length < planob.Radius) {
 
                                         if (plan2.Fixed)
                                         {
@@ -549,33 +565,40 @@ namespace AIMIS
 
 
 
-					//draw
+					
 
-					GL.Color3 (Color.DarkRed);
+					    foreach (PlanetObject planob in lstPlanets) {
+                            //add a 'step' to the planet
+                            planob.Position += planob.Velocity;
 
-					//draw vector [dead] trails
+                            //add the trails
+                            //are we doing short trails?
+						    if(gbvars.ShortTrails && planob.Trails.Count > 500 ) {
+							    planob.Trails.RemoveAt(0);
+						    }   
+                            
+                            planob.Trails.Add(planob.Position);
+					    }
+					}
+
+
+                    //draw
+
+                    GL.Color3(Color.DarkRed);
+
+                    //draw vector [dead] trails
                     if (gbvars.ShowTrails)
                     {
-						foreach (List<Vector2> TrailL in lstTrails) {
-							GL.Begin (PrimitiveType.LineStrip);	
-							foreach (Vector2 pos in TrailL) {
-								GL.Vertex2 (pos.X, pos.Y);
-							}
-							GL.End ();
-						}
-					}
-
-					foreach (PlanetObject planob in lstPlanets) {
-						if(gbvars.ShortTrails && planob.Trails.Count > 500 ) {
-							planob.Trails.RemoveAt(0);
-						}
-                       
-                        
-                            planob.Trails.Add(planob.Position);
-                        
-						planob.Position += planob.Velocity;
-					}
-					}
+                        foreach (List<Vector2> TrailL in lstTrails)
+                        {
+                            GL.Begin(PrimitiveType.LineStrip);
+                            foreach (Vector2 pos in TrailL)
+                            {
+                                GL.Vertex2(pos.X, pos.Y);
+                            }
+                            GL.End();
+                        }
+                    }
 
 					//draw planets
 					for (int i = lstPlanets.Count - 1; i >= 0; i--) {
@@ -609,7 +632,6 @@ namespace AIMIS
                             //GL.LoadMatrix(ref rotmatrix);
                             //GL.Ortho(-game.Width * ZoomMulti, game.Width * ZoomMulti, -game.Height * ZoomMulti, game.Height * ZoomMulti, 0.0, 4.0);
                             
-                            planob.RotationAngle += planob.RotationTime * SimulationSpeed;
                             GL.MatrixMode(MatrixMode.Modelview);
 
                             GL.Begin(PrimitiveType.Quads);
