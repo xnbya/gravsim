@@ -1,5 +1,5 @@
 ﻿/* AIMIS
-Copyright (C) 2014 Alexis Enston
+Copyright (C) 2014, 2015 Alexis Enston
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation; either version 2 of the License, or
@@ -80,11 +80,20 @@ namespace AIMIS
                 formearth.Show();
                 this.Hide();
                 //int Texture = MainUIclass.LoadTexture();
-                
-                //Mass in x10^20 kg
-                MainUIclass.NewPlanet(59720f, 0f, 0f, 0f, 0f,  "earth.png", -0.003f, true);
-                //radius in MM
-                MainUIclass.lstPlanets[0].Radius = 6.371f;
+
+                //gbvars.G = 6.673E-11f;
+
+                //Mass in U
+                MainUIclass.NewPlanet(10000f, 0f, 0f, 0f, 0f, "earth.png", -0.002f, true);
+                MainUIclass.blGeoStat = true;
+                //radius in km
+               // MainUIclass.lstPlanets[0].Radius = 6371f;
+
+                //MainUIclass.NewPlanet(5E5f, 0f, 35780, 0f, 0f);
+                //MainUIclass.lstPlanets[1].Radius = 100f;
+
+                //MainUIclass.ZoomMulti = 50f;
+
 
                 //ISS test
 

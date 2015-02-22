@@ -214,14 +214,21 @@ namespace AIMIS
 
         //viewpoint
         Vector3 ViewPointV = new Vector3(0f, 0f, 0f);
-        float ZoomMulti = 0.01f;
+        public float ZoomMulti = 0.01f;
 
 
 
         //speed
         public int SimulationSpeed = 20;
 
-        //are we 
+
+        //Draw lines for showing geostyationary orbit?
+        public bool blGeoStat = false;
+
+        //Show dot on earth for geostat
+        public bool blShowGeostatDot = false;
+        public float fAngleGeostat = 0f;
+
         [STAThread]
 		public void Main ()
 		{
@@ -230,7 +237,8 @@ namespace AIMIS
                 
                // game.WindowState = WindowState.Fullscreen;
               //  DisplayDevice.Default.ChangeResolution(1280, 1024,2, 30);
-               
+
+                game.TargetRenderFrequency = 60;
 
 				Matrix4 matrix = Matrix4.CreateTranslation (0, 0, 0);
 				game.Load += (sender, e) =>
@@ -510,6 +518,14 @@ namespace AIMIS
 					for (int i = lstPlanets.Count - 1; i >= 0; i--) {
 
 						PlanetObject planob = lstPlanets [i];
+
+
+
+                        //DEBUG
+                        Console.Write("Object " + i.ToString() + " ");
+                        Console.WriteLine(planob.Position);
+
+
 						for (int ic = lstPlanets.Count - 1; ic >= 0; ic--) {
 							PlanetObject plan2 = lstPlanets [ic];
 							if (plan2.Position != planob.Position) {
@@ -518,16 +534,16 @@ namespace AIMIS
                                 //Skip this if we have a 'fixed' object
                                 if (planob.Fixed != true)
                                 {
-                                    float dissqu = (float)Math.Pow((planob.Position.X - plan2.Position.X), 2)
-                                        + (float)Math.Pow((planob.Position.Y - plan2.Position.Y), 2);
+                                    //distance squared
+                                    float dissqu = (planob.Position - plan2.Position).Length;
+                                    dissqu = dissqu * dissqu;
+                                    //(float)Math.Pow((planob.Position.X - plan2.Position.X), 2)
+                                        //+ (float)Math.Pow((planob.Position.Y - plan2.Position.Y), 2);
                                     Vector2 Force = -G * ((planob.Mass * plan2.Mass) / dissqu) * ((planob.Position - plan2.Position) / (float)Math.Sqrt(dissqu));
                                     Vector2 Acceleration = Force / planob.Mass;
                                     planob.Velocity += Acceleration;
                                 }
 
-                                //spin a planet, but only do it if we have a texture, otherwise its pointless
-                                if(planob.Texture > 0)
-                                    planob.RotationAngle += planob.RotationTime * SimulationSpeed;
 
 								//collision detection, merge objects
                                 //check if they overlap, and if we have a fixed object
@@ -613,6 +629,21 @@ namespace AIMIS
                         }
 
 						PlanetObject planob = lstPlanets [i];
+
+                        //spin a planet, but only do it if we have a texture, otherwise its pointless
+                        //also only do it if we're doing the 'step'
+                        if (planob.Texture > 0 && SimulationSlowDownStep == 0)
+                        {
+                            if (SimulationSpeed < 20)
+                                planob.RotationAngle += planob.RotationTime;
+                            else
+                                planob.RotationAngle += planob.RotationTime * (SimulationSpeed - 19);
+                            if (planob.RotationAngle > (float)Math.PI * 2)
+                                planob.RotationAngle -= (float)Math.PI * 2;
+                            if (planob.RotationAngle < -(float)Math.PI * 2)
+                                planob.RotationAngle += (float)Math.PI * 2;
+                            // Console.WriteLine(planob.RotationAngle);
+                        }
                        
                         if (planob.Texture > 0)
                         {
@@ -699,7 +730,7 @@ namespace AIMIS
                     }
 
                     //Draw lines for geostationary simulation
-                    if (gbvars.blGeoStat && lstPlanets.Count > 1)
+                    if (blGeoStat && lstPlanets.Count > 1)
                     {
                         for (int i = 1; i < lstPlanets.Count; i++)
                         {
@@ -711,6 +742,12 @@ namespace AIMIS
                         }
                     }
 
+                    //Draw earth sim arrows
+                    if (blShowGeostatDot)
+                    {
+                        GL.Color3(Color.Yellow);
+                        DrawCircle(30, (float)Math.Sin(-lstPlanets[0].RotationAngle + fAngleGeostat) * lstPlanets[0].Radius, (float)Math.Cos(-lstPlanets[0].RotationAngle + fAngleGeostat) * lstPlanets[0].Radius, 0.1f);
+                    }
 
                     Console.WriteLine(game.RenderFrequency);
                     
@@ -721,7 +758,7 @@ namespace AIMIS
 
 
 				// Run the simulaton at 60 updates per second
-				game.Run (60.0);
+                game.Run();
                 
 			}
 		}

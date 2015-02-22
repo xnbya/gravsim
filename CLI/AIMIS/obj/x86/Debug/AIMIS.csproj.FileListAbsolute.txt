@@ -57,3 +57,4 @@ C:\Users\Alexis\Documents\dev\gravsim\CLI\AIMIS\obj\x86\Debug\AIMIS.frmNewObjAdv
 C:\Users\Alexis\Documents\dev\gravsim\CLI\AIMIS\obj\x86\Debug\AIMIS.frmNewSim.resources
 C:\Users\Alexis\Documents\dev\gravsim\CLI\AIMIS\obj\x86\Debug\GenerateResource.read.1.tlog
 C:\Users\Alexis\Documents\dev\gravsim\CLI\AIMIS\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\Alexis\Documents\dev\gravsim\CLI\AIMIS\bin\Debug\Satellite.png
