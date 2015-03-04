@@ -65,9 +65,9 @@ namespace AIMIS
             if (rbSimple.Checked)
             {
 
-                MainUIclass.NewPlanet(1000f, 0f, 0f, 0f, 0f);
+                MainUIclass.NewPlanet(1000f, 0f, 0f, 4.47E-5f, 0f);
                 MainUIclass.NewPlanet(3f, 0f, -3f, -0.0149f, 0f);
-                MainUIclass.NewPlanet(4f, 0f, 5f, 0f, 0f);
+               // MainUIclass.NewPlanet(4f, 0f, 5f, 0f, 0f);
            
             }
 

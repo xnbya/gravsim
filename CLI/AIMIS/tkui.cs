@@ -490,6 +490,10 @@ namespace AIMIS
                     //slowdown?
                     if (SimulationSpeed < 20)
                     {
+                        //Stop simulation when sim speed = 0
+                        if (SimulationSpeed == 0)
+                            SimulationSlowDownStep = 1;
+
                         SimulationSlowDownStep += SimulationSpeed;
                         if (SimulationSlowDownStep > 20)
                             SimulationSlowDownStep = 0;
@@ -497,6 +501,8 @@ namespace AIMIS
                     else
                         SimulationSlowDownStep = 0;
                         
+                    //DEBUG
+                    int Calculations = 0;
 
 					for(int zx = 20; (zx < SimulationSpeed || zx == 20) && SimulationSlowDownStep == 0; zx ++) {
 
@@ -522,8 +528,8 @@ namespace AIMIS
 
 
                         //DEBUG
-                        Console.Write("Object " + i.ToString() + " ");
-                        Console.WriteLine(planob.Position);
+                        //Console.Write("Object " + i.ToString() + " ");
+                        //Console.WriteLine(planob.Position);
 
 
 						for (int ic = lstPlanets.Count - 1; ic >= 0; ic--) {
@@ -542,6 +548,7 @@ namespace AIMIS
                                     Vector2 Force = -G * ((planob.Mass * plan2.Mass) / dissqu) * ((planob.Position - plan2.Position) / (float)Math.Sqrt(dissqu));
                                     Vector2 Acceleration = Force / planob.Mass;
                                     planob.Velocity += Acceleration;
+                                    Calculations++;
                                 }
 
 
@@ -597,6 +604,7 @@ namespace AIMIS
 					    }
 					}
 
+                    Console.WriteLine(Calculations);
 
                     //draw
 
@@ -749,7 +757,7 @@ namespace AIMIS
                         DrawCircle(30, (float)Math.Sin(-lstPlanets[0].RotationAngle + fAngleGeostat) * lstPlanets[0].Radius, (float)Math.Cos(-lstPlanets[0].RotationAngle + fAngleGeostat) * lstPlanets[0].Radius, 0.1f);
                     }
 
-                    Console.WriteLine(game.RenderFrequency);
+                   // Console.WriteLine(game.RenderFrequency);
                     
 
 					game.SwapBuffers ();
