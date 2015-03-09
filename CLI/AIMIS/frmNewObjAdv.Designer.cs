@@ -39,16 +39,16 @@
             this.lbRadius = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.nmSpeed = new System.Windows.Forms.NumericUpDown();
-            this.btnOK = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.txtTexture = new System.Windows.Forms.TextBox();
-            this.btnLoadTexture = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.label10 = new System.Windows.Forms.Label();
             this.nmRotation = new System.Windows.Forms.NumericUpDown();
             this.chFixed = new System.Windows.Forms.CheckBox();
+            this.btnLoadTexture = new System.Windows.Forms.Button();
             this.ctlDirection1 = new AIMIS.ctlDirection();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.btnOK = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nmMass)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nmMoonMass)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nmMoonRadius)).BeginInit();
@@ -178,26 +178,6 @@
             0,
             0});
             // 
-            // btnOK
-            // 
-            this.btnOK.Location = new System.Drawing.Point(371, 218);
-            this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(75, 23);
-            this.btnOK.TabIndex = 11;
-            this.btnOK.Text = "OK";
-            this.btnOK.UseVisualStyleBackColor = true;
-            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
-            // 
-            // btnCancel
-            // 
-            this.btnCancel.Location = new System.Drawing.Point(290, 218);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 12;
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
             // label9
             // 
             this.label9.AutoSize = true;
@@ -213,16 +193,6 @@
             this.txtTexture.Name = "txtTexture";
             this.txtTexture.Size = new System.Drawing.Size(108, 20);
             this.txtTexture.TabIndex = 15;
-            // 
-            // btnLoadTexture
-            // 
-            this.btnLoadTexture.Location = new System.Drawing.Point(192, 67);
-            this.btnLoadTexture.Name = "btnLoadTexture";
-            this.btnLoadTexture.Size = new System.Drawing.Size(25, 20);
-            this.btnLoadTexture.TabIndex = 16;
-            this.btnLoadTexture.Text = "...";
-            this.btnLoadTexture.UseVisualStyleBackColor = true;
-            this.btnLoadTexture.Click += new System.EventHandler(this.btnLoadTexture_Click);
             // 
             // openFileDialog1
             // 
@@ -261,12 +231,48 @@
             this.chFixed.Text = "Fixed object";
             this.chFixed.UseVisualStyleBackColor = true;
             // 
+            // btnLoadTexture
+            // 
+            this.btnLoadTexture.Location = new System.Drawing.Point(192, 67);
+            this.btnLoadTexture.Name = "btnLoadTexture";
+            this.btnLoadTexture.Size = new System.Drawing.Size(25, 20);
+            this.btnLoadTexture.TabIndex = 16;
+            this.btnLoadTexture.Text = "...";
+            this.btnLoadTexture.UseVisualStyleBackColor = true;
+            this.btnLoadTexture.Click += new System.EventHandler(this.btnLoadTexture_Click);
+            // 
             // ctlDirection1
             // 
             this.ctlDirection1.Location = new System.Drawing.Point(242, 12);
             this.ctlDirection1.Name = "ctlDirection1";
             this.ctlDirection1.Size = new System.Drawing.Size(215, 163);
             this.ctlDirection1.TabIndex = 19;
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Image = global::AIMIS.Properties.Resources.dialog_close;
+            this.btnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnCancel.Location = new System.Drawing.Point(270, 211);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(73, 34);
+            this.btnCancel.TabIndex = 12;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // btnOK
+            // 
+            this.btnOK.Image = global::AIMIS.Properties.Resources.list_add;
+            this.btnOK.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnOK.Location = new System.Drawing.Point(349, 211);
+            this.btnOK.Name = "btnOK";
+            this.btnOK.Size = new System.Drawing.Size(97, 34);
+            this.btnOK.TabIndex = 11;
+            this.btnOK.Text = "Add Object";
+            this.btnOK.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnOK.UseVisualStyleBackColor = true;
+            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
             // frmNewObjAdv
             // 
@@ -287,8 +293,9 @@
             this.Controls.Add(this.grpMoon);
             this.Controls.Add(this.nmMass);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmNewObjAdv";
-            this.Text = "New Object";
+            this.Text = "Add New Object";
             this.TopMost = true;
             this.Load += new System.EventHandler(this.frmNewObjAdv_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nmMass)).EndInit();

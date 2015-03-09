@@ -32,10 +32,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.nmHeight = new System.Windows.Forms.NumericUpDown();
             this.nmSpeed = new System.Windows.Forms.NumericUpDown();
-            this.btnLaunch = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
             this.ctlDirection1 = new AIMIS.ctlDirection();
             this.chPoint = new System.Windows.Forms.CheckBox();
+            this.btnLaunch = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nmHeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nmSpeed)).BeginInit();
             this.SuspendLayout();
@@ -68,7 +68,7 @@
             65536});
             this.nmHeight.Location = new System.Drawing.Point(130, 12);
             this.nmHeight.Name = "nmHeight";
-            this.nmHeight.Size = new System.Drawing.Size(120, 20);
+            this.nmHeight.Size = new System.Drawing.Size(114, 20);
             this.nmHeight.TabIndex = 3;
             // 
             // nmSpeed
@@ -81,26 +81,19 @@
             131072});
             this.nmSpeed.Location = new System.Drawing.Point(130, 38);
             this.nmSpeed.Name = "nmSpeed";
-            this.nmSpeed.Size = new System.Drawing.Size(120, 20);
+            this.nmSpeed.Size = new System.Drawing.Size(114, 20);
             this.nmSpeed.TabIndex = 4;
-            // 
-            // btnLaunch
-            // 
-            this.btnLaunch.Location = new System.Drawing.Point(175, 233);
-            this.btnLaunch.Name = "btnLaunch";
-            this.btnLaunch.Size = new System.Drawing.Size(75, 23);
-            this.btnLaunch.TabIndex = 6;
-            this.btnLaunch.Text = "Launch";
-            this.btnLaunch.UseVisualStyleBackColor = true;
-            this.btnLaunch.Click += new System.EventHandler(this.btnLaunch_Click);
             // 
             // btnClear
             // 
-            this.btnClear.Location = new System.Drawing.Point(94, 233);
+            this.btnClear.Image = global::AIMIS.Properties.Resources.edit_clear;
+            this.btnClear.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnClear.Location = new System.Drawing.Point(88, 252);
             this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(75, 23);
+            this.btnClear.Size = new System.Drawing.Size(75, 34);
             this.btnClear.TabIndex = 8;
             this.btnClear.Text = "Clear";
+            this.btnClear.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
@@ -114,18 +107,31 @@
             // chPoint
             // 
             this.chPoint.AutoSize = true;
-            this.chPoint.Location = new System.Drawing.Point(106, 262);
+            this.chPoint.Location = new System.Drawing.Point(35, 229);
             this.chPoint.Name = "chPoint";
             this.chPoint.Size = new System.Drawing.Size(135, 17);
             this.chPoint.TabIndex = 9;
             this.chPoint.Text = "Show Point on Surface";
             this.chPoint.UseVisualStyleBackColor = true;
             // 
+            // btnLaunch
+            // 
+            this.btnLaunch.Image = global::AIMIS.Properties.Resources.fork;
+            this.btnLaunch.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnLaunch.Location = new System.Drawing.Point(169, 252);
+            this.btnLaunch.Name = "btnLaunch";
+            this.btnLaunch.Size = new System.Drawing.Size(75, 34);
+            this.btnLaunch.TabIndex = 6;
+            this.btnLaunch.Text = "Launch";
+            this.btnLaunch.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnLaunch.UseVisualStyleBackColor = true;
+            this.btnLaunch.Click += new System.EventHandler(this.btnLaunch_Click);
+            // 
             // frmEarthOrbit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(263, 287);
+            this.ClientSize = new System.Drawing.Size(263, 298);
             this.Controls.Add(this.chPoint);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.ctlDirection1);

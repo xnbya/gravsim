@@ -31,8 +31,6 @@
             this.rbEmpty = new System.Windows.Forms.RadioButton();
             this.rbRandom = new System.Windows.Forms.RadioButton();
             this.rbSimple = new System.Windows.Forms.RadioButton();
-            this.btnLaunch = new System.Windows.Forms.Button();
-            this.btnOpenSaved = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.grbRand = new System.Windows.Forms.GroupBox();
             this.tbSpread = new System.Windows.Forms.TrackBar();
@@ -44,6 +42,8 @@
             this.tbSpeed = new System.Windows.Forms.TrackBar();
             this.tbMass = new System.Windows.Forms.TrackBar();
             this.rbEarthOrbit = new System.Windows.Forms.RadioButton();
+            this.btnOpenSaved = new System.Windows.Forms.Button();
+            this.btnLaunch = new System.Windows.Forms.Button();
             this.grbRand.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tbSpread)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nmRandNumber)).BeginInit();
@@ -84,26 +84,6 @@
             this.rbSimple.TabStop = true;
             this.rbSimple.Text = "Simple Orbit";
             this.rbSimple.UseVisualStyleBackColor = true;
-            // 
-            // btnLaunch
-            // 
-            this.btnLaunch.Location = new System.Drawing.Point(12, 129);
-            this.btnLaunch.Name = "btnLaunch";
-            this.btnLaunch.Size = new System.Drawing.Size(75, 23);
-            this.btnLaunch.TabIndex = 3;
-            this.btnLaunch.Text = "Launch";
-            this.btnLaunch.UseVisualStyleBackColor = true;
-            this.btnLaunch.Click += new System.EventHandler(this.btnLaunch_Click);
-            // 
-            // btnOpenSaved
-            // 
-            this.btnOpenSaved.Location = new System.Drawing.Point(12, 158);
-            this.btnOpenSaved.Name = "btnOpenSaved";
-            this.btnOpenSaved.Size = new System.Drawing.Size(75, 23);
-            this.btnOpenSaved.TabIndex = 4;
-            this.btnOpenSaved.Text = "Load saved ";
-            this.btnOpenSaved.UseVisualStyleBackColor = true;
-            this.btnOpenSaved.Click += new System.EventHandler(this.btnOpenSaved_Click);
             // 
             // openFileDialog1
             // 
@@ -218,6 +198,32 @@
             this.rbEarthOrbit.Text = "Earth Orbit";
             this.rbEarthOrbit.UseVisualStyleBackColor = true;
             // 
+            // btnOpenSaved
+            // 
+            this.btnOpenSaved.Image = global::AIMIS.Properties.Resources.document_open;
+            this.btnOpenSaved.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnOpenSaved.Location = new System.Drawing.Point(12, 144);
+            this.btnOpenSaved.Name = "btnOpenSaved";
+            this.btnOpenSaved.Size = new System.Drawing.Size(105, 32);
+            this.btnOpenSaved.TabIndex = 4;
+            this.btnOpenSaved.Text = "Load saved ";
+            this.btnOpenSaved.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnOpenSaved.UseVisualStyleBackColor = true;
+            this.btnOpenSaved.Click += new System.EventHandler(this.btnOpenSaved_Click);
+            // 
+            // btnLaunch
+            // 
+            this.btnLaunch.Image = global::AIMIS.Properties.Resources.fork;
+            this.btnLaunch.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnLaunch.Location = new System.Drawing.Point(12, 106);
+            this.btnLaunch.Name = "btnLaunch";
+            this.btnLaunch.Size = new System.Drawing.Size(105, 32);
+            this.btnLaunch.TabIndex = 3;
+            this.btnLaunch.Text = "Launch";
+            this.btnLaunch.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnLaunch.UseVisualStyleBackColor = true;
+            this.btnLaunch.Click += new System.EventHandler(this.btnLaunch_Click);
+            // 
             // frmNewSim
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -230,6 +236,7 @@
             this.Controls.Add(this.rbSimple);
             this.Controls.Add(this.rbRandom);
             this.Controls.Add(this.rbEmpty);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmNewSim";
             this.Text = "New Simulation";
             this.TopMost = true;

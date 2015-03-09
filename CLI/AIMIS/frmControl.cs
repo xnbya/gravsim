@@ -202,5 +202,11 @@ namespace AIMIS
             gbvars.blAddObjAdvanced = chkAddObjAdvanced.Checked;
         }
 
+        private void btnAbout_Click(object sender, EventArgs e)
+        {
+            frmAbout about = new frmAbout();
+            about.ShowDialog();
+        }
+
     }
 }
