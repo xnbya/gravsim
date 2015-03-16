@@ -233,7 +233,7 @@ namespace AIMIS
 		public void Main ()
 		{
 
-			using (var game = new GameWindow(700,500, new GraphicsMode(8,2,0))) {
+			using (var game = new GameWindow(700,500, new GraphicsMode(32,24,0,8))) {
                 
                // game.WindowState = WindowState.Fullscreen;
               //  DisplayDevice.Default.ChangeResolution(1280, 1024,2, 30);
@@ -519,18 +519,10 @@ namespace AIMIS
                             }
                         }
 
-					//foreach (PlanetObject planob in lstPlanets) {
 					//calculate forces between objects
 					for (int i = lstPlanets.Count - 1; i >= 0; i--) {
 
 						PlanetObject planob = lstPlanets [i];
-
-
-
-                        //DEBUG
-                        //Console.Write("Object " + i.ToString() + " ");
-                        //Console.WriteLine(planob.Position);
-
 
 						for (int ic = lstPlanets.Count - 1; ic >= 0; ic--) {
 							PlanetObject plan2 = lstPlanets [ic];
@@ -543,8 +535,6 @@ namespace AIMIS
                                     //distance squared
                                     float dissqu = (planob.Position - plan2.Position).Length;
                                     dissqu = dissqu * dissqu;
-                                    //(float)Math.Pow((planob.Position.X - plan2.Position.X), 2)
-                                        //+ (float)Math.Pow((planob.Position.Y - plan2.Position.Y), 2);
                                     Vector2 Force = -G * ((planob.Mass * plan2.Mass) / dissqu) * ((planob.Position - plan2.Position) / (float)Math.Sqrt(dissqu));
                                     Vector2 Acceleration = Force / planob.Mass;
                                     planob.Velocity += Acceleration;
@@ -556,6 +546,7 @@ namespace AIMIS
                                 //check if they overlap, and if we have a fixed object
                                 if((planob.Position - plan2.Position).Length < planob.Radius) {
 
+                                        //if fixed, keep it
                                         if (plan2.Fixed)
                                         {
                                             planob = plan2;
@@ -568,25 +559,18 @@ namespace AIMIS
                                                 planob.Texture = plan2.Texture;
                                     
 									        planob.Mass += plan2.Mass;
-									        //planob.Radius = (float)Math.Sqrt( Math.Pow(plan2.Radius,2) + Math.Pow(planob.Radius,2));
 									        CombVelocity = CombVelocity / planob.Mass;    
                                         }
+                                    //add 'dead' objects trails to the other list
 									lstTrails.Add (plan2.Trails);
-									
-									lstPlanets.RemoveAt (ic);
-									
-									i --; 
+
+                                    //Delete the 'dead' object
+                                    lstPlanets.RemoveAt (ic);
+                                    i --; 
 								}
-
-
-
 							}
 						}
 					}
-
-					//}
-
-
 
 					
 

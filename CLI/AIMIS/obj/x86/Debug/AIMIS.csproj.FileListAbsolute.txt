@@ -61,3 +61,9 @@ C:\Users\Alexis\Documents\dev\gravsim\CLI\AIMIS\bin\Debug\Satellite.png
 N:\Project\gravsim\CLI\AIMIS\bin\Debug\Satellite.png
 C:\Users\Alexis\Documents\dev\gravsim\CLI\AIMIS\obj\x86\Debug\AIMIS.Properties.Resources.resources
 C:\Users\Alexis\Documents\dev\gravsim\CLI\AIMIS\obj\x86\Debug\AIMIS.frmAbout.resources
+N:\Project\gravsim\CLI\AIMIS\bin\Debug\AIMIS.exe.manifest
+N:\Project\gravsim\CLI\AIMIS\bin\Debug\AIMIS.application
+N:\Project\gravsim\CLI\AIMIS\obj\x86\Debug\AIMIS.frmAbout.resources
+N:\Project\gravsim\CLI\AIMIS\obj\x86\Debug\AIMIS.Properties.Resources.resources
+N:\Project\gravsim\CLI\AIMIS\obj\x86\Debug\AIMIS.exe.manifest
+N:\Project\gravsim\CLI\AIMIS\obj\x86\Debug\AIMIS.application
