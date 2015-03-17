@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmControl));
             this.grbTrails = new System.Windows.Forms.GroupBox();
-            this.btnClearTrails = new System.Windows.Forms.Button();
             this.rbLongTrails = new System.Windows.Forms.RadioButton();
             this.rbShortTrails = new System.Windows.Forms.RadioButton();
             this.rbNoTrails = new System.Windows.Forms.RadioButton();
@@ -43,11 +43,12 @@
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.ckDispObjToFollow = new System.Windows.Forms.CheckBox();
             this.nmObjToFollow = new System.Windows.Forms.NumericUpDown();
+            this.btnAbout = new System.Windows.Forms.Button();
             this.btnShowHide = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnGraphs = new System.Windows.Forms.Button();
             this.btnNewSim = new System.Windows.Forms.Button();
-            this.btnAbout = new System.Windows.Forms.Button();
+            this.btnClearTrails = new System.Windows.Forms.Button();
             this.grbTrails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.rkbSpeed)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -67,19 +68,6 @@
             this.grbTrails.TabStop = false;
             this.grbTrails.Text = "Trails";
             // 
-            // btnClearTrails
-            // 
-            this.btnClearTrails.Image = global::AIMIS.Properties.Resources.edit_clear;
-            this.btnClearTrails.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnClearTrails.Location = new System.Drawing.Point(6, 88);
-            this.btnClearTrails.Name = "btnClearTrails";
-            this.btnClearTrails.Size = new System.Drawing.Size(84, 48);
-            this.btnClearTrails.TabIndex = 3;
-            this.btnClearTrails.Text = "Clear Trails";
-            this.btnClearTrails.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnClearTrails.UseVisualStyleBackColor = true;
-            this.btnClearTrails.Click += new System.EventHandler(this.btnClearTrails_Click);
-            // 
             // rbLongTrails
             // 
             this.rbLongTrails.AutoSize = true;
@@ -87,7 +75,6 @@
             this.rbLongTrails.Name = "rbLongTrails";
             this.rbLongTrails.Size = new System.Drawing.Size(73, 17);
             this.rbLongTrails.TabIndex = 2;
-            this.rbLongTrails.TabStop = true;
             this.rbLongTrails.Text = "Long trails";
             this.rbLongTrails.UseVisualStyleBackColor = true;
             this.rbLongTrails.CheckedChanged += new System.EventHandler(this.rbNoTrails_CheckedChanged);
@@ -112,7 +99,6 @@
             this.rbNoTrails.Name = "rbNoTrails";
             this.rbNoTrails.Size = new System.Drawing.Size(63, 17);
             this.rbNoTrails.TabIndex = 0;
-            this.rbNoTrails.TabStop = true;
             this.rbNoTrails.Text = "No trails";
             this.rbNoTrails.UseVisualStyleBackColor = true;
             this.rbNoTrails.CheckedChanged += new System.EventHandler(this.rbNoTrails_CheckedChanged);
@@ -224,6 +210,17 @@
             this.nmObjToFollow.TabIndex = 8;
             this.nmObjToFollow.ValueChanged += new System.EventHandler(this.nmObjToFollow_ValueChanged);
             // 
+            // btnAbout
+            // 
+            this.btnAbout.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnAbout.Location = new System.Drawing.Point(279, 1);
+            this.btnAbout.Name = "btnAbout";
+            this.btnAbout.Size = new System.Drawing.Size(46, 23);
+            this.btnAbout.TabIndex = 10;
+            this.btnAbout.Text = "About";
+            this.btnAbout.UseVisualStyleBackColor = true;
+            this.btnAbout.Click += new System.EventHandler(this.btnAbout_Click);
+            // 
             // btnShowHide
             // 
             this.btnShowHide.Image = global::AIMIS.Properties.Resources.view_restore;
@@ -276,17 +273,18 @@
             this.btnNewSim.UseVisualStyleBackColor = true;
             this.btnNewSim.Click += new System.EventHandler(this.btnNewSim_Click);
             // 
-            // btnAbout
+            // btnClearTrails
             // 
-            this.btnAbout.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnAbout.Location = new System.Drawing.Point(279, 1);
-            this.btnAbout.Name = "btnAbout";
-            this.btnAbout.Size = new System.Drawing.Size(46, 23);
-            this.btnAbout.TabIndex = 10;
-            this.btnAbout.Text = "About";
-            this.btnAbout.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAbout.UseVisualStyleBackColor = true;
-            this.btnAbout.Click += new System.EventHandler(this.btnAbout_Click);
+            this.btnClearTrails.Image = global::AIMIS.Properties.Resources.edit_clear;
+            this.btnClearTrails.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnClearTrails.Location = new System.Drawing.Point(6, 88);
+            this.btnClearTrails.Name = "btnClearTrails";
+            this.btnClearTrails.Size = new System.Drawing.Size(84, 48);
+            this.btnClearTrails.TabIndex = 3;
+            this.btnClearTrails.Text = "Clear Trails";
+            this.btnClearTrails.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnClearTrails.UseVisualStyleBackColor = true;
+            this.btnClearTrails.Click += new System.EventHandler(this.btnClearTrails_Click);
             // 
             // frmControl
             // 
@@ -304,6 +302,7 @@
             this.Controls.Add(this.rkbSpeed);
             this.Controls.Add(this.grbTrails);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmControl";
             this.Text = "AIMIS control window";
             this.TopMost = true;

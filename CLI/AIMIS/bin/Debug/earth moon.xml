@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<ArrayOfPlanetObject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <PlanetObject>
+    <Velocity>
+      <X>0</X>
+      <Y>-0</Y>
+    </Velocity>
+    <Position>
+      <X>0.56</X>
+      <Y>0.68</Y>
+    </Position>
+    <Trails />
+    <RotationTime>0.02</RotationTime>
+    <RotationAngle>5.53713751</RotationAngle>
+    <BitmapFilename>N:\Project\gravsim\CLI\AIMIS\bin\Debug\earth.png</BitmapFilename>
+    <Fixed>true</Fixed>
+    <Mass>1000</Mass>
+    <Radius>0.31017524</Radius>
+    <Texture>1</Texture>
+  </PlanetObject>
+  <PlanetObject>
+    <Velocity>
+      <X>-0.005908974</X>
+      <Y>0.007849908</Y>
+    </Velocity>
+    <Position>
+      <X>6.12137032</X>
+      <Y>4.97327757</Y>
+    </Position>
+    <Trails />
+    <RotationTime>0</RotationTime>
+    <RotationAngle>0</RotationAngle>
+    <Fixed>false</Fixed>
+    <Mass>20</Mass>
+    <Radius>0.08419452</Radius>
+    <Texture>0</Texture>
+    <BitmapFilename>N:\Project\gravsim\CLI\AIMIS\bin\Debug\moon.png</BitmapFilename>
+    <RotationTime>0.003</RotationTime>
+  </PlanetObject>
+</ArrayOfPlanetObject>

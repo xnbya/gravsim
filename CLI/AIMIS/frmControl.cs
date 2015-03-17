@@ -41,7 +41,8 @@ namespace AIMIS
 
         private void btnClearTrails_Click(object sender, EventArgs e)
         {
-            MainUIclass.ClearTrails();
+            if(MainUIclass != null)
+                MainUIclass.ClearTrails();
 
         }
 
@@ -207,6 +208,6 @@ namespace AIMIS
             frmAbout about = new frmAbout();
             about.ShowDialog();
         }
-
+        
     }
 }

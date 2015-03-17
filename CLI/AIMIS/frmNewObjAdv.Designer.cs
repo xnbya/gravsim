@@ -145,7 +145,7 @@
             // lbRadius
             // 
             this.lbRadius.AutoSize = true;
-            this.lbRadius.Location = new System.Drawing.Point(14, 86);
+            this.lbRadius.Location = new System.Drawing.Point(14, 84);
             this.lbRadius.Name = "lbRadius";
             this.lbRadius.Size = new System.Drawing.Size(117, 13);
             this.lbRadius.TabIndex = 7;

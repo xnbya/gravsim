@@ -167,17 +167,18 @@ namespace AIMIS
             }
         }
 
+        //get the position of the mouse as a vector scaled to the gamewindow
         public Vector2 MousePosition(float mX, float mY, GameWindow game)
         {
             Vector2 vecMousePos = new Vector2(((mX) / (float)game.Width - 0.5f) * game.Width * 2 * 
                 ZoomMulti - ViewPointV.X * game.Width * ZoomMulti, 0 - ((mY) / (float)game.Height - 0.5f)
                 * game.Height * 2 * ZoomMulti - ViewPointV.Y * game.Height * ZoomMulti);
-            //Console.WriteLine(ViewPointV);
             return vecMousePos;
 
         }
 
-		//For the textures - image of earth
+		//For the textures - ie image of earth
+        //loads a bitmap, and returns it's location as an int
 		public static int LoadTexture(Bitmap bitmap)
 		{
 			int texture;
@@ -200,31 +201,20 @@ namespace AIMIS
 			return texture;
 		}
 
-        //vars
+        //variables
         //list of planets
         public List<PlanetObject> lstPlanets = new List<PlanetObject>();
-
-        
-
         //list of trails of 'dead' planets
         List<List<Vector2>> lstTrails = new List<List<Vector2>>();
-
         //color of planets
         Color colPlanets = Color.LightYellow;
-
         //viewpoint
         Vector3 ViewPointV = new Vector3(0f, 0f, 0f);
         public float ZoomMulti = 0.01f;
-
-
-
         //speed
         public int SimulationSpeed = 20;
-
-
         //Draw lines for showing geostyationary orbit?
         public bool blGeoStat = false;
-
         //Show dot on earth for geostat
         public bool blShowGeostatDot = false;
         public float fAngleGeostat = 0f;
@@ -235,9 +225,7 @@ namespace AIMIS
 
 			using (var game = new GameWindow(700,500, new GraphicsMode(32,24,0,8))) {
                 
-               // game.WindowState = WindowState.Fullscreen;
-              //  DisplayDevice.Default.ChangeResolution(1280, 1024,2, 30);
-
+                //run at 60fps
                 game.TargetRenderFrequency = 60;
 
 				Matrix4 matrix = Matrix4.CreateTranslation (0, 0, 0);
@@ -259,26 +247,25 @@ namespace AIMIS
                 bool MoCdraw = false;
                 Vector3 PrevViewpoint = new Vector3(0f, 0f, 0f);
                 
-				//load textures
+				//enable textures
 				GL.Enable (EnableCap.Texture2D);
-				//GL.Enable (EnableCap.Blend);
 				GL.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
-				//int EarthTexture = LoadTexture(new Bitmap("earth.png"));
-                //lstPlanets[0].Texture = EarthTexture;
-               // float RotAngle = 0f;
 			
 
+                //mouse click event
                 game.Mouse.ButtonDown += (sender, e) =>
                     {
                         MoCinitialvec = MousePosition(e.X, e.Y, game);
                         MoCdvec = MoCinitialvec;
 
+                        //start adding an object
                         if (e.Button == MouseButton.Left)
                         {
                             MoCdraw = true;
                         }
+
+                        //start moving viewpoint
                         if (e.Button == MouseButton.Right) {
-                            //MovePrev = MousePosition(e.X, e.Y, game);
                             PrevViewpoint = ViewPointV;
                         }
 
@@ -287,10 +274,10 @@ namespace AIMIS
 
                 game.Mouse.ButtonUp += (sender, e) =>
                     {
+                        //if left click - add object
                         if (e.Button == MouseButton.Left)
                         {
-
-
+                            //show advanced options?
                             if (gbvars.blAddObjAdvanced)
                             {
                                 frmNewObjAdv frmobj = new frmNewObjAdv();
@@ -310,9 +297,7 @@ namespace AIMIS
                                     }
                                     plan.RotationAngle = 0f;
                                     plan.RotationTime = frmobj.fRotation;
-                                    plan.Fixed = frmobj.blFixed;
-                                   
-                                    //p2.Radius = 0.005f;
+                                    plan.Fixed = frmobj.blFixed;                                   
                                     lstPlanets.Add(plan);
 
                                     //are we graphing the speed of the new planets?
@@ -338,6 +323,7 @@ namespace AIMIS
                                 }
                             }
 
+                            //otherwise add object without any dialogue
                             else
                             {
 
@@ -347,8 +333,6 @@ namespace AIMIS
                                 plan.Position = MoCinitialvec;
                                 plan.Velocity = (MoCdvec - MoCinitialvec) * 0.05f;
                                 plan.Trails = new List<Vector2>();
-                                //plan.BitmapTexture = new Bitmap("ship.png");
-                                //p2.Radius = 0.005f;
                                 lstPlanets.Add(plan);
 
                                 //are we graphing the speed of the new planets?
@@ -373,35 +357,36 @@ namespace AIMIS
                                 }
                             }
 
-                                MoCdraw = false;
+                            MoCdraw = false;
                         }
                     };
 
+                //scroll wheel - zoom in / out
                 game.Mouse.WheelChanged += (sender, e) =>
                     {
                         
                         if (ZoomMulti - e.DeltaPrecise * 0.001f > 0)
                         {
-
                             ZoomMulti -= e.DeltaPrecise * 0.001f;
                         }
 
                     };
 
+                //moving mouse
                 game.Mouse.Move += (sender, e) =>
                     {
-                        //if(!gbvars.blAddObjAdvanced)
+                        //for adding object
                         MoCdvec = MousePosition(e.X, e.Y, game);
-
+                        
+                        //for moving viewpoint
                         if(e.Mouse.RightButton == ButtonState.Pressed)
                         {
-
                             ViewPointV = new Vector3((MoCdvec - MoCinitialvec).X / (game.Width * ZoomMulti), (MoCdvec - MoCinitialvec).Y / (game.Height * ZoomMulti), 0) + PrevViewpoint;
-                            
                         }
                         
                     };
 
+                //keyboard input
                 game.KeyPress += (sender, e) =>
                     {
                         switch (e.KeyChar)
@@ -422,10 +407,9 @@ namespace AIMIS
 
                     };
 
+                //more keyboard input
 				game.UpdateFrame += (sender, e) =>
 				{
-				
-					
 					if (game.Keyboard [Key.Escape]) {
 						game.Exit ();
 					}
@@ -445,20 +429,14 @@ namespace AIMIS
 						ZoomMulti += 0.001f;
 					}
 					if (game.Keyboard [Key.X] && ZoomMulti > 0.001f) {
-                        
-						    ZoomMulti -= 0.001f;
+                        ZoomMulti -= 0.001f;
 					}
-                    			
 
 				};
-
-
-
-                float G = gbvars.G;
-
+                
+                //for slowing down simulation
                 int SimulationSlowDownStep = 0;
                 
-				//Vector2 velocity = new Vector2 (0f, 0f);
 				game.RenderFrame += (sender, e) =>
 				{
 					// render graphics
@@ -477,10 +455,6 @@ namespace AIMIS
                         ViewPointV.Y = -followPosition.Y / (game.Height * ZoomMulti);
                     }
 					
-
-
-
-					//GL.LoadIdentity();
                     matrix = Matrix4.CreateTranslation(ViewPointV);
 
 					GL.LoadMatrix (ref matrix);
@@ -501,18 +475,13 @@ namespace AIMIS
                     else
                         SimulationSlowDownStep = 0;
                         
-                    //DEBUG
-                    int Calculations = 0;
 
 					for(int zx = 20; (zx < SimulationSpeed || zx == 20) && SimulationSlowDownStep == 0; zx ++) {
 
                         //keep list of speeds for graphs
                         if (lstPlanets.Count > gbvars.intObjectToTrack)
                         {
-
                             gbvars.lstVelocities.Add(lstPlanets[gbvars.intObjectToTrack].Velocity.Length);
-                            //Console.WriteLine(lstPlanets[gbvars.intObjectToTrack].Velocity.Length);
-
                             if (lstPlanets.Count > 500)
                             {
                                 lstPlanets.RemoveAt(0);
@@ -535,10 +504,9 @@ namespace AIMIS
                                     //distance squared
                                     float dissqu = (planob.Position - plan2.Position).Length;
                                     dissqu = dissqu * dissqu;
-                                    Vector2 Force = -G * ((planob.Mass * plan2.Mass) / dissqu) * ((planob.Position - plan2.Position) / (float)Math.Sqrt(dissqu));
+                                    Vector2 Force = -gbvars.G * ((planob.Mass * plan2.Mass) / dissqu) * ((planob.Position - plan2.Position) / (float)Math.Sqrt(dissqu));
                                     Vector2 Acceleration = Force / planob.Mass;
                                     planob.Velocity += Acceleration;
-                                    Calculations++;
                                 }
 
 
@@ -574,7 +542,7 @@ namespace AIMIS
 
 					
 
-					    foreach (PlanetObject planob in lstPlanets) {
+				    foreach (PlanetObject planob in lstPlanets) {
                             //add a 'step' to the planet
                             planob.Position += planob.Velocity;
 
@@ -587,10 +555,8 @@ namespace AIMIS
                             planob.Trails.Add(planob.Position);
 					    }
 					}
-
-                    Console.WriteLine(Calculations);
-
-                    //draw
+                    
+                    //Now draw the objects to the gamewindow
 
                     GL.Color3(Color.DarkRed);
 
@@ -634,7 +600,6 @@ namespace AIMIS
                                 planob.RotationAngle -= (float)Math.PI * 2;
                             if (planob.RotationAngle < -(float)Math.PI * 2)
                                 planob.RotationAngle += (float)Math.PI * 2;
-                            // Console.WriteLine(planob.RotationAngle);
                         }
                        
                         if (planob.Texture > 0)
@@ -643,22 +608,19 @@ namespace AIMIS
                             GL.BindTexture(TextureTarget.Texture2D, planob.Texture);
                             GL.Enable(EnableCap.Blend);
 
-                            GL.Color3(Color.White);
+                            //don't recolor the texture
+                            GL.Color3(Color.White);                            
 
-                            
-
+                            //rotate?
                             Matrix4 rotmatrix = Matrix4.CreateFromAxisAngle(new Vector3(0, 0, 1), planob.RotationAngle);
                             rotmatrix = rotmatrix * Matrix4.CreateTranslation(planob.Position.X, planob.Position.Y, 0);
                             
                             GL.MultMatrix(ref rotmatrix);
 
-                            //GL.LoadMatrix(ref rotmatrix);
-                            //GL.Ortho(-game.Width * ZoomMulti, game.Width * ZoomMulti, -game.Height * ZoomMulti, game.Height * ZoomMulti, 0.0, 4.0);
-                            
                             GL.MatrixMode(MatrixMode.Modelview);
 
+                            //draw square for mapping of texture
                             GL.Begin(PrimitiveType.Quads);
-
                             GL.TexCoord2(0, 0);
                             GL.Vertex2(- planob.Radius,  - planob.Radius);
                             GL.TexCoord2(1, 0);
@@ -669,6 +631,7 @@ namespace AIMIS
                             GL.Vertex2(- planob.Radius, planob.Radius);
                             GL.End();
 
+                            //map texture
                             GL.BindTexture(TextureTarget.Texture2D, 0);
 
                            
@@ -681,16 +644,15 @@ namespace AIMIS
                         
                         else
                         {
+                            //draw a circle to represent object
                             DrawCircle(30, planob.Position.X, planob.Position.Y, planob.Radius);
                             
                         }
-                       // GL.Color4(255, 255, 255, 50);
-                        
+
                         GL.Color3(Color.DarkRed);
 						
 							
-						//trails
-
+						//draw trails
                         if (gbvars.ShowTrails)
                         {
 
@@ -702,14 +664,10 @@ namespace AIMIS
                             }
 							GL.End ();
 						}
-						//planet
 			
 					}
 
-
-                
-
-                    //draw mouse click line
+                    //draw mouse click line, for when adding object
                     if (MoCdraw)
                     {
                         GL.Begin(PrimitiveType.Lines);
@@ -718,7 +676,8 @@ namespace AIMIS
                         GL.Vertex2(MoCdvec);
                         GL.End();
 
-                        DrawCircle(30, MoCinitialvec.X, MoCinitialvec.Y, 0.1f);
+                        //draw the object
+                        DrawCircle(30, MoCinitialvec.X, MoCinitialvec.Y, (float)Math.Pow((gbvars.NewObjectMass * 3) / (Math.PI * 4 * 8000), (double)1 / 3));
                     }
 
                     //Draw lines for geostationary simulation
@@ -741,15 +700,11 @@ namespace AIMIS
                         DrawCircle(30, (float)Math.Sin(-lstPlanets[0].RotationAngle + fAngleGeostat) * lstPlanets[0].Radius, (float)Math.Cos(-lstPlanets[0].RotationAngle + fAngleGeostat) * lstPlanets[0].Radius, 0.1f);
                     }
 
-                   // Console.WriteLine(game.RenderFrequency);
-                    
-
+                    //load onto screen
 					game.SwapBuffers ();
 				};
 
-
-
-				// Run the simulaton at 60 updates per second
+                //run the game loop
                 game.Run();
                 
 			}
