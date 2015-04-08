@@ -223,7 +223,7 @@ namespace AIMIS
 		public void Main ()
 		{
 
-			using (var game = new GameWindow(700,500, new GraphicsMode(32,24,0,8))) {
+			using (var game = new GameWindow(700,500, new GraphicsMode(32,24,0,4))) {
                 
                 //run at 60fps
                 game.TargetRenderFrequency = 60;
@@ -497,51 +497,52 @@ namespace AIMIS
 							PlanetObject plan2 = lstPlanets [ic];
 							if (plan2.Position != planob.Position) {
 
-								//calculate force with vectors
-                                //Skip this if we have a 'fixed' object
-                                if (planob.Fixed != true)
-                                {
-                                    //distance squared
-                                    float dissqu = (planob.Position - plan2.Position).Length;
-                                    dissqu = dissqu * dissqu;
-                                    Vector2 Force = -gbvars.G * ((planob.Mass * plan2.Mass) / dissqu) * ((planob.Position - plan2.Position) / (float)Math.Sqrt(dissqu));
-                                    Vector2 Acceleration = Force / planob.Mass;
-                                    planob.Velocity += Acceleration;
-                                }
-
-
 								//collision detection, merge objects
                                 //check if they overlap, and if we have a fixed object
-                                if((planob.Position - plan2.Position).Length < planob.Radius) {
+                                if ((planob.Position - plan2.Position).Length < planob.Radius)
+                                {
+                                    //if fixed, keep it
+                                    if (plan2.Fixed)
+                                    {
+                                        planob = plan2;
+                                    }
+                                    if (planob.Fixed != true)
+                                    {
+                                        Vector2 CombVelocity = planob.Velocity * planob.Mass + plan2.Velocity * plan2.Mass;
+                                        //Keep texture of largest object
+                                        if (planob.Mass < plan2.Mass)
+                                            planob.Texture = plan2.Texture;
 
-                                        //if fixed, keep it
-                                        if (plan2.Fixed)
-                                        {
-                                            planob = plan2;
-                                        }
-                                        if (planob.Fixed != true) { 
-
-                                            Vector2 CombVelocity = planob.Velocity * planob.Mass + plan2.Velocity * plan2.Mass;
-                                            //Keep texture of largest object
-                                            if (planob.Mass < plan2.Mass)
-                                                planob.Texture = plan2.Texture;
-                                    
-									        planob.Mass += plan2.Mass;
-									        CombVelocity = CombVelocity / planob.Mass;    
-                                        }
+                                        planob.Mass += plan2.Mass;
+                                        CombVelocity = CombVelocity / planob.Mass;
+                                    }
                                     //add 'dead' objects trails to the other list
-									lstTrails.Add (plan2.Trails);
+                                    lstTrails.Add(plan2.Trails);
 
                                     //Delete the 'dead' object
-                                    lstPlanets.RemoveAt (ic);
-                                    i --; 
-								}
+                                    lstPlanets.RemoveAt(ic);
+                                    i--;
+                                }
+
+                                else
+                                {
+                                    //calculate force with vectors
+                                    //Skip this if we have a 'fixed' object
+                                    if (planob.Fixed != true)
+                                    {
+                                        //distance squared
+                                        float dissqu = (planob.Position - plan2.Position).Length;
+                                        dissqu = dissqu * dissqu;
+                                        Vector2 Force = -gbvars.G * ((planob.Mass * plan2.Mass) / dissqu) * ((planob.Position - plan2.Position) / (float)Math.Sqrt(dissqu));
+                                        Vector2 Acceleration = Force / planob.Mass;
+                                        planob.Velocity += Acceleration;
+                                    }
+                                }
 							}
 						}
 					}
 
 					
-
 				    foreach (PlanetObject planob in lstPlanets) {
                             //add a 'step' to the planet
                             planob.Position += planob.Velocity;
