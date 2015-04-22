@@ -12,7 +12,7 @@
     <Trails />
     <RotationTime>0.02</RotationTime>
     <RotationAngle>5.53713751</RotationAngle>
-    <BitmapFilename>N:\Project\gravsim\CLI\AIMIS\bin\Debug\earth.png</BitmapFilename>
+    <BitmapFilename>earth.png</BitmapFilename>
     <Fixed>true</Fixed>
     <Mass>1000</Mass>
     <Radius>0.31017524</Radius>
@@ -34,7 +34,7 @@
     <Mass>20</Mass>
     <Radius>0.08419452</Radius>
     <Texture>0</Texture>
-    <BitmapFilename>N:\Project\gravsim\CLI\AIMIS\bin\Debug\moon.png</BitmapFilename>
+    <BitmapFilename>moon.png</BitmapFilename>
     <RotationTime>0.003</RotationTime>
   </PlanetObject>
 </ArrayOfPlanetObject>

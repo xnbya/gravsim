@@ -112,9 +112,11 @@
             // tbSpread
             // 
             this.tbSpread.Location = new System.Drawing.Point(9, 156);
+            this.tbSpread.Minimum = 1;
             this.tbSpread.Name = "tbSpread";
             this.tbSpread.Size = new System.Drawing.Size(205, 45);
             this.tbSpread.TabIndex = 7;
+            this.tbSpread.Value = 1;
             // 
             // label4
             // 
