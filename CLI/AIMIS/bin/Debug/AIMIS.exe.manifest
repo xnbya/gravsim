@@ -4,7 +4,7 @@
   <description asmv2:iconFile="aimis2.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="AIMIS" version="1.0.5590.17130" language="neutral" processorArchitecture="x86" />
+    <assemblyIdentity name="AIMIS" version="1.0.5595.17545" language="neutral" processorArchitecture="x86" />
     <commandLine file="AIMIS.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -44,13 +44,13 @@
   </dependency>
   <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="AIMIS.exe" size="822784">
-      <assemblyIdentity name="AIMIS" version="1.0.5590.17130" language="neutral" processorArchitecture="x86" />
+      <assemblyIdentity name="AIMIS" version="1.0.5595.17545" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>HmHPF98wn5Dpq3N1wjDxLmMpP8g=</dsig:DigestValue>
+        <dsig:DigestValue>y9+aqBRx2hJi6KFG4UlkowwJNcI=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

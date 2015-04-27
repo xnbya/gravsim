@@ -91,11 +91,7 @@ namespace AIMIS
 		{
             
 			private float mass;
-
-            //do we calc radius based on mass?
-            private bool calcradius = true;
-            
-			private float radius;
+            private float radius;
             //mass
 			public float Mass {
 				get {
@@ -103,8 +99,7 @@ namespace AIMIS
 				}
 				set {
 					this.mass = value;
-                    if(calcradius)
-					    this.radius = (float)Math.Pow ((value * 3) / (Math.PI * 4 * 8000), (double)1 / 3);
+                    this.radius = (float)Math.Pow ((value * 3) / (Math.PI * 4 * 8000), (double)1 / 3);
 				}
 			}
             //radius calculated from mass
