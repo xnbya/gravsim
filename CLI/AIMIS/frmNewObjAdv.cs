@@ -47,6 +47,7 @@ namespace AIMIS
 
         private void btnOK_Click(object sender, EventArgs e)
         {
+	    //store the variables so they can be accessed by tkui
             fAngle = ctlDirection1.fAngle;
             fMass = (float)nmMass.Value;
             fMoonMass = (float)nmMoonMass.Value;
@@ -68,6 +69,7 @@ namespace AIMIS
 
         private void nmMass_ValueChanged(object sender, EventArgs e)
         {
+	    //calculate radius
             lbRadius.Text = "(Radius of main planet is " + Decimal.Round((decimal)Math.Pow(((double)nmMass.Value * 3) / (Math.PI * 4 * 8000), (double)1 / 3), 2).ToString() + " )";
         
         }

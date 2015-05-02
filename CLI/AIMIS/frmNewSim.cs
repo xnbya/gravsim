@@ -30,12 +30,6 @@ namespace AIMIS
         {
             InitializeComponent();
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         
         private void btnLaunch_Click(object sender, EventArgs e)
         {
@@ -50,15 +44,11 @@ namespace AIMIS
                 for (int ii = 0; ii < nmRandNumber.Value; ii++)
                 {
                     tkui.PlanetObject p1 = new tkui.PlanetObject();
-                    //p1.Mass = 0.5f;
                     p1.Position = new Vector2(((float)rand.NextDouble() - 0.5f) * 8f * (float)tbSpread.Value, ((float)rand.NextDouble() - 0.5f) * 8f * (float)tbSpread.Value);
                     p1.Velocity = new Vector2(((float)rand.NextDouble() - 0.5f) * ((float)tbSpeed.Value / 100), ((float)rand.NextDouble() - 0.5f) * ((float)tbSpeed.Value / 100));
-                    //Vector2 (0.02f, 0.01f);
-                    //p1.Velocity = new Vector2 (0f, 0f);
                     p1.Mass = (float)rand.NextDouble() + (float)tbMass.Value / 20f;
                     p1.Trails = new List<Vector2>();
                     MainUIclass.lstPlanets.Add(p1);
-                    //Console.WriteLine ("Added planet!:D");
                 }
             }
 
@@ -67,42 +57,25 @@ namespace AIMIS
 
                 MainUIclass.NewPlanet(1000f, 0f, 0f, 4.47E-5f, 0f);
                 MainUIclass.NewPlanet(3f, 0f, -3f, -0.0149f, 0f);
-               // MainUIclass.NewPlanet(4f, 0f, 5f, 0f, 0f);
            
             }
 
             if (rbEarthOrbit.Checked)
             {
+		//lauch the earth orbit simulator
                 frmEarthOrbit formearth = new frmEarthOrbit();
                 formearth.MainUIclass = MainUIclass;
                 formearth.thMainUI = thMainUI;
                 formearth.gbvars = gbvars;
                 formearth.Show();
                 this.Hide();
-                //int Texture = MainUIclass.LoadTexture();
 
-                //gbvars.G = 6.673E-11f;
-
-                //Mass in U
                 MainUIclass.NewPlanet(10000f, 0f, 0f, 0f, 0f, "earth.png", -0.002f, true);
                 MainUIclass.blGeoStat = true;
-                //radius in km
-               // MainUIclass.lstPlanets[0].Radius = 6371f;
-
-                //MainUIclass.NewPlanet(5E5f, 0f, 35780, 0f, 0f);
-                //MainUIclass.lstPlanets[1].Radius = 100f;
-
-                //MainUIclass.ZoomMulti = 50f;
-
-
-                //ISS test
-
-
-                //NewPlanet(3f, 0f, -3f, -0.0149f, 0f, new Bitmap("ship.png"));
-                //NewPlanet(4f, 0f, 5f, 0f, 0f);
+             
             }
 
-
+	    //launch the tkui thread
             thMainUI.Start();
 
 
@@ -122,11 +95,8 @@ namespace AIMIS
 
             MainUIclass.LoadPlanets(openFileDialog1.FileName);
 
-           
             thMainUI.Start();
             
-
-
             this.Close();
         }
 

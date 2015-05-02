@@ -33,7 +33,7 @@ namespace AIMIS
 
         private void btnLaunch_Click(object sender, EventArgs e)
         {
-            //image from http://domain.acwebserve.com/browserdetect/Images/Satellite.png 
+	    //add an object into orbit, based on the given parameters
             MainUIclass.NewPlanet(5f, 0f, (float)nmHeight.Value + MainUIclass.lstPlanets[0].Radius, 
                 (float)Math.Cos(-ctlDirection1.fAngle) * (float)nmSpeed.Value / 50, 
                 (float)Math.Sin(-ctlDirection1.fAngle) * (float)nmSpeed.Value / 50);

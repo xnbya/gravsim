@@ -509,7 +509,7 @@ namespace AIMIS
                                             planob.Texture = plan2.Texture;
 
                                         planob.Mass += plan2.Mass;
-                                        CombVelocity = CombVelocity / planob.Mass;
+                                        planob.Velocity = CombVelocity / planob.Mass;
                                     }
                                     //add 'dead' objects trails to the other list
                                     lstTrails.Add(plan2.Trails);

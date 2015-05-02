@@ -30,7 +30,6 @@ namespace AIMIS
         public frmControl()
         {
             InitializeComponent();
-            //gbvars.NewObjectMass = 5;
         }
 
         private void rbNoTrails_CheckedChanged(object sender, EventArgs e)
@@ -61,11 +60,13 @@ namespace AIMIS
         private void cboNewMass_TextChanged(object sender, EventArgs e)
         {
             float Mass = 0;
+            //check to see if there is a valid number
             if(float.TryParse(cboNewMass.Text, out Mass )) {
                 gbvars.NewObjectMass = Mass;
             }
             else
             {
+            
                 MessageBox.Show("Please enter a valid mass", "Invalid mass", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             
@@ -115,15 +116,14 @@ namespace AIMIS
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-
-
+	    //need something to save!
             if (MainUIclass == null)
                 MessageBox.Show("Please start a simulation", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             else
             {
                 if (MessageBox.Show("Clear trails when saving. This will result in a smaller file size.", "Clear trails?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
                     MainUIclass.ClearTrails();
-                
+                //pause the simulation, and save it
                 SimSpeed = MainUIclass.SimulationSpeed;
                 MainUIclass.SimulationSpeed = 0;
                 saveFileDialog1.ShowDialog();

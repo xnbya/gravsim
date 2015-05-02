@@ -25,17 +25,15 @@ namespace AIMIS
         public static void Main()
         {
             
-
+	    //load the main form, and instantiate gbVariables
             frmControl form = new frmControl();
             gbVariables gbvars = new gbVariables();
             form.gbvars = gbvars;
 
-
+            //lauch the application
             Application.EnableVisualStyles();
             Application.Run(form);
 
-            //tkui mainui = new tkui();
-           // mainui.Main();
         }
     }
 }

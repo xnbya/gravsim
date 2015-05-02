@@ -37,11 +37,10 @@ namespace AIMIS
         {
             List<float> velocit = new List<float>(gbvars.lstVelocities);
 
+            //setup the graph
             chart1.DataSource = velocit;
-
                 chart1.DataBind();
                 chart1.Series[0].IsXValueIndexed = true;
-                //chart1.Series.First().XValueMember = "Y";
                 chart1.Series.First().YValueMembers = "X";
                 chart1.Update();
         }
@@ -54,6 +53,7 @@ namespace AIMIS
 
         private void timerUpdate_Tick(object sender, EventArgs e)
         {
+	    //update the graph every x seconds
             List<float> velocit = new List<float>(gbvars.lstVelocities);
 
             nudPlanetIndex.Value = gbvars.intObjectToTrack;
