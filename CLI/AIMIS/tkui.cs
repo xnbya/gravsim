@@ -200,14 +200,19 @@ namespace AIMIS
         //list of planets
         public List<PlanetObject> lstPlanets = new List<PlanetObject>();
         //list of trails of 'dead' planets
-        List<List<Vector2>> lstTrails = new List<List<Vector2>>();
+        public List<List<Vector2>> lstTrails = new List<List<Vector2>>();
+
+		//obsticals 
+		public List<List<Vector2>> lstObsticals = new List<List<Vector2>>();
+
+
         //color of planets
         Color colPlanets = Color.LightYellow;
         //viewpoint
         Vector3 ViewPointV = new Vector3(0f, 0f, 0f);
         public float ZoomMulti = 0.01f;
         //speed
-        public int SimulationSpeed = 20;
+        public int SimulationSpeed = 0;
         //Draw lines for showing geostyationary orbit?
         public bool blGeoStat = false;
         //Show dot on earth for geostat
@@ -554,10 +559,23 @@ namespace AIMIS
                     
                     //Now draw the objects to the gamewindow
 
-                    GL.Color3(Color.DarkRed);
+					GL.Color3(Color.Blue);
+
+					//draw obsticals
+					foreach (List<Vector2> vertices in lstObsticals) {
+						GL.Begin (PrimitiveType.LineStrip);
+
+						for (int j = 0; j < vertices.Count; j++)
+						{
+							GL.Vertex2(vertices[j]);
+						}
+						GL.End ();
+					}
+
+					GL.Color3(Color.Red);
 
                     //draw vector [dead] trails
-                    if (gbvars.ShowTrails)
+					if (gbvars.ShowTrails)
                     {
                         foreach (List<Vector2> TrailL in lstTrails)
                         {
@@ -569,6 +587,8 @@ namespace AIMIS
                             GL.End();
                         }
                     }
+
+
 
 					//draw planets
 					for (int i = lstPlanets.Count - 1; i >= 0; i--) {
@@ -662,6 +682,7 @@ namespace AIMIS
 						}
 			
 					}
+
 
                     //draw mouse click line, for when adding object
                     if (MoCdraw)

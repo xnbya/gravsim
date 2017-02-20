@@ -1,0 +1,84 @@
+\documentclass[a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{listings}
+\usepackage[usenames,dvipsnames]{color}  %% Allow color names
+\lstdefinestyle{customasm}{
+  belowcaptionskip=1\baselineskip,
+  xleftmargin=\parindent,
+  language=[sharp]C,   %% Change this to whatever you write in
+  breaklines=true, %% Wrap long lines
+  basicstyle=\footnotesize\ttfamily,
+  commentstyle=\itshape\color{Gray},
+  stringstyle=\color{Black},
+  keywordstyle=\bfseries\color{OliveGreen},
+  identifierstyle=\color{blue},
+  xleftmargin=-1em,
+}        
+\usepackage[colorlinks=true,linkcolor=blue]{hyperref} 
+%%\usepackage{fullpage}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{OCR Computing F454 - AIMIS}
+\lfoot{Alexis Enston 4026, The Kings School Chester  40317}
+\cfoot{}
+\rfoot{Code Listings Page \thepage}
+
+
+\title{AIMIS Final Code Listing}
+\author{Alexis Enston 4026\\ The Kings School Chester 40317}
+\begin{document}
+\maketitle
+\tableofcontents
+
+\newpage
+\section{ctlDirection.cs}
+\lstinputlisting[style=customasm]{ctlDirection.cs}
+\newpage
+\section{ctlDirection.Designer.cs}
+\lstinputlisting[style=customasm]{ctlDirection.Designer.cs}
+\newpage
+\section{frmAbout.cs}
+\lstinputlisting[style=customasm]{frmAbout.cs}
+\newpage
+\section{frmAbout.Designer.cs}
+\lstinputlisting[style=customasm]{frmAbout.Designer.cs}
+\newpage
+\section{frmControl.cs}
+\lstinputlisting[style=customasm]{frmControl.cs}
+\newpage
+\section{frmControl.Designer.cs}
+\lstinputlisting[style=customasm]{frmControl.Designer.cs}
+\newpage
+\section{frmEarthOrbit.cs}
+\lstinputlisting[style=customasm]{frmEarthOrbit.cs}
+\newpage
+\section{frmEarthOrbit.Designer.cs}
+\lstinputlisting[style=customasm]{frmEarthOrbit.Designer.cs}
+\newpage
+\section{frmGraphs.cs}
+\lstinputlisting[style=customasm]{frmGraphs.cs}
+\newpage
+\section{frmGraphs.Designer.cs}
+\lstinputlisting[style=customasm]{frmGraphs.Designer.cs}
+\newpage
+\section{frmNewObjAdv.cs}
+\lstinputlisting[style=customasm]{frmNewObjAdv.cs}
+\newpage
+\section{frmNewObjAdv.Designer.cs}
+\lstinputlisting[style=customasm]{frmNewObjAdv.Designer.cs}
+\newpage
+\section{frmNewSim.cs}
+\lstinputlisting[style=customasm]{frmNewSim.cs}
+\newpage
+\section{frmNewSim.Designer.cs}
+\lstinputlisting[style=customasm]{frmNewSim.Designer.cs}
+\newpage
+\section{gbVariables.cs}
+\lstinputlisting[style=customasm]{gbVariables.cs}
+\newpage
+\section{Program.cs}
+\lstinputlisting[style=customasm]{Program.cs}
+\newpage
+\section{tkui.cs}
+\lstinputlisting[style=customasm]{tkui.cs}
+\end{document}
