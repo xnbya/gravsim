@@ -25,9 +25,13 @@ namespace AIMIS
 	{
         public gbVariables gbvars;
 
+		public Color[] pathCols = {Color.Chartreuse, Color.CornflowerBlue, Color.Coral, Color.OrangeRed,
+			Color.DeepPink, Color.DarkViolet, Color.DarkTurquoise};
+
         //serialize the lstPlanets to the filename given
         public void SavePlanets(string filename)
         {
+				
             XmlSerializer xmlser = new XmlSerializer(typeof (List<PlanetObject>));
 
             using(Stream stream = File.Create(filename)) {
@@ -36,6 +40,132 @@ namespace AIMIS
             }
 
         }
+
+		public void LoadNewSim(GameWindow game) {
+
+			//title
+			game.Title = "MAT " + gbvars.currentSim.ToString() + " obstacle " + hiObject.ToString();
+
+			//clear
+			lstPlanets.Clear();
+			lstTrails.Clear ();
+			lstObsticals.Clear ();
+			lstTrailOffsets.Clear ();
+
+
+			//read input
+			string[] lines = File.ReadAllLines("robots.mat");
+			string rawin = lines [gbvars.currentSim];
+
+
+			//robots
+			string robots = rawin.Split(new string[] {": ("}, StringSplitOptions.None)[1].Split('#')[0];
+			foreach (string rob in robots.Split('(')) {
+				double x = Double.Parse (rob.Split (',') [0]);
+				double y = Double.Parse(rob.Split(',')[1].Split(')')[0]);
+
+				NewPlanet (gbvars.NewObjectMass, (float)x, (float)y, 0, 0);
+
+			}
+
+			//obstacals
+			if (rawin.Split ('#').Length == 2) {
+				string[] obsticals = rawin.Split ('#') [1].Split (';');
+				foreach (string obstical in obsticals) {
+					//parse
+					List<Vector2> vertices = new List<Vector2> ();
+					foreach (string vect in obstical.Split('(')) {
+						if (vect != "") {
+							double x = Double.Parse (vect.Split (',') [0]);
+							double y = Double.Parse (vect.Split (',') [1].Split (')') [0]);
+							vertices.Add (new Vector2 ((float)x, (float)y));
+						}
+					}
+
+					//complete
+					vertices.Add(vertices[0]);
+					lstObsticals.Add (vertices);
+				}
+			}
+
+
+			//read output
+
+			lines = File.ReadAllLines("out.mat");
+			rawin = lines [gbvars.currentSim + 2];
+
+			string[] paths = rawin.Split(new string[] {": ("}, StringSplitOptions.None)[1].Split (new string[] {"; ("}, StringSplitOptions.None);
+			foreach (string path in paths) {
+				//parse
+				List<Vector2> vertices = new List<Vector2> ();
+				foreach (string vect in path.Split('(')) {
+					if (vect != "") {
+						double x = Double.Parse (vect.Split (',') [0]);
+						double y = Double.Parse (vect.Split (',') [1].Split (')') [0]);
+						vertices.Add (new Vector2 ((float)x, (float)y));
+					}
+				}
+
+
+
+				//find needed offset
+				if (lstTrailOffsets.Count == 0) {
+					lstTrailOffsets.Add (0);
+				} else {
+					bool added = false;
+					for (int i = 0; i < lstTrails.Count; i++) {
+						for (int j = 0; j < lstTrails [i].Count; j++) {
+							Vector2 a = lstTrails [i] [j];
+							Vector2 b = vertices [0];
+							Console.Write ((a - b).Length);
+							if ((a - b).Length < 0.01f && lstTrailOffsets [i] >= 0) {
+								
+								lstTrailOffsets.Add (j + lstTrailOffsets [i]);
+								added = true;
+							}
+						}
+					}
+					if (!added) {
+						lstTrailOffsets.Add (-1);
+					}
+				}
+
+				lstTrails.Add (vertices);
+
+			}
+
+			//add offsets
+			bool finding = true;
+			while (finding) {
+				finding = false;
+				for (int k = 0; k < lstTrailOffsets.Count; k++) {
+					if (lstTrailOffsets [k] == -1) {			
+
+						bool added = false;
+						for (int i = 0; i < lstTrails.Count; i++) {
+							for (int j = 0; j < lstTrails [i].Count; j++) {
+								Vector2 a = lstTrails [i] [j];
+								Vector2 b = lstTrails [k] [0];
+								Console.Write ((a - b).Length);
+								if (i != k && (a - b).Length < 0.01f && lstTrailOffsets [i] >= 0) {
+
+									lstTrailOffsets[k] = (j + lstTrailOffsets [i]);
+									added = true;
+								}
+							}
+						}
+						if (!added) {
+							finding = true;
+						}
+					}
+				}
+			}
+
+
+
+
+
+		}
 
         //unserialize lstPlanets from the file
         public void LoadPlanets(string filename)
@@ -196,11 +326,16 @@ namespace AIMIS
 			return texture;
 		}
 
+		//number of parts to print
+		int numTrailParts = 0;
+
         //variables
         //list of planets
         public List<PlanetObject> lstPlanets = new List<PlanetObject>();
         //list of trails of 'dead' planets
         public List<List<Vector2>> lstTrails = new List<List<Vector2>>();
+
+		public List<int> lstTrailOffsets = new List<int> ();
 
 		//obsticals 
 		public List<List<Vector2>> lstObsticals = new List<List<Vector2>>();
@@ -219,6 +354,9 @@ namespace AIMIS
         public bool blShowGeostatDot = false;
         public float fAngleGeostat = 0f;
 
+		//highlight object
+		public int hiObject = 0;
+
         [STAThread]
 		public void Main ()
 		{
@@ -233,7 +371,7 @@ namespace AIMIS
 				{
 					// setup settings, load textures, sounds
 					game.VSync = VSyncMode.On;
-                    game.Title = "AIMIS Simulation";
+                    game.Title = "press b";
 				};
 
 				game.Resize += (sender, e) =>
@@ -403,6 +541,31 @@ namespace AIMIS
 							        planobj.Trails = new List<Vector2> ();
 						        }
                                 break;
+							case 'n':
+								numTrailParts++;
+								break;
+					case 'm':
+						numTrailParts--;
+						break;
+					case 'b':
+						gbvars.currentSim++;
+						LoadNewSim(game);
+						break;
+					case 'v':
+						gbvars.currentSim--;
+						LoadNewSim(game);
+						break;
+					case '1':
+						gbvars.hiObstacle--;
+						//title
+						game.Title = "MAT " + gbvars.currentSim.ToString() + " obstacle " + gbvars.hiObstacle.ToString();
+						break;
+					case '2':
+						gbvars.hiObstacle++;
+						//title
+						game.Title = "MAT " + gbvars.currentSim.ToString() + " obstacle " + gbvars.hiObstacle.ToString();
+						break;
+
                         }
 
                     };
@@ -559,10 +722,18 @@ namespace AIMIS
                     
                     //Now draw the objects to the gamewindow
 
-					GL.Color3(Color.Blue);
+					//GL.Color3(Color.MediumPurple);
 
 					//draw obsticals
-					foreach (List<Vector2> vertices in lstObsticals) {
+					for(int i = 0; i < lstObsticals.Count; i++) {
+						List<Vector2> vertices = lstObsticals[i];
+					
+						if(i == gbvars.hiObstacle) {
+							GL.Color3(Color.Blue);
+						}
+						else {
+							GL.Color3(Color.LightSkyBlue);
+						}
 						GL.Begin (PrimitiveType.LineStrip);
 
 						for (int j = 0; j < vertices.Count; j++)
@@ -570,21 +741,37 @@ namespace AIMIS
 							GL.Vertex2(vertices[j]);
 						}
 						GL.End ();
+
+
 					}
 
-					GL.Color3(Color.Red);
 
                     //draw vector [dead] trails
 					if (gbvars.ShowTrails)
                     {
-                        foreach (List<Vector2> TrailL in lstTrails)
+						for(int i = 0; i < lstTrails.Count; i++) 
                         {
-                            GL.Begin(PrimitiveType.LineStrip);
-                            foreach (Vector2 pos in TrailL)
-                            {
-                                GL.Vertex2(pos.X, pos.Y);
-                            }
-                            GL.End();
+							GL.Color3(pathCols[i % 6]);
+							List<Vector2> TrailL = lstTrails[i];
+							if(lstTrailOffsets[i] < numTrailParts) {
+								
+
+	                            GL.Begin(PrimitiveType.LineStrip);
+								int ii = 0;
+								while(ii < (numTrailParts - lstTrailOffsets[i]) && ii < TrailL.Count) 
+	                            {
+										GL.Vertex2(TrailL[ii].X, TrailL[ii].Y);
+										ii++;
+	                            }
+	                            GL.End();
+
+								//draw current robot
+								//GL.Color3(Color.Yellow);
+								if(ii > 0)
+									DrawCircle(30, TrailL[ii-1].X, TrailL[ii-1].Y, 0.1f);
+							}
+							
+
                         }
                     }
 
@@ -716,6 +903,8 @@ namespace AIMIS
                         GL.Color3(Color.Yellow);
                         DrawCircle(30, (float)Math.Sin(-lstPlanets[0].RotationAngle + fAngleGeostat) * lstPlanets[0].Radius, (float)Math.Cos(-lstPlanets[0].RotationAngle + fAngleGeostat) * lstPlanets[0].Radius, 0.1f);
                     }
+
+					//DrawCircle(20, (float)1.25172613420093, (float)1.364106114122106, (float)0.1);
 
                     //load onto screen
 					game.SwapBuffers ();
