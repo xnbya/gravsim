@@ -41,6 +41,10 @@ namespace AIMIS
         //add new object advanced option
         public bool blAddObjAdvanced = false;
 
+		//current
+		public int currentSim = 0;
+		public int hiObstacle = -1;
+
 
 
     }

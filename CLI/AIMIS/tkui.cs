@@ -41,10 +41,16 @@ namespace AIMIS
 
         }
 
-		public void LoadNewSim(GameWindow game) {
+		public float score = 0f;
 
+		public void updateTitle(GameWindow game) {
 			//title
-			game.Title = "MAT " + gbvars.currentSim.ToString() + " obstacle " + hiObject.ToString();
+			game.Title = "MAT " + gbvars.currentSim.ToString() + " currentob " + hiObject.ToString() + " score " + this.score.ToString() + " robots " + lstPlanets.Count.ToString();
+		}
+
+		public void LoadNewSim(GameWindow game) {
+			
+			
 
 			//clear
 			lstPlanets.Clear();
@@ -110,8 +116,11 @@ namespace AIMIS
 
 				//find needed offset
 				if (lstTrailOffsets.Count == 0) {
-					lstTrailOffsets.Add (0);
+					lstTrailOffsets.Add (0f);
 				} else {
+					lstTrailOffsets.Add (-1f);
+				}
+				/*
 					bool added = false;
 					for (int i = 0; i < lstTrails.Count; i++) {
 						for (int j = 0; j < lstTrails [i].Count; j++) {
@@ -128,7 +137,7 @@ namespace AIMIS
 					if (!added) {
 						lstTrailOffsets.Add (-1);
 					}
-				}
+				} */
 
 				lstTrails.Add (vertices);
 
@@ -148,8 +157,9 @@ namespace AIMIS
 								Vector2 b = lstTrails [k] [0];
 								Console.Write ((a - b).Length);
 								if (i != k && (a - b).Length < 0.01f && lstTrailOffsets [i] >= 0) {
-
-									lstTrailOffsets[k] = (j + lstTrailOffsets [i]);
+									//now compute length
+									float length = pathLength(lstTrails[i], 0, j);
+									lstTrailOffsets[k] = (length + lstTrailOffsets [i]);
 									added = true;
 								}
 							}
@@ -161,10 +171,28 @@ namespace AIMIS
 				}
 			}
 
+			//score
+			score = 0f;
+			for (int i = 0; i < lstTrails.Count; i++) {
+				float length = pathLength (lstTrails [i], 0, lstTrails [i].Count) + lstTrailOffsets [i];
+				if (length > score) {
+					score = length;
+				}
+			}
+
+			updateTitle (game);
 
 
 
+		}
 
+		public float pathLength(List<Vector2> path, int start, int end) {
+			float total = 0f;
+			while (start < end && start + 1 < path.Count) {
+				total += (path [start+1] - path [start]).Length;
+				start++;
+			}
+			return total;
 		}
 
         //unserialize lstPlanets from the file
@@ -329,13 +357,17 @@ namespace AIMIS
 		//number of parts to print
 		int numTrailParts = 0;
 
+		//playback
+		float fCurrentFrame = 0;
+		float fCurrentSpeed = 0.5f;
+
         //variables
         //list of planets
         public List<PlanetObject> lstPlanets = new List<PlanetObject>();
         //list of trails of 'dead' planets
         public List<List<Vector2>> lstTrails = new List<List<Vector2>>();
 
-		public List<int> lstTrailOffsets = new List<int> ();
+		public List<float> lstTrailOffsets = new List<float> ();
 
 		//obsticals 
 		public List<List<Vector2>> lstObsticals = new List<List<Vector2>>();
@@ -355,7 +387,7 @@ namespace AIMIS
         public float fAngleGeostat = 0f;
 
 		//highlight object
-		public int hiObject = 0;
+		public int hiObject = -1;
 
         [STAThread]
 		public void Main ()
@@ -542,28 +574,38 @@ namespace AIMIS
 						        }
                                 break;
 							case 'n':
-								numTrailParts++;
+						fCurrentSpeed -= 0.1f;
 								break;
+					case 'p':
+						fCurrentSpeed = 0f;
+						break;
+					case 'o':
+						fCurrentFrame = 0f;
+						break;
 					case 'm':
-						numTrailParts--;
+						fCurrentSpeed += 0.1f;
 						break;
 					case 'b':
 						gbvars.currentSim++;
+						fCurrentFrame = 0f;
 						LoadNewSim(game);
 						break;
 					case 'v':
 						gbvars.currentSim--;
+						fCurrentFrame = 0f;
 						LoadNewSim(game);
 						break;
 					case '1':
 						gbvars.hiObstacle--;
 						//title
-						game.Title = "MAT " + gbvars.currentSim.ToString() + " obstacle " + gbvars.hiObstacle.ToString();
+						//game.Title = "MAT " + gbvars.currentSim.ToString() + " obstacle " + gbvars.hiObstacle.ToString();
+						updateTitle(game);
 						break;
 					case '2':
 						gbvars.hiObstacle++;
 						//title
-						game.Title = "MAT " + gbvars.currentSim.ToString() + " obstacle " + gbvars.hiObstacle.ToString();
+						//game.Title = "MAT " + gbvars.currentSim.ToString() + " obstacle " + gbvars.hiObstacle.ToString();
+						updateTitle(game);
 						break;
 
                         }
@@ -729,10 +771,10 @@ namespace AIMIS
 						List<Vector2> vertices = lstObsticals[i];
 					
 						if(i == gbvars.hiObstacle) {
-							GL.Color3(Color.Blue);
+							GL.Color3(Color.LightSkyBlue);
 						}
 						else {
-							GL.Color3(Color.LightSkyBlue);
+							GL.Color3(Color.Aqua);
 						}
 						GL.Begin (PrimitiveType.LineStrip);
 
@@ -744,36 +786,6 @@ namespace AIMIS
 
 
 					}
-
-
-                    //draw vector [dead] trails
-					if (gbvars.ShowTrails)
-                    {
-						for(int i = 0; i < lstTrails.Count; i++) 
-                        {
-							GL.Color3(pathCols[i % 6]);
-							List<Vector2> TrailL = lstTrails[i];
-							if(lstTrailOffsets[i] < numTrailParts) {
-								
-
-	                            GL.Begin(PrimitiveType.LineStrip);
-								int ii = 0;
-								while(ii < (numTrailParts - lstTrailOffsets[i]) && ii < TrailL.Count) 
-	                            {
-										GL.Vertex2(TrailL[ii].X, TrailL[ii].Y);
-										ii++;
-	                            }
-	                            GL.End();
-
-								//draw current robot
-								//GL.Color3(Color.Yellow);
-								if(ii > 0)
-									DrawCircle(30, TrailL[ii-1].X, TrailL[ii-1].Y, 0.1f);
-							}
-							
-
-                        }
-                    }
 
 
 
@@ -868,6 +880,48 @@ namespace AIMIS
 							GL.End ();
 						}
 			
+					}
+
+
+					fCurrentFrame += fCurrentSpeed;
+
+					//draw vector [dead] trails
+					if (gbvars.ShowTrails)
+					{
+						for(int i = 0; i < lstTrails.Count; i++) 
+						{
+							GL.Color3(pathCols[i % 6]);
+							List<Vector2> TrailL = lstTrails[i];
+							if(lstTrailOffsets[i] < fCurrentFrame) {
+
+
+								GL.Begin(PrimitiveType.LineStrip);
+								int ii = 0;
+								while(pathLength(TrailL, 0, ii) < (fCurrentFrame - lstTrailOffsets[i]) && ii < TrailL.Count) 
+								{
+									GL.Vertex2(TrailL[ii].X, TrailL[ii].Y);
+									ii++;
+								}
+								Vector2 lastPos = TrailL[ii-1];
+
+								if(ii < TrailL.Count) {
+									//interpolate last position
+									float pathLength = this.pathLength(TrailL, 0, ii-1);
+									Vector2 newPart = TrailL[ii] - TrailL[ii-1];
+									Vector2 betPos = TrailL[ii-1] + newPart * ((fCurrentFrame - lstTrailOffsets[i] - pathLength) / newPart.Length);
+									GL.Vertex2(betPos);
+									lastPos = betPos;
+								}
+								GL.End();
+
+								//draw current robot
+								//GL.Color3(Color.Yellow);
+								if(ii > 0)
+									DrawCircle(30, lastPos.X, lastPos.Y, 0.1f);
+							}
+
+
+						}
 					}
 
 
